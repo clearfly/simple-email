@@ -1,0 +1,8 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<body>
+<p><b>Dear <a href="mailto:@{person.email}">@{person.name}</a>,</b></p>
+<p>This is an example <i>HTML</i> email sent by @{version} and Seam Render.</p>
+<p><img src="@{mailContext.insert("seamLogo.png")}" /></p>
+<p>It has an alternative text body for mail readers that don't support html.</p>
+</body>
+</html>

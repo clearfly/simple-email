@@ -1,0 +1,13 @@
+This project began as part of the now EOL Seam 3 Mail module which was created by Cody Lerum with certain contributions by Red Hat, Inc
+
+Contributors at fork from Seam 3 (https://github.com/seam/mail/contributors)
+
+* Cody Lerum
+* Jason Porter (Red Hat)
+* Shane Bryzak (Red Hat)
+* Dan Allen (Red Hat)
+* Marek Schmidt (Red Hat)
+* Marek Śmigielski
+* Ken Finnigan (Red Hat)
+* Martin Gencur (Red Hat)
+* Bernard Labno
