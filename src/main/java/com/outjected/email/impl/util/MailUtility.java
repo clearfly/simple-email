@@ -49,6 +49,9 @@ import com.outjected.email.impl.MailSessionAuthenticator;
  * @author Cody Lerum
  */
 public class MailUtility {
+    
+    public static final String DOMAIN_PROPERTY_KEY = "com.outjected.email.domainName";
+    
     public static InternetAddress internetAddress(String address) throws InvalidAddressException {
         try {
             return new InternetAddress(address);
@@ -180,7 +183,7 @@ public class MailUtility {
         }
 
         if (!Strings.isNullOrBlank(mailConfig.getDomainName())) {
-            props.put("mail.seam.domainName", mailConfig.getDomainName());
+            props.put(MailUtility.DOMAIN_PROPERTY_KEY, mailConfig.getDomainName());
         }
 
         if (mailConfig.getUsername() != null && mailConfig.getUsername().length() != 0 && mailConfig.getPassword() != null && mailConfig.getPassword().length() != 0) {

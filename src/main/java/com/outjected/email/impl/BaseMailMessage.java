@@ -171,7 +171,7 @@ public class BaseMailMessage {
     }
 
     private void initializeMessageId() {
-        String mailerDomainName = session.getProperty("mail.seam.domainName");
+        String mailerDomainName = session.getProperty(MailUtility.DOMAIN_PROPERTY_KEY);
 
         if (mailerDomainName != null && mailerDomainName.length() > 0) {
             setMessageID(UUID.randomUUID().toString() + "@" + mailerDomainName);
