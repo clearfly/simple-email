@@ -280,7 +280,7 @@ public class MailUtility
         b.addReadRecieptAddresses(e.getReadReceiptAddresses());
         b.setImportance(e.getImportance());
         b.addHeaders(e.getHeaders());
-        b.setEnvelopeFrom(MailUtility.nullSafeInternetAddressAsString(e.getEnvelopeFrom()));
+        b.setEnvelopeFrom(MailUtility.nullSafeAddress(e.getEnvelopeFrom()));
 
         if (e.getSubject() != null)
         {
@@ -318,9 +318,9 @@ public class MailUtility
         return b.getFinalizedMessage();
     }
 
-    public static String nullSafeInternetAddressAsString(InternetAddress value)
+    public static String nullSafeAddress(InternetAddress value)
     {
-        return value != null ? value.toString() : null;
+        return value != null ? value.getAddress() : null;
     }
 
     public static void send(EmailMessage e, Session session) throws SendFailedException
