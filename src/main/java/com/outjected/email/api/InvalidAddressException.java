@@ -17,22 +17,27 @@ package com.outjected.email.api;
  * 
  * @author Cody Lerum
  */
-public class InvalidAddressException extends MailException {
+public class InvalidAddressException extends MailException
+{
     private static final long serialVersionUID = 1L;
 
-    public InvalidAddressException() {
+    public InvalidAddressException()
+    {
         super();
     }
 
-    public InvalidAddressException(String message, Throwable cause) {
+    public InvalidAddressException(String message, Throwable cause)
+    {
         super(message, cause);
     }
 
-    public InvalidAddressException(String message) {
+    public InvalidAddressException(String message)
+    {
         super(message);
     }
 
-    public InvalidAddressException(Throwable cause) {
+    public InvalidAddressException(Throwable cause)
+    {
         super(cause);
     }
 }

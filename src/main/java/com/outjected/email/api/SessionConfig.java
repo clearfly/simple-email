@@ -17,7 +17,8 @@ package com.outjected.email.api;
  * 
  * @author Cody Lerum
  */
-public interface SessionConfig {
+public interface SessionConfig
+{
 
     String getServerHost();
 

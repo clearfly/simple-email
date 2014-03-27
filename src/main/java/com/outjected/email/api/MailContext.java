@@ -17,23 +17,28 @@ import java.util.Map;
 /**
  * @author Cody Lerum
  */
-public class MailContext {
+public class MailContext
+{
 
     private Map<String, EmailAttachment> attachments;
 
-    public MailContext(Map<String, EmailAttachment> attachments) {
+    public MailContext(Map<String, EmailAttachment> attachments)
+    {
         this.attachments = attachments;
     }
 
-    public String insert(String fileName) {
+    public String insert(String fileName)
+    {
         EmailAttachment attachment = null;
 
         attachment = attachments.get(fileName);
 
-        if (attachment == null) {
+        if (attachment == null)
+        {
             throw new RuntimeException("Unable to find attachment: " + fileName);
         }
-        else {
+        else
+        {
             return "cid:" + attachment.getContentId();
         }
     }

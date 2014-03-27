@@ -19,6 +19,7 @@ import java.util.Map;
  * @author Cody Lerum
  * 
  */
-public interface TemplateProvider {
+public interface TemplateProvider
+{
     public String merge(Map<String, Object> context);
 }

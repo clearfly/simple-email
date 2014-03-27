@@ -19,33 +19,41 @@ import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
 
+import com.sun.mail.smtp.SMTPMessage;
+
 /**
  * Extends {@link MimeMessage} to allow for the setting of the Message-ID
  * 
  * @author cody.lerum
  */
-public class RootMimeMessage extends MimeMessage {
+public class RootMimeMessage extends SMTPMessage
+{
     private String messageId;
 
-    public RootMimeMessage(Session session) {
+    public RootMimeMessage(Session session)
+    {
         super(session);
     }
 
-    public RootMimeMessage(Session session, InputStream inputStream) throws MessagingException {
+    public RootMimeMessage(Session session, InputStream inputStream) throws MessagingException
+    {
         super(session, inputStream);
     }
 
     @Override
-    protected void updateMessageID() throws MessagingException {
+    protected void updateMessageID() throws MessagingException
+    {
         Header header = new Header("Message-ID", messageId);
         setHeader(header.getName(), header.getValue());
     }
 
-    public String getMessageId() {
+    public String getMessageId()
+    {
         return messageId;
     }
 
-    public void setMessageId(String messageId) {
+    public void setMessageId(String messageId)
+    {
         this.messageId = messageId;
     }
 }

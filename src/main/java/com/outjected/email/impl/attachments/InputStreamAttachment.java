@@ -23,22 +23,29 @@ import com.outjected.email.impl.util.Streams;
 /**
  * @author Cody Lerum
  */
-public class InputStreamAttachment extends BaseAttachment {
-    public InputStreamAttachment(String fileName, String mimeType, ContentDisposition contentDisposition, InputStream inputStream) {
+public class InputStreamAttachment extends BaseAttachment
+{
+    public InputStreamAttachment(String fileName, String mimeType, ContentDisposition contentDisposition,
+            InputStream inputStream)
+    {
         super();
 
-        try {
+        try
+        {
             super.setFileName(fileName);
             super.setMimeType(mimeType);
             super.setContentDisposition(contentDisposition);
             super.setBytes(Streams.toByteArray(inputStream));
         }
-        catch (IOException e) {
+        catch (IOException e)
+        {
             throw new AttachmentException("Wasn't able to create email attachment from InputStream");
         }
     }
 
-    public InputStreamAttachment(String fileName, String mimeType, ContentDisposition contentDisposition, InputStream inputStream, String contentClass) {
+    public InputStreamAttachment(String fileName, String mimeType, ContentDisposition contentDisposition,
+            InputStream inputStream, String contentClass)
+    {
         this(fileName, mimeType, contentDisposition, inputStream);
         super.addHeader(new Header("Content-Class", contentClass));
     }

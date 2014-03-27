@@ -24,31 +24,39 @@ import com.outjected.email.api.Header;
 /**
  * @author Cody Lerum
  */
-public class FileAttachment extends BaseAttachment {
+public class FileAttachment extends BaseAttachment
+{
 
-    public FileAttachment(ContentDisposition contentDisposition, Path path) {
+    public FileAttachment(ContentDisposition contentDisposition, Path path)
+    {
         super();
-        try {
+        try
+        {
             super.setFileName(path.getFileName().toString());
             super.setMimeType(Files.probeContentType(path));
             super.setContentDisposition(contentDisposition);
             super.setBytes(Files.readAllBytes(path));
         }
-        catch (IOException e) {
-            throw new AttachmentException("Wasn't able to create email attachment from File: " + path.getFileName().toString(), e);
+        catch (IOException e)
+        {
+            throw new AttachmentException("Wasn't able to create email attachment from File: "
+                    + path.getFileName().toString(), e);
         }
     }
 
-    public FileAttachment(ContentDisposition contentDisposition, Path path, String contentClass) {
+    public FileAttachment(ContentDisposition contentDisposition, Path path, String contentClass)
+    {
         this(contentDisposition, path);
         super.addHeader(new Header("Content-Class", contentClass));
     }
 
-    public FileAttachment(ContentDisposition contentDisposition, File file) {
+    public FileAttachment(ContentDisposition contentDisposition, File file)
+    {
         this(contentDisposition, file.toPath());
     }
 
-    public FileAttachment(ContentDisposition contentDisposition, File file, String contentClass) {
+    public FileAttachment(ContentDisposition contentDisposition, File file, String contentClass)
+    {
         this(contentDisposition, file.toPath());
         super.addHeader(new Header("Content-Class", contentClass));
     }

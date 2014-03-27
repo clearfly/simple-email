@@ -23,15 +23,18 @@ import com.outjected.email.impl.util.MailUtility;
  * @author Cody Lerum
  * 
  */
-public class MailTransporterImpl implements MailTransporter {
+public class MailTransporterImpl implements MailTransporter
+{
 
     private Session session;
 
-    public MailTransporterImpl(Session session) {
+    public MailTransporterImpl(Session session)
+    {
         this.session = session;
     }
 
-    public EmailMessage send(EmailMessage emailMessage) {
+    public EmailMessage send(EmailMessage emailMessage)
+    {
         MailUtility.send(emailMessage, session);
         return emailMessage;
     }

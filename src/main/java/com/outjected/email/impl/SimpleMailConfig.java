@@ -21,7 +21,8 @@ import com.outjected.email.api.SessionConfig;
  * 
  * @author Cody Lerum
  */
-public class SimpleMailConfig implements  Serializable, SessionConfig {
+public class SimpleMailConfig implements Serializable, SessionConfig
+{
 
     private static final long serialVersionUID = 1L;
 
@@ -36,97 +37,121 @@ public class SimpleMailConfig implements  Serializable, SessionConfig {
     private Boolean auth = false;
     private String jndiSessionName;
 
-    public String getServerHost() {
+    public String getServerHost()
+    {
         return serverHost;
     }
 
-    public void setServerHost(String serverHost) {
+    public void setServerHost(String serverHost)
+    {
         this.serverHost = serverHost;
     }
 
-    public Integer getServerPort() {
+    public Integer getServerPort()
+    {
         return serverPort;
     }
 
-    public void setServerPort(Integer serverPort) {
+    public void setServerPort(Integer serverPort)
+    {
         this.serverPort = serverPort;
     }
 
-    public String getDomainName() {
+    public String getDomainName()
+    {
         return domainName;
     }
 
-    public void setDomainName(String domainName) {
+    public void setDomainName(String domainName)
+    {
         this.domainName = domainName;
     }
 
-    public String getUsername() {
+    public String getUsername()
+    {
         return username;
     }
 
-    public void setUsername(String username) {
+    public void setUsername(String username)
+    {
         this.username = username;
     }
 
-    public String getPassword() {
+    public String getPassword()
+    {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(String password)
+    {
         this.password = password;
     }
 
-    public Boolean getEnableTls() {
+    public Boolean getEnableTls()
+    {
         return enableTls;
     }
 
-    public void setEnableTls(Boolean enableTls) {
+    public void setEnableTls(Boolean enableTls)
+    {
         this.enableTls = enableTls;
     }
 
-    public Boolean getRequireTls() {
+    public Boolean getRequireTls()
+    {
         return requireTls;
     }
 
-    public void setRequireTls(Boolean requireTls) {
+    public void setRequireTls(Boolean requireTls)
+    {
         this.requireTls = requireTls;
     }
 
-    public Boolean getEnableSsl() {
+    public Boolean getEnableSsl()
+    {
         return enableSsl;
     }
 
-    public void setEnableSsl(Boolean enableSsl) {
+    public void setEnableSsl(Boolean enableSsl)
+    {
         this.enableSsl = enableSsl;
     }
 
-    public Boolean getAuth() {
+    public Boolean getAuth()
+    {
         return auth;
     }
 
-    public void setAuth(Boolean auth) {
+    public void setAuth(Boolean auth)
+    {
         this.auth = auth;
     }
 
-    public String getJndiSessionName() {
+    public String getJndiSessionName()
+    {
         return jndiSessionName;
     }
 
-    public void setJndiSessionName(String jndiSessionName) {
+    public void setJndiSessionName(String jndiSessionName)
+    {
         this.jndiSessionName = jndiSessionName;
     }
 
-    public boolean isValid() {
+    public boolean isValid()
+    {
 
-        if (jndiSessionName != null && !jndiSessionName.trim().isEmpty()) {
+        if (jndiSessionName != null && !jndiSessionName.trim().isEmpty())
+        {
             return true;
         }
 
-        if (serverHost == null || serverHost.trim().isEmpty()) {
+        if (serverHost == null || serverHost.trim().isEmpty())
+        {
             return false;
         }
 
-        if (serverPort == 0) {
+        if (serverPort == 0)
+        {
             return false;
         }
 

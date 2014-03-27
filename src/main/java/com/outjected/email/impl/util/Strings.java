@@ -15,14 +15,16 @@ package com.outjected.email.impl.util;
 /**
  * @author Cody Lerum
  */
-public class Strings {
+public class Strings
+{
     /**
      * Checks if a String is null or empty when trimmed
      * 
      * @param string
      * @return TRUE if NULL or string.trim.length == 0
      */
-    public static boolean isNullOrBlank(String string) {
+    public static boolean isNullOrBlank(String string)
+    {
         return string == null || string.trim().length() == 0;
     }
 }

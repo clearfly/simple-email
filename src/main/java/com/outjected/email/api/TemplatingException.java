@@ -17,22 +17,27 @@ package com.outjected.email.api;
  * 
  * @author Cody Lerum
  */
-public class TemplatingException extends MailException {
+public class TemplatingException extends MailException
+{
     private static final long serialVersionUID = 1L;
 
-    public TemplatingException() {
+    public TemplatingException()
+    {
         super();
     }
 
-    public TemplatingException(String message, Throwable cause) {
+    public TemplatingException(String message, Throwable cause)
+    {
         super(message, cause);
     }
 
-    public TemplatingException(String message) {
+    public TemplatingException(String message)
+    {
         super(message);
     }
 
-    public TemplatingException(Throwable cause) {
+    public TemplatingException(Throwable cause)
+    {
         super(cause);
     }
 }

@@ -34,40 +34,50 @@ import com.outjected.email.api.TemplatingException;
 /**
  * @author Cody Lerum
  */
-public class VelocityTemplate implements TemplateProvider {
+public class VelocityTemplate implements TemplateProvider
+{
     private VelocityEngine velocityEngine;
     private VelocityContext velocityContext;
     private InputStream inputStream;
 
-    public VelocityTemplate(InputStream inputStream) {
+    public VelocityTemplate(InputStream inputStream)
+    {
         velocityEngine = new VelocityEngine();
-        velocityEngine.setProperty(RuntimeConstants.RUNTIME_LOG_LOGSYSTEM_CLASS, "org.apache.velocity.runtime.log.NullLogChute");
+        velocityEngine.setProperty(RuntimeConstants.RUNTIME_LOG_LOGSYSTEM_CLASS,
+                "org.apache.velocity.runtime.log.NullLogChute");
         this.inputStream = inputStream;
     }
 
-    public VelocityTemplate(String string) {
+    public VelocityTemplate(String string)
+    {
         this(new ByteArrayInputStream(string.getBytes()));
     }
 
-    public VelocityTemplate(File file) throws FileNotFoundException {
+    public VelocityTemplate(File file) throws FileNotFoundException
+    {
         this(new FileInputStream(file));
     }
 
-    public String merge(Map<String, Object> context) {
+    public String merge(Map<String, Object> context)
+    {
         StringWriter writer = new StringWriter();
 
         velocityContext = new VelocityContext(context);
 
-        try {
+        try
+        {
             velocityEngine.evaluate(velocityContext, writer, "mailGenerated", new InputStreamReader(inputStream));
         }
-        catch (ResourceNotFoundException e) {
+        catch (ResourceNotFoundException e)
+        {
             throw new TemplatingException("Unable to find template", e);
         }
-        catch (ParseErrorException e) {
+        catch (ParseErrorException e)
+        {
             throw new TemplatingException("Unable to find template", e);
         }
-        catch (MethodInvocationException e) {
+        catch (MethodInvocationException e)
+        {
             throw new TemplatingException("Error processing method referenced in context", e);
         }
 
