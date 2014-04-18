@@ -330,10 +330,20 @@ public class MailMessageImpl implements MailMessage
 
     // Begin Calendar
 
-    public MailMessage iCal(String html, byte[] bytes)
+    public MailMessage iCal(String htmlBody,String textBody, byte[] bytes)
     {
         emailMessage.setType(EmailMessageType.INVITE_ICAL);
-        emailMessage.setHtmlBody(html);
+        emailMessage.setHtmlBody(htmlBody);
+        emailMessage.setTextBody(textBody);
+        emailMessage.addAttachment(new BaseAttachment(null, "text/calendar;method=CANCEL",
+                ContentDisposition.INLINE, bytes, "urn:content-classes:calendarmessage"));
+        return this;
+    }
+    
+    public MailMessage iCal(String textBody, byte[] bytes)
+    {
+        emailMessage.setType(EmailMessageType.INVITE_ICAL);
+        emailMessage.setTextBody(textBody);
         emailMessage.addAttachment(new BaseAttachment(null, "text/calendar;method=CANCEL",
                 ContentDisposition.INLINE, bytes, "urn:content-classes:calendarmessage"));
         return this;

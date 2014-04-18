@@ -321,13 +321,27 @@ public interface MailMessage
     /**
      * Used for creating iCal Calendar Invites.
      * 
-     * @param htmlSummary
+     * @param textBody
      *            Summary of the invite to be displayed in the body of the email messages.
      * @param bytes
      *            iCal data which will be attached to the message
      * 
      */
-    public MailMessage iCal(String htmlSummary, byte[] bytes);
+    public MailMessage iCal(String textBody, byte[] bytes);
+
+    /**
+     * Used for creating iCal Calendar Invites.
+     * 
+     * @param htmlBody
+     *            Summary of the invite to be displayed in the html body of the email messages.
+     * 
+     * @param textBody
+     *            Summary of the invite to be displayed in the alternate text body of the email messages.
+     * @param bytes
+     *            iCal data which will be attached to the message
+     * 
+     */
+    public MailMessage iCal(String htmlBody, String textBody, byte[] bytes);
 
     // End Calendar
 

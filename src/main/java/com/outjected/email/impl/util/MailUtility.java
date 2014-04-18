@@ -307,7 +307,13 @@ public class MailUtility
         }
         else if (e.getType() == EmailMessageType.INVITE_ICAL)
         {
-            b.setHTMLNotRelated(e.getHtmlBody());
+            if (e.getHtmlBody() != null)
+            {
+                b.setHTMLNotRelated(e.getHtmlBody());
+            }
+            else{
+                b.setText(e.getTextBody());
+            }
             b.addAttachments(e.getAttachments());
         }
         else
