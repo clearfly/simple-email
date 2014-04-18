@@ -25,6 +25,7 @@ import com.outjected.email.api.EmailContact;
 import com.outjected.email.api.EmailMessage;
 import com.outjected.email.api.EmailMessageType;
 import com.outjected.email.api.Header;
+import com.outjected.email.api.ICalMethod;
 import com.outjected.email.api.SessionConfig;
 import com.outjected.email.api.MailContext;
 import com.outjected.email.api.MailMessage;
@@ -330,21 +331,21 @@ public class MailMessageImpl implements MailMessage
 
     // Begin Calendar
 
-    public MailMessage iCal(String htmlBody,String textBody, byte[] bytes)
+    public MailMessage iCal(String htmlBody, String textBody, ICalMethod method, byte[] bytes)
     {
         emailMessage.setType(EmailMessageType.INVITE_ICAL);
         emailMessage.setHtmlBody(htmlBody);
         emailMessage.setTextBody(textBody);
-        emailMessage.addAttachment(new BaseAttachment(null, "text/calendar;method=CANCEL",
+        emailMessage.addAttachment(new BaseAttachment(null, "text/calendar;method=" + method,
                 ContentDisposition.INLINE, bytes, "urn:content-classes:calendarmessage"));
         return this;
     }
-    
-    public MailMessage iCal(String textBody, byte[] bytes)
+
+    public MailMessage iCal(String textBody, ICalMethod method, byte[] bytes)
     {
         emailMessage.setType(EmailMessageType.INVITE_ICAL);
         emailMessage.setTextBody(textBody);
-        emailMessage.addAttachment(new BaseAttachment(null, "text/calendar;method=CANCEL",
+        emailMessage.addAttachment(new BaseAttachment(null, "text/calendar;method=" + method,
                 ContentDisposition.INLINE, bytes, "urn:content-classes:calendarmessage"));
         return this;
     }
