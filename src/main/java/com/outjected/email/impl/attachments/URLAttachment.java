@@ -26,32 +26,26 @@ import com.outjected.email.impl.util.Streams;
 /**
  * @author Cody Lerum
  */
-public class URLAttachment extends BaseAttachment
-{
-    public URLAttachment(String url, String fileName, ContentDisposition contentDisposition)
-    {
+public class URLAttachment extends BaseAttachment {
+    public URLAttachment(String url, String fileName, ContentDisposition contentDisposition) {
         super();
         URLDataSource uds;
-        try
-        {
+        try {
             uds = new URLDataSource(new URL(url));
             super.setFileName(fileName);
             super.setMimeType(uds.getContentType());
             super.setContentDisposition(contentDisposition);
             super.setBytes(Streams.toByteArray(uds.getInputStream()));
         }
-        catch (MalformedURLException e)
-        {
+        catch (MalformedURLException e) {
             throw new AttachmentException("Wasn't able to create email attachment from URL: " + url, e);
         }
-        catch (IOException e)
-        {
+        catch (IOException e) {
             throw new AttachmentException("Wasn't able to create email attachment from URL: " + url, e);
         }
     }
 
-    public URLAttachment(String url, String fileName, ContentDisposition contentDisposition, String contentClass)
-    {
+    public URLAttachment(String url, String fileName, ContentDisposition contentDisposition, String contentClass) {
         this(url, fileName, contentDisposition);
         super.addHeader(new Header("Content-Class", contentClass));
     }

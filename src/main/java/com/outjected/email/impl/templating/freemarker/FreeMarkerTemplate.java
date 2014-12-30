@@ -34,46 +34,38 @@ import freemarker.template.TemplateException;
 /**
  * @author Cody Lerum
  */
-public class FreeMarkerTemplate implements TemplateProvider
-{
+public class FreeMarkerTemplate implements TemplateProvider {
     private Configuration configuration;
     private Map<String, Object> rootMap = new HashMap<String, Object>();
     private InputStream inputStream;
 
-    public FreeMarkerTemplate(InputStream inputStream)
-    {
+    public FreeMarkerTemplate(InputStream inputStream) {
         this.inputStream = inputStream;
         configuration = new Configuration();
         configuration.setObjectWrapper(new DefaultObjectWrapper());
     }
 
-    public FreeMarkerTemplate(String string)
-    {
+    public FreeMarkerTemplate(String string) {
         this(new ByteArrayInputStream(string.getBytes()));
     }
 
-    public FreeMarkerTemplate(File file) throws FileNotFoundException
-    {
+    public FreeMarkerTemplate(File file) throws FileNotFoundException {
         this(new FileInputStream(file));
     }
 
-    public String merge(Map<String, Object> context)
-    {
+    public String merge(Map<String, Object> context) {
         rootMap.putAll(context);
 
         StringWriter writer = new StringWriter();
 
-        try
-        {
+        try {
             Template template = new Template("mailGenerated", new InputStreamReader(inputStream), configuration);
             template.process(rootMap, writer);
         }
-        catch (IOException e)
-        {
+        catch (IOException e) {
             throw new TemplatingException("Error creating template", e);
         }
-        catch (TemplateException e)
-        {
+        catch (TemplateException e) {
             throw new TemplatingException("Error rendering output", e);
         }
 

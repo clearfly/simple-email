@@ -21,25 +21,20 @@ import javax.mail.internet.MimeMultipart;
 /**
  * @author Cody Lerum
  */
-public class MailTestUtil
-{
-    public static String getAddressHeader(String address)
-    {
+public class MailTestUtil {
+    public static String getAddressHeader(String address) {
         return address;
     }
 
-    public static String getAddressHeader(String name, String address)
-    {
+    public static String getAddressHeader(String name, String address) {
         return name + " <" + address + ">";
     }
 
-    public static String getStringContent(MimeMultipart mmp, int index) throws IOException, MessagingException
-    {
+    public static String getStringContent(MimeMultipart mmp, int index) throws IOException, MessagingException {
         return getStringContent(mmp.getBodyPart(index));
     }
 
-    public static String getStringContent(BodyPart bodyPart) throws IOException, MessagingException
-    {
+    public static String getStringContent(BodyPart bodyPart) throws IOException, MessagingException {
         return (String) bodyPart.getContent();
     }
 }

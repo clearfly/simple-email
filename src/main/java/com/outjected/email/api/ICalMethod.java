@@ -1,7 +1,6 @@
 package com.outjected.email.api;
 
-public enum ICalMethod
-{
+public enum ICalMethod {
     PUBLISH,
     REQUEST,
     REFRESH,

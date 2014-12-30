@@ -13,32 +13,27 @@
 package com.outjected.email.api;
 
 /**
- * Any exception that is raised by the mail module extends from this runtime exception class, making it easy for other
- * modules and extensions to catch all mail-related exceptions in a single catch block, if need be.
+ * Any exception that is raised by the mail module extends from this runtime exception class, making it easy for other modules
+ * and extensions to catch all mail-related exceptions in a single catch block, if need be.
  * 
  * @author Cody Lerum
  */
-public class MailException extends RuntimeException
-{
+public class MailException extends RuntimeException {
     private static final long serialVersionUID = 1L;
 
-    public MailException()
-    {
+    public MailException() {
         super();
     }
 
-    public MailException(String message, Throwable cause)
-    {
+    public MailException(String message, Throwable cause) {
         super(message, cause);
     }
 
-    public MailException(String message)
-    {
+    public MailException(String message) {
         super(message);
     }
 
-    public MailException(Throwable cause)
-    {
+    public MailException(Throwable cause) {
         super(cause);
     }
 }

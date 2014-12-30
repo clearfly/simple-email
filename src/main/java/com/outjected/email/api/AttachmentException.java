@@ -17,27 +17,22 @@ package com.outjected.email.api;
  * 
  * @author Cody Lerum
  */
-public class AttachmentException extends MailException
-{
+public class AttachmentException extends MailException {
     private static final long serialVersionUID = 1L;
 
-    public AttachmentException()
-    {
+    public AttachmentException() {
         super();
     }
 
-    public AttachmentException(String message, Throwable cause)
-    {
+    public AttachmentException(String message, Throwable cause) {
         super(message, cause);
     }
 
-    public AttachmentException(String message)
-    {
+    public AttachmentException(String message) {
         super(message);
     }
 
-    public AttachmentException(Throwable cause)
-    {
+    public AttachmentException(Throwable cause) {
         super(cause);
     }
 }

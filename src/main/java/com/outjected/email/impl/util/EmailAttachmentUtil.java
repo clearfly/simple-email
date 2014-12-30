@@ -16,25 +16,20 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.outjected.email.api.EmailAttachment;
+import com.outjected.email.impl.attachments.BaseAttachment;
 
 /**
  * @author Cody Lerum
  */
-public class EmailAttachmentUtil
-{
-    public static Map<String, EmailAttachment> getEmailAttachmentMap(Collection<EmailAttachment> attachments)
-    {
-        Map<String, EmailAttachment> emailAttachmentMap = new HashMap<String, EmailAttachment>();
+public class EmailAttachmentUtil {
+    public static Map<String, BaseAttachment> getEmailAttachmentMap(Collection<BaseAttachment> attachments) {
+        Map<String, BaseAttachment> emailAttachmentMap = new HashMap<String, BaseAttachment>();
 
-        for (EmailAttachment ea : attachments)
-        {
-            if (!Strings.isNullOrBlank(ea.getFileName()))
-            {
+        for (BaseAttachment ea : attachments) {
+            if (!Strings.isNullOrBlank(ea.getFileName())) {
                 emailAttachmentMap.put(ea.getFileName(), ea);
             }
         }
-
         return emailAttachmentMap;
     }
 }

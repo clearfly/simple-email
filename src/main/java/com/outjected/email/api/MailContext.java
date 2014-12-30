@@ -14,31 +14,28 @@ package com.outjected.email.api;
 
 import java.util.Map;
 
+import com.outjected.email.impl.attachments.BaseAttachment;
+
 /**
  * @author Cody Lerum
  */
-public class MailContext
-{
+public class MailContext {
 
-    private Map<String, EmailAttachment> attachments;
+    private Map<String, BaseAttachment> attachments;
 
-    public MailContext(Map<String, EmailAttachment> attachments)
-    {
+    public MailContext(Map<String, BaseAttachment> attachments) {
         this.attachments = attachments;
     }
 
-    public String insert(String fileName)
-    {
-        EmailAttachment attachment = null;
+    public String insert(String fileName) {
+        BaseAttachment attachment = null;
 
         attachment = attachments.get(fileName);
 
-        if (attachment == null)
-        {
+        if (attachment == null) {
             throw new RuntimeException("Unable to find attachment: " + fileName);
         }
-        else
-        {
+        else {
             return "cid:" + attachment.getContentId();
         }
     }

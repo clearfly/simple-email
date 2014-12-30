@@ -17,27 +17,22 @@ package com.outjected.email.api;
  * 
  * @author Cody Lerum
  */
-public class SendFailedException extends MailException
-{
+public class SendFailedException extends MailException {
     private static final long serialVersionUID = 1L;
 
-    public SendFailedException()
-    {
+    public SendFailedException() {
         super();
     }
 
-    public SendFailedException(String message, Throwable cause)
-    {
+    public SendFailedException(String message, Throwable cause) {
         super(message, cause);
     }
 
-    public SendFailedException(String message)
-    {
+    public SendFailedException(String message) {
         super(message);
     }
 
-    public SendFailedException(Throwable cause)
-    {
+    public SendFailedException(Throwable cause) {
         super(cause);
     }
 }

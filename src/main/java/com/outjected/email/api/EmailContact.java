@@ -17,8 +17,7 @@ package com.outjected.email.api;
  * @author Cody Lerum
  * 
  */
-public interface EmailContact
-{
+public interface EmailContact {
 
     public String getName();
 

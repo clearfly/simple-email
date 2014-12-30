@@ -15,21 +15,18 @@ package com.outjected.email.api;
 /**
  * @author Cody Lerum
  */
-public enum ContentType
-{
+public enum ContentType {
     ALTERNATIVE("alternative"),
     MIXED("mixed"),
     RELATED("related");
 
     private String value;
 
-    private ContentType(String value)
-    {
+    private ContentType(String value) {
         this.value = value;
     }
 
-    public String getValue()
-    {
+    public String getValue() {
         return value;
     }
 }

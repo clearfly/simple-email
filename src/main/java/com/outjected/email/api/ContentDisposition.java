@@ -18,8 +18,8 @@ import javax.mail.internet.MimeBodyPart;
  * Defines the available Dispostions for attachments in an email Message.
  * <p/>
  * <p>
- * INLINE is used where an attachment should be displayed in the body of the message such as a image reference in an
- * HTML message body
+ * INLINE is used where an attachment should be displayed in the body of the message such as a image reference in an HTML
+ * message body
  * </p>
  * <p/>
  * <p>
@@ -28,35 +28,28 @@ import javax.mail.internet.MimeBodyPart;
  * 
  * @author Cody Lerum
  */
-public enum ContentDisposition
-{
+public enum ContentDisposition {
     ATTACHMENT(MimeBodyPart.ATTACHMENT),
     INLINE(MimeBodyPart.INLINE);
 
     private String headerValue;
 
-    private ContentDisposition(String headerValue)
-    {
+    private ContentDisposition(String headerValue) {
         this.headerValue = headerValue;
     }
 
-    public String headerValue()
-    {
+    public String headerValue() {
         return headerValue;
     }
 
-    public static ContentDisposition mapValue(String value)
-    {
-        if (value.equals(MimeBodyPart.ATTACHMENT))
-        {
+    public static ContentDisposition mapValue(String value) {
+        if (value.equals(MimeBodyPart.ATTACHMENT)) {
             return ContentDisposition.ATTACHMENT;
         }
-        else if (value.equals(MimeBodyPart.INLINE))
-        {
+        else if (value.equals(MimeBodyPart.INLINE)) {
             return ContentDisposition.INLINE;
         }
-        else
-        {
+        else {
             throw new UnsupportedOperationException("Unsupported Content DispostionType: " + value);
         }
     }

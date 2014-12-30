@@ -15,8 +15,7 @@ package com.outjected.email.api;
 /**
  * @author Cody Lerum
  */
-public enum MessagePriority
-{
+public enum MessagePriority {
     LOW("5", "non-urgent", "low"),
     NORMAL("3", "normal", "normal"),
     HIGH("1", "urgent", "high");
@@ -25,25 +24,21 @@ public enum MessagePriority
     private String priority;
     private String importance;
 
-    private MessagePriority(String x_priority, String priority, String importance)
-    {
+    private MessagePriority(String x_priority, String priority, String importance) {
         this.xPriority = x_priority;
         this.priority = priority;
         this.importance = importance;
     }
 
-    public String getX_priority()
-    {
+    public String getX_priority() {
         return xPriority;
     }
 
-    public String getPriority()
-    {
+    public String getPriority() {
         return priority;
     }
 
-    public String getImportance()
-    {
+    public String getImportance() {
         return importance;
     }
 }

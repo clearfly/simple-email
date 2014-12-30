@@ -16,61 +16,58 @@ import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 
 import javax.mail.internet.MimeUtility;
+import javax.xml.bind.annotation.XmlElement;
 
 /**
  * @author Cody Lerum
  */
-public class Header implements Serializable
-{
+public class Header implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String name;
     private String value;
 
-    public Header(String name, String value)
-    {
+    public Header() {
+        // Required for JAX-B
+    }
+
+    public Header(String name, String value) {
         this.name = name;
 
-        try
-        {
+        try {
             this.value = MimeUtility.fold(name.length() + 2, MimeUtility.encodeText(value));
         }
-        catch (UnsupportedEncodingException e)
-        {
+        catch (UnsupportedEncodingException e) {
             throw new RuntimeException("Unable to create header", e);
         }
     }
 
-    public String getName()
-    {
+    @XmlElement
+    public String getName() {
         return name;
     }
 
-    public void setName(String name)
-    {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public String getValue()
-    {
+    @XmlElement
+    public String getValue() {
         return value;
     }
 
-    public void setValue(String value)
-    {
+    public void setValue(String value) {
         this.value = value;
     }
 
-    public boolean equals(Object o)
-    {
+    public boolean equals(Object o) {
 
         Header h = (Header) o;
 
         return name.equals(h.getName()) || value.equals(h.getValue());
     }
 
-    public int hashCode()
-    {
+    public int hashCode() {
         return name.hashCode() + value.hashCode();
     }
 

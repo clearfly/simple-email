@@ -17,8 +17,7 @@ package com.outjected.email.api;
  * @author Cody Lerum
  * 
  */
-public interface MailTransporter
-{
+public interface MailTransporter {
 
     public EmailMessage send(EmailMessage emailMessage);
 }
