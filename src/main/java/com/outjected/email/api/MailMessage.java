@@ -19,8 +19,6 @@ import java.util.Map;
 
 import javax.mail.internet.InternetAddress;
 
-import com.outjected.email.impl.attachments.BaseAttachment;
-
 /**
  * Base interface for creating email messages.
  * 
@@ -208,14 +206,14 @@ public interface MailMessage {
      * 
      * @param attachment {@link EmailAttachment} to be added
      */
-    public MailMessage addAttachment(BaseAttachment attachment);
+    public MailMessage addAttachment(EmailAttachment attachment);
 
     /**
      * Adds a Collection of Attachments to the message
      * 
      * @param attachments
      */
-    public MailMessage addAttachments(Collection<BaseAttachment> attachments);
+    public MailMessage addAttachments(Collection<EmailAttachment> attachments);
 
     /**
      * Adds Attachment to the message

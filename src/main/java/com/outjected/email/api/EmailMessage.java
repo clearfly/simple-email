@@ -18,6 +18,7 @@ import javax.mail.internet.InternetAddress;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 import com.outjected.email.impl.attachments.BaseAttachment;
 
@@ -27,6 +28,8 @@ import com.outjected.email.impl.attachments.BaseAttachment;
  * @author Cody Lerum
  */
 @XmlRootElement
+@XmlType(propOrder = { "messageId", "importance", "charset", "fromAddresses", "replyToAddresses", "toAddresses", "ccAddresses", "bccAddresses", "envelopeFrom", "deliveryReceiptAddresses",
+        "readReceiptAddresses", "subject", "textBody", "htmlBody", "headers", "rootContentType", "type", "attachments" })
 public class EmailMessage {
     private String charset = Charset.defaultCharset().name();
     private ContentType rootContentType = ContentType.MIXED;
@@ -142,24 +145,6 @@ public class EmailMessage {
     }
 
     /**
-     * Adds a single InternetAddress to the FROM addresses on the EmailMessage
-     * 
-     * @param fromAddress
-     */
-    public void addFromAddress(InternetAddress fromAddress) {
-        this.fromAddresses.add(fromAddress);
-    }
-
-    /**
-     * Adds a Collection of InternetAddress to the FROM addresses on the EmailMessage
-     * 
-     * @param fromAddresses
-     */
-    public void addFromAddresses(Collection<InternetAddress> fromAddresses) {
-        this.fromAddresses.addAll(fromAddresses);
-    }
-
-    /**
      * Get the Collection of REPLY-TO addresses on the EmailMeassage
      * 
      * @return Collection of InternetAddresses addresses
@@ -174,24 +159,6 @@ public class EmailMessage {
     }
 
     /**
-     * Adds a single InternetAddress to the REPLY-TO addresses on the EmailMessage
-     * 
-     * @param replyToAddress InternetAddress to set
-     */
-    public void addReplyToAddress(InternetAddress replyToAddress) {
-        this.replyToAddresses.add(replyToAddress);
-    }
-
-    /**
-     * Adds a Collection of InternetAddress to the REPLY-TO addresses on the
-     * 
-     * @param replyToAddresses Collection of InternetAddress to add
-     */
-    public void addReplyToAddresses(Collection<InternetAddress> replyToAddresses) {
-        this.replyToAddresses.addAll(replyToAddresses);
-    }
-
-    /**
      * Get the Collection of TO addresses on the EmailMeassage
      * 
      * @return Collection of InternetAddresses addresses
@@ -199,38 +166,6 @@ public class EmailMessage {
     @XmlElement
     public List<InternetAddress> getToAddresses() {
         return toAddresses;
-    }
-
-    /**
-     * Adds a single InternetAddress to the TO addresses on the EmailMessage
-     * 
-     * @param toAddress InternetAddress to set
-     */
-    public void addToAddress(InternetAddress toAddress) {
-        this.toAddresses.add(toAddress);
-    }
-
-    /**
-     * Adds a Collection of InternetAddress to the TO addresses on the
-     * 
-     * @param toAddresses Collection of InternetAddress to add
-     */
-    public void addToAddresses(Collection<InternetAddress> toAddresses) {
-        this.toAddresses.addAll(toAddresses);
-    }
-
-    public void setToAddresses(List<InternetAddress> toAddresses) {
-        this.toAddresses = toAddresses;
-    }
-
-    /**
-     * Remove an InternetAddress from the TO addressses
-     * 
-     * @param toAddress
-     * @return true if address was removed. false if it did not exist.
-     */
-    public boolean removeToAddress(InternetAddress toAddress) {
-        return toAddresses.remove(toAddress);
     }
 
     /**
@@ -248,34 +183,6 @@ public class EmailMessage {
     }
 
     /**
-     * Adds a single InternetAddress to the CC addresses on the EmailMessage
-     * 
-     * @param ccAddress InternetAddress to set
-     */
-    public void addCcAddress(InternetAddress ccAddress) {
-        this.ccAddresses.add(ccAddress);
-    }
-
-    /**
-     * Adds a Collection of InternetAddress to the CC addresses on the
-     * 
-     * @param ccAddresses Collection of InternetAddress to add
-     */
-    public void addCcAddresses(Collection<InternetAddress> ccAddresses) {
-        this.ccAddresses.addAll(ccAddresses);
-    }
-
-    /**
-     * Remove an InternetAddress from the CC addressses
-     * 
-     * @param ccAddress
-     * @return true if address was removed. false if it did not exist.
-     */
-    public boolean removeCcAddress(InternetAddress ccAddress) {
-        return ccAddresses.remove(ccAddress);
-    }
-
-    /**
      * Get the Collection of BCC addresses on the EmailMeassage
      * 
      * @return Collection of InternetAddresses addresses
@@ -287,34 +194,6 @@ public class EmailMessage {
 
     public void setBccAddresses(List<InternetAddress> bccAddresses) {
         this.bccAddresses = bccAddresses;
-    }
-
-    /**
-     * Adds a single InternetAddress to the BCC addresses on the EmailMessage
-     * 
-     * @param bccAddress InternetAddress to set
-     */
-    public void addBccAddress(InternetAddress bccAddress) {
-        this.bccAddresses.add(bccAddress);
-    }
-
-    /**
-     * Adds a Collection of InternetAddress to the BCC addresses on the
-     * 
-     * @param bccAddresses Collection of InternetAddress to add
-     */
-    public void addBccAddresses(Collection<InternetAddress> bccAddresses) {
-        this.bccAddresses.addAll(bccAddresses);
-    }
-
-    /**
-     * Remove an InternetAddress from the BCC addresses
-     * 
-     * @param bccAddress
-     * @return true if address was removed. false if it did not exist.
-     */
-    public boolean removeBccAddress(InternetAddress bccAddress) {
-        return bccAddresses.remove(bccAddress);
     }
 
     /**
@@ -349,24 +228,6 @@ public class EmailMessage {
 
     public void setHeaders(List<Header> headers) {
         this.headers = headers;
-    }
-
-    /**
-     * Add a single Header to the EmailMessage
-     * 
-     * @param header Header to set
-     */
-    public void addHeader(Header header) {
-        headers.add(header);
-    }
-
-    /**
-     * Add a Collection of Header to the EmailMessage
-     * 
-     * @param headers Collection of Header to add to EmailMessage
-     */
-    public void addHeaders(Collection<Header> headers) {
-        this.headers.addAll(headers);
     }
 
     /**
@@ -441,24 +302,6 @@ public class EmailMessage {
     }
 
     /**
-     * Adds a InternetAddress as a Delivery Receipt address
-     * 
-     * @param address InternetAddress to be added
-     */
-    public void addDeliveryReceiptAddress(InternetAddress address) {
-        deliveryReceiptAddresses.add(address);
-    }
-
-    /**
-     * Adds a Collection of InternetAddress as a Delivery Receipt address
-     * 
-     * @param deliveryReceiptAddresses Collection of InternetAddress to be added
-     */
-    public void addDeliveryReceiptAddresses(Collection<InternetAddress> deliveryReceiptAddresses) {
-        deliveryReceiptAddresses.addAll(deliveryReceiptAddresses);
-    }
-
-    /**
      * Get the collection of InternetAddress which are Read Receipt addresses
      * 
      * @return Collection of InternetAddress
@@ -469,24 +312,6 @@ public class EmailMessage {
 
     public void setReadReceiptAddresses(List<InternetAddress> readReceiptAddresses) {
         this.readReceiptAddresses = readReceiptAddresses;
-    }
-
-    /**
-     * Adds a InternetAddress as a Read Receipt address
-     * 
-     * @param address InternetAddress to be added
-     */
-    public void addReadReceiptAddress(InternetAddress address) {
-        readReceiptAddresses.add(address);
-    }
-
-    /**
-     * Adds a Collection of InternetAddress as a Read Receipt address
-     * 
-     * @param readReceiptAddresses Collection of InternetAddress to be added
-     */
-    public void addReadReceiptAddresses(Collection<InternetAddress> readReceiptAddresses) {
-        readReceiptAddresses.addAll(readReceiptAddresses);
     }
 
     /**
@@ -508,7 +333,7 @@ public class EmailMessage {
     }
 
     /**
-     * Adds an EmailAttachment to the EmailMessage
+     * Adds an BaseAttachment to the EmailMessage
      * 
      * @param attachment EmailAttachment to be added
      */
@@ -517,12 +342,22 @@ public class EmailMessage {
     }
 
     /**
+     * Adds an EmailAttachment to the EmailMessage
+     * 
+     * @param attachment EmailAttachment to be added
+     */
+    public void addAttachment(EmailAttachment attachment) {
+        BaseAttachment ba = new BaseAttachment(attachment.getFileName(), attachment.getMimeType(), attachment.getContentDisposition(), attachment.getBytes());
+        attachments.add(ba);
+    }
+
+    /**
      * Adds a Collection of EmailAttachment to the EmailMessage
      * 
      * @param attachments Collection of EmailAttachment
      */
-    public void addAttachments(Collection<BaseAttachment> attachments) {
-        for (BaseAttachment e : attachments) {
+    public void addAttachments(Collection<EmailAttachment> attachments) {
+        for (EmailAttachment e : attachments) {
             addAttachment(e);
         }
     }

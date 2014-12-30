@@ -44,12 +44,12 @@ public class MessageConverter {
 
         try {
             emailMessage.setFromAddresses(MailUtility.getInternetAddressses(m.getFrom()));
-            emailMessage.setToAddresses(MailUtility.getInternetAddressses(m.getRecipients(RecipientType.TO)));
+            emailMessage.getToAddresses().addAll(MailUtility.getInternetAddressses(m.getRecipients(RecipientType.TO)));
             emailMessage.setCcAddresses(MailUtility.getInternetAddressses(m.getRecipients(RecipientType.CC)));
             emailMessage.setBccAddresses(MailUtility.getInternetAddressses(m.getRecipients(RecipientType.BCC)));
             emailMessage.setSubject(m.getSubject());
             emailMessage.setMessageId(m.getHeader("Message-ID")[0]);
-            emailMessage.addHeaders(MailUtility.getHeaders(m.getAllHeaders()));
+            emailMessage.getHeaders().addAll(MailUtility.getHeaders(m.getAllHeaders()));
 
             if (m.getContentType().toLowerCase().contains("multipart/")) {
                 addMultiPart((MimeMultipart) m.getContent());

@@ -20,6 +20,7 @@ import javax.mail.internet.InternetAddress;
 
 import com.outjected.email.api.ContentDisposition;
 import com.outjected.email.api.ContentType;
+import com.outjected.email.api.EmailAttachment;
 import com.outjected.email.api.EmailContact;
 import com.outjected.email.api.EmailMessage;
 import com.outjected.email.api.EmailMessageType;
@@ -78,117 +79,117 @@ public class MailMessageImpl implements MailMessage {
     // Begin Addressing
 
     public MailMessage from(String... address) {
-        emailMessage.addFromAddresses(MailUtility.internetAddress(address));
+        emailMessage.getFromAddresses().addAll(MailUtility.internetAddress(address));
         return this;
     }
 
     public MailMessage from(InternetAddress emailAddress) {
-        emailMessage.addFromAddress(emailAddress);
+        emailMessage.getFromAddresses().add(emailAddress);
         return this;
     }
 
     public MailMessage from(EmailContact emailContact) {
         if (emailContact != null) {
-            emailMessage.addFromAddress(MailUtility.internetAddress(emailContact));
+            emailMessage.getFromAddresses().add(MailUtility.internetAddress(emailContact));
         }
         return this;
     }
 
     public MailMessage from(Collection<? extends EmailContact> emailContacts) {
-        emailMessage.addFromAddresses(MailUtility.internetAddress(emailContacts));
+        emailMessage.getFromAddresses().addAll(MailUtility.internetAddress(emailContacts));
         return this;
     }
 
     public MailMessage replyTo(String... address) {
-        emailMessage.addReplyToAddresses(MailUtility.internetAddress(address));
+        emailMessage.getReplyToAddresses().addAll(MailUtility.internetAddress(address));
         return this;
     }
 
     public MailMessage replyTo(InternetAddress emailAddress) {
-        emailMessage.addReplyToAddress(emailAddress);
+        emailMessage.getReplyToAddresses().add(emailAddress);
         return this;
     }
 
     public MailMessage replyTo(EmailContact emailContact) {
         if (emailContact != null) {
-            emailMessage.addReplyToAddress(MailUtility.internetAddress(emailContact));
+            emailMessage.getReplyToAddresses().add(MailUtility.internetAddress(emailContact));
         }
         return this;
     }
 
     public MailMessage replyTo(Collection<? extends EmailContact> emailContacts) {
-        emailMessage.addReplyToAddresses(MailUtility.internetAddress(emailContacts));
+        emailMessage.getReplyToAddresses().addAll(MailUtility.internetAddress(emailContacts));
         return this;
     }
 
     public MailMessage addHeader(String name, String value) {
-        emailMessage.addHeader(new Header(name, value));
+        emailMessage.getHeaders().add(new Header(name, value));
         return this;
     }
 
     public MailMessage to(String... address) {
-        emailMessage.addToAddresses(MailUtility.internetAddress(address));
+        emailMessage.getToAddresses().addAll(MailUtility.internetAddress(address));
         return this;
     }
 
     public MailMessage to(InternetAddress emailAddress) {
-        emailMessage.addToAddress(emailAddress);
+        emailMessage.getToAddresses().add(emailAddress);
         return this;
     }
 
     public MailMessage to(EmailContact emailContact) {
         if (emailContact != null) {
-            emailMessage.addToAddress(MailUtility.internetAddress(emailContact));
+            emailMessage.getToAddresses().add(MailUtility.internetAddress(emailContact));
         }
         return this;
     }
 
     public MailMessage to(Collection<? extends EmailContact> emailContacts) {
-        emailMessage.addToAddresses(MailUtility.internetAddress(emailContacts));
+        emailMessage.getToAddresses().addAll(MailUtility.internetAddress(emailContacts));
         return this;
     }
 
     public MailMessage cc(String... address) {
-        emailMessage.addCcAddresses(MailUtility.internetAddress(address));
+        emailMessage.getCcAddresses().addAll(MailUtility.internetAddress(address));
         return this;
     }
 
     public MailMessage cc(InternetAddress emailAddress) {
-        emailMessage.addCcAddress(emailAddress);
+        emailMessage.getCcAddresses().add(emailAddress);
         return this;
     }
 
     public MailMessage cc(EmailContact emailContact) {
         if (emailContact != null) {
-            emailMessage.addCcAddress(MailUtility.internetAddress(emailContact));
+            emailMessage.getCcAddresses().add(MailUtility.internetAddress(emailContact));
         }
         return this;
     }
 
     public MailMessage cc(Collection<? extends EmailContact> emailContacts) {
-        emailMessage.addCcAddresses(MailUtility.internetAddress(emailContacts));
+        emailMessage.getCcAddresses().addAll(MailUtility.internetAddress(emailContacts));
         return this;
     }
 
     public MailMessage bcc(String... address) {
-        emailMessage.addBccAddresses(MailUtility.internetAddress(address));
+        emailMessage.getBccAddresses().addAll(MailUtility.internetAddress(address));
         return this;
     }
 
     public MailMessage bcc(InternetAddress emailAddress) {
-        emailMessage.addBccAddress(emailAddress);
+        emailMessage.getBccAddresses().add(emailAddress);
         return this;
     }
 
     public MailMessage bcc(EmailContact emailContact) {
         if (emailContact != null) {
-            emailMessage.addBccAddress(MailUtility.internetAddress(emailContact));
+            emailMessage.getBccAddresses().add(MailUtility.internetAddress(emailContact));
         }
         return this;
     }
 
     public MailMessage bcc(Collection<? extends EmailContact> emailContacts) {
-        emailMessage.addBccAddresses(MailUtility.internetAddress(emailContacts));
+        emailMessage.getBccAddresses().addAll(MailUtility.internetAddress(emailContacts));
         return this;
     }
 
@@ -214,12 +215,12 @@ public class MailMessageImpl implements MailMessage {
     }
 
     public MailMessage deliveryReceipt(String address) {
-        emailMessage.addDeliveryReceiptAddress(MailUtility.internetAddress(address));
+        emailMessage.getDeliveryReceiptAddresses().add(MailUtility.internetAddress(address));
         return this;
     }
 
     public MailMessage readReceipt(String address) {
-        emailMessage.addReadReceiptAddress(MailUtility.internetAddress(address));
+        emailMessage.getReadReceiptAddresses().add(MailUtility.internetAddress(address));
         return this;
     }
 
@@ -251,12 +252,12 @@ public class MailMessageImpl implements MailMessage {
 
     // Begin Attachments
 
-    public MailMessage addAttachment(BaseAttachment attachment) {
+    public MailMessage addAttachment(EmailAttachment attachment) {
         emailMessage.addAttachment(attachment);
         return this;
     }
 
-    public MailMessage addAttachments(Collection<BaseAttachment> attachments) {
+    public MailMessage addAttachments(Collection<EmailAttachment> attachments) {
         emailMessage.addAttachments(attachments);
         return this;
     }

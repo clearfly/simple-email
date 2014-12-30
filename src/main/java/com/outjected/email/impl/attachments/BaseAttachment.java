@@ -21,12 +21,13 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 
 import com.outjected.email.api.ContentDisposition;
+import com.outjected.email.api.EmailAttachment;
 import com.outjected.email.api.Header;
 
 /**
  * @author Cody Lerum
  */
-public class BaseAttachment {
+public class BaseAttachment implements EmailAttachment {
     private String contentId;
     private String fileName;
     private String mimeType;
