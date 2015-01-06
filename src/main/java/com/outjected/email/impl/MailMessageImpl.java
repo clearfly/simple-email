@@ -84,7 +84,9 @@ public class MailMessageImpl implements MailMessage {
     }
 
     public MailMessage from(InternetAddress emailAddress) {
-        emailMessage.getFromAddresses().add(emailAddress);
+        if (emailAddress != null) {
+            emailMessage.getFromAddresses().add(emailAddress);
+        }
         return this;
     }
 
@@ -106,7 +108,9 @@ public class MailMessageImpl implements MailMessage {
     }
 
     public MailMessage replyTo(InternetAddress emailAddress) {
-        emailMessage.getReplyToAddresses().add(emailAddress);
+        if (emailAddress != null) {
+            emailMessage.getReplyToAddresses().add(emailAddress);
+        }
         return this;
     }
 
@@ -133,7 +137,9 @@ public class MailMessageImpl implements MailMessage {
     }
 
     public MailMessage to(InternetAddress emailAddress) {
-        emailMessage.getToAddresses().add(emailAddress);
+        if (emailAddress != null) {
+            emailMessage.getToAddresses().add(emailAddress);
+        }
         return this;
     }
 
@@ -155,7 +161,9 @@ public class MailMessageImpl implements MailMessage {
     }
 
     public MailMessage cc(InternetAddress emailAddress) {
-        emailMessage.getCcAddresses().add(emailAddress);
+        if (emailAddress != null) {
+            emailMessage.getCcAddresses().add(emailAddress);
+        }
         return this;
     }
 
@@ -177,7 +185,9 @@ public class MailMessageImpl implements MailMessage {
     }
 
     public MailMessage bcc(InternetAddress emailAddress) {
-        emailMessage.getBccAddresses().add(emailAddress);
+        if (emailAddress != null) {
+            emailMessage.getBccAddresses().add(emailAddress);
+        }
         return this;
     }
 

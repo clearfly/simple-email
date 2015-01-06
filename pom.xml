@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.outjected</groupId>
 	<artifactId>simple-email</artifactId>
-	<version>0.2</version>
+	<version>0.2.1</version>
 
 	<description>Continuation of the Seam 3 Mail Module</description>
 	<url>https://github.com/codylerum/simple-email</url>
