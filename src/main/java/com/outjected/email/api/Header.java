@@ -14,6 +14,7 @@ package com.outjected.email.api;
 
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
+import java.util.Objects;
 
 import javax.mail.internet.MimeUtility;
 import javax.xml.bind.annotation.XmlElement;
@@ -60,15 +61,18 @@ public class Header implements Serializable {
         this.value = value;
     }
 
+    @Override
     public boolean equals(Object o) {
-
-        Header h = (Header) o;
-
-        return name.equals(h.getName()) || value.equals(h.getValue());
+        if (o instanceof Header) {
+            return getName().equalsIgnoreCase(((Header) o).getName()) && getValue().equalsIgnoreCase(((Header) o).getValue());
+        }
+        else {
+            return false;
+        }
     }
 
+    @Override
     public int hashCode() {
-        return name.hashCode() + value.hashCode();
+        return Objects.hash(getName(), getValue());
     }
-
 }
