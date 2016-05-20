@@ -73,6 +73,6 @@ public class Header implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getName(), getValue());
+        return Objects.hash(getName().toLowerCase(), getValue().toLowerCase());
     }
 }
