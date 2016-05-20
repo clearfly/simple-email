@@ -6,6 +6,19 @@
 	<artifactId>simple-email</artifactId>
 	<version>0.2.2</version>
 
+	<distributionManagement>
+		<repository>
+			<id>central</id>
+			<name>clearfly-releases</name>
+			<url>https://mvn.clearfly.net/artifactory/libs-release</url>
+		</repository>
+		<snapshotRepository>
+			<id>snapshots</id>
+			<name>clearfly-snapshots</name>
+			<url>https://mvn.clearfly.net/artifactory/libs-snapshot</url>
+		</snapshotRepository>
+	</distributionManagement>
+
 	<description>Continuation of the Seam 3 Mail Module</description>
 	<url>https://github.com/codylerum/simple-email</url>
 
@@ -39,9 +52,9 @@
 	<dependencies>
 
 		<dependency>
-			<groupId>javax.mail</groupId>
-			<artifactId>mail</artifactId>
-			<version>1.4.4</version>
+			<groupId>com.sun.mail</groupId>
+			<artifactId>javax.mail</artifactId>
+			<version>1.5.5</version>
 			<scope>provided</scope>
 		</dependency>
 
@@ -110,7 +123,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.4</version>
+				<version>3.2</version>
 				<configuration>
 					<source>1.7</source>
 					<target>1.7</target>
@@ -119,7 +132,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
-				<version>2.2.1</version>
+				<version>2.4</version>
 				<executions>
 					<execution>
 						<id>attach-sources</id>
