@@ -29,15 +29,13 @@ import com.outjected.email.api.Header;
  */
 public class AttachmentPart extends MimeBodyPart {
 
-    private String uid;
-
     public AttachmentPart(DataSource dataSource, String uid, String fileName, Collection<Header> headers, ContentDisposition contentDisposition) {
         super();
 
-        this.uid = uid;
-
         try {
-            setContentID("<" + uid + ">");
+            if (uid != null) {
+                setContentID("<" + uid + ">");
+            }
         }
         catch (MessagingException e1) {
             throw new RuntimeException("Unable to set unique content-id on attachment");
@@ -93,10 +91,6 @@ public class AttachmentPart extends MimeBodyPart {
         catch (MessagingException e) {
             throw new RuntimeException("Unable to get Content-Dispostion on attachment");
         }
-    }
-
-    public String getUid() {
-        return uid;
     }
 
     public void setContentDisposition(ContentDisposition contentDisposition) {
