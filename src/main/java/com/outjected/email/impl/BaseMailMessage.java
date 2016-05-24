@@ -329,9 +329,9 @@ public class BaseMailMessage {
     }
 
     public void addAttachment(BaseAttachment emailAttachment) {
-        AttachmentPart attachment =
-                new AttachmentPart(emailAttachment.getBytes(), emailAttachment.getContentId(), emailAttachment.getFileName(), emailAttachment.getMimeType(), emailAttachment.getHeaders(),
-                        emailAttachment.getContentDisposition());
+        String contentId = emailAttachment.getContentDisposition() == ContentDisposition.INLINE ? emailAttachment.getContentId() : null;
+        AttachmentPart attachment = new AttachmentPart(emailAttachment.getBytes(), contentId, emailAttachment.getFileName(), emailAttachment.getMimeType(), emailAttachment.getHeaders(),
+                emailAttachment.getContentDisposition());
         attachments.put(attachment.getAttachmentFileName(), attachment);
     }
 
