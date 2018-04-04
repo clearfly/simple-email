@@ -16,17 +16,30 @@ package com.outjected.email.api;
  * @author Cody Lerum
  */
 public enum RecipientType {
-    TO(javax.mail.Message.RecipientType.TO),
-    CC(javax.mail.Message.RecipientType.CC),
-    BCC(javax.mail.Message.RecipientType.BCC);
+    TO("To"),
+    CC("Cc"),
+    BCC("Bcc");
 
-    private javax.mail.Message.RecipientType recipientType;
+    private final String typeName;
 
-    private RecipientType(javax.mail.Message.RecipientType recipientType) {
-        this.recipientType = recipientType;
+    private RecipientType(String typeName) {
+        this.typeName = typeName;
     }
 
-    public javax.mail.Message.RecipientType getRecipientType() {
-        return recipientType;
+    public String getTypeName() {
+        return typeName;
+    }
+
+    public javax.mail.Message.RecipientType asJavaMailType() {
+        switch (this) {
+            case TO:
+                return javax.mail.Message.RecipientType.TO;
+            case CC:
+                return javax.mail.Message.RecipientType.CC;
+            case BCC:
+                return javax.mail.Message.RecipientType.BCC;
+            default:
+                throw new RuntimeException("Unsupported Type: " + this);
+        }
     }
 }

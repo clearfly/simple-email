@@ -26,6 +26,7 @@ import org.junit.Test;
 import org.subethamail.smtp.auth.EasyAuthenticationHandlerFactory;
 import org.subethamail.wiser.Wiser;
 
+import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
 import com.outjected.email.api.ContentDisposition;
 import com.outjected.email.api.EmailMessage;
@@ -71,10 +72,9 @@ public class FreeMarkerMailMessageTest {
         try {
             wiser.start();
 
-            e =
-                    new MailMessageImpl(mailConfig).from(MailTestUtil.getAddressHeader(fromName, fromAddress)).replyTo(replyToAddress).to(MailTestUtil.getAddressHeader(toName, toAddress)).subject(
-                            new FreeMarkerTemplate(subjectTemplate)).bodyText(new FreeMarkerTemplate(Resources.newInputStreamSupplier(Resources.getResource("template.text.freemarker")).getInput()))
-                            .put("person", person).put("version", version).importance(MessagePriority.HIGH).send();
+            e = new MailMessageImpl(mailConfig).from(MailTestUtil.getAddressHeader(fromName, fromAddress)).replyTo(replyToAddress).to(MailTestUtil.getAddressHeader(toName, toAddress)).subject(
+                    new FreeMarkerTemplate(subjectTemplate)).bodyText(new FreeMarkerTemplate(Resources.asCharSource(Resources.getResource("template.text.freemarker"), Charsets.UTF_8).read())).put(
+                            "person", person).put("version", version).importance(MessagePriority.HIGH).send();
         }
         finally {
             stop(wiser);
@@ -125,10 +125,8 @@ public class FreeMarkerMailMessageTest {
         try {
             wiser.start();
 
-            e =
-                    new MailMessageImpl(mailConfig).from(MailTestUtil.getAddressHeader(fromName, fromAddress)).replyTo(replyToAddress).to(MailTestUtil.getAddressHeader(toName, toAddress)).subject(
-                            new FreeMarkerTemplate(subjectTemplate)).bodyText(new FreeMarkerTemplate(specialTextBody)).importance(MessagePriority.HIGH).messageId(messageId).put("version", version)
-                            .send();
+            e = new MailMessageImpl(mailConfig).from(MailTestUtil.getAddressHeader(fromName, fromAddress)).replyTo(replyToAddress).to(MailTestUtil.getAddressHeader(toName, toAddress)).subject(
+                    new FreeMarkerTemplate(subjectTemplate)).bodyText(new FreeMarkerTemplate(specialTextBody)).importance(MessagePriority.HIGH).messageId(messageId).put("version", version).send();
         }
         finally {
             stop(wiser);
@@ -166,11 +164,10 @@ public class FreeMarkerMailMessageTest {
         try {
             wiser.start();
 
-            emailMessage =
-                    new MailMessageImpl(mailConfig).from(MailTestUtil.getAddressHeader(fromName, fromAddress)).replyTo(MailTestUtil.getAddressHeader(replyToName, replyToAddress)).to(person).subject(
-                            subject).bodyHtml(new FreeMarkerTemplate(Resources.newInputStreamSupplier(Resources.getResource("template.html.freemarker")).getInput())).put("person", person).put(
-                            "version", version).importance(MessagePriority.HIGH).addAttachment(
-                            new URLAttachment("http://design.jboss.org/seam/logo/final/seam_mail_85px.png", "seamLogo.png", ContentDisposition.INLINE)).send();
+            emailMessage = new MailMessageImpl(mailConfig).from(MailTestUtil.getAddressHeader(fromName, fromAddress)).replyTo(MailTestUtil.getAddressHeader(replyToName, replyToAddress)).to(person)
+                    .subject(subject).bodyHtml(new FreeMarkerTemplate(Resources.asCharSource(Resources.getResource("template.html.freemarker"), Charsets.UTF_8).read())).put("person", person).put(
+                            "version", version).importance(MessagePriority.HIGH).addAttachment(new URLAttachment("http://design.jboss.org/seam/logo/final/seam_mail_85px.png", "seamLogo.png",
+                                    ContentDisposition.INLINE)).send();
         }
         finally {
             stop(wiser);
@@ -223,14 +220,12 @@ public class FreeMarkerMailMessageTest {
         try {
             wiser.start();
 
-            emailMessage =
-                    new MailMessageImpl(mailConfig).from(MailTestUtil.getAddressHeader(fromName, fromAddress)).to(MailTestUtil.getAddressHeader(person.getName(), person.getEmail())).subject(subject)
-                            .put("person", person).put("version", version).bodyHtmlTextAlt(
-                                    new FreeMarkerTemplate(Resources.newInputStreamSupplier(Resources.getResource("template.html.freemarker")).getInput()),
-                                    new FreeMarkerTemplate(Resources.newInputStreamSupplier(Resources.getResource("template.text.freemarker")).getInput())).importance(MessagePriority.LOW)
-                            .deliveryReceipt(fromAddress).readReceipt("seam.test").addAttachment("template.html.freemarker", "text/html", ContentDisposition.ATTACHMENT,
-                                    Resources.newInputStreamSupplier(Resources.getResource("template.html.freemarker")).getInput()).addAttachment(
-                                    new URLAttachment("http://design.jboss.org/seam/logo/final/seam_mail_85px.png", "seamLogo.png", ContentDisposition.INLINE)).send();
+            emailMessage = new MailMessageImpl(mailConfig).from(MailTestUtil.getAddressHeader(fromName, fromAddress)).to(MailTestUtil.getAddressHeader(person.getName(), person.getEmail())).subject(
+                    subject).put("person", person).put("version", version).bodyHtmlTextAlt(new FreeMarkerTemplate(Resources.asCharSource(Resources.getResource("template.html.freemarker"),
+                            Charsets.UTF_8).read()), new FreeMarkerTemplate(Resources.asCharSource(Resources.getResource("template.text.freemarker"), Charsets.UTF_8).read())).importance(
+                                    MessagePriority.LOW).deliveryReceipt(fromAddress).readReceipt("seam.test").addAttachment("template.html.freemarker", "text/html", ContentDisposition.ATTACHMENT,
+                                            Resources.asByteSource(Resources.getResource("template.html.freemarker")).read()).addAttachment(new URLAttachment(
+                                                    "http://design.jboss.org/seam/logo/final/seam_mail_85px.png", "seamLogo.png", ContentDisposition.INLINE)).send();
         }
         finally {
             stop(wiser);
@@ -292,12 +287,11 @@ public class FreeMarkerMailMessageTest {
         try {
             wiser.start();
 
-            new MailMessageImpl(mailConfig).from(fromAddress).to(person.getEmail()).subject(subject).put("person", person).put("version", "Seam 3").bodyHtmlTextAlt(
-                    new FreeMarkerTemplate(Resources.newInputStreamSupplier(Resources.getResource("template.html.freemarker")).getInput()),
-                    new FreeMarkerTemplate(Resources.newInputStreamSupplier(Resources.getResource("template.text.freemarker")).getInput())).importance(MessagePriority.LOW)
-                    .deliveryReceipt(fromAddress).readReceipt("seam.test").addAttachment("template.html.freemarker", "text/html", ContentDisposition.ATTACHMENT,
-                            Resources.newInputStreamSupplier(Resources.getResource("template.html.freemarker")).getInput()).addAttachment(
-                            new URLAttachment("http://design.jboss.org/seam/logo/final/seam_mail_85px.png", "seamLogo.png", ContentDisposition.INLINE)).send();
+            new MailMessageImpl(mailConfig).from(fromAddress).to(person.getEmail()).subject(subject).put("person", person).put("version", "Seam 3").bodyHtmlTextAlt(new FreeMarkerTemplate(Resources
+                    .asCharSource(Resources.getResource("template.html.freemarker"), Charsets.UTF_8).read()), new FreeMarkerTemplate(Resources.asCharSource(Resources.getResource(
+                            "template.text.freemarker"), Charsets.UTF_8).read())).importance(MessagePriority.LOW).deliveryReceipt(fromAddress).readReceipt("seam.test").addAttachment(
+                                    "template.html.freemarker", "text/html", ContentDisposition.ATTACHMENT, Resources.asByteSource(Resources.getResource("template.html.freemarker")).read())
+                    .addAttachment(new URLAttachment("http://design.jboss.org/seam/logo/final/seam_mail_85px.png", "seamLogo.png", ContentDisposition.INLINE)).send();
         }
         finally {
             stop(wiser);
@@ -330,9 +324,8 @@ public class FreeMarkerMailMessageTest {
             person.setName(toName);
             person.setEmail(toAddress);
 
-            new MailMessageImpl(mailConfig).from(fromAddress).replyTo(replyToAddress).to(toAddress).subject(new FreeMarkerTemplate(subject)).bodyText(
-                    new FreeMarkerTemplate(Resources.newInputStreamSupplier(Resources.getResource("template.text.freemarker")).getInput())).put("person", person).put("version", version).importance(
-                    MessagePriority.HIGH).send();
+            new MailMessageImpl(mailConfig).from(fromAddress).replyTo(replyToAddress).to(toAddress).subject(new FreeMarkerTemplate(subject)).bodyText(new FreeMarkerTemplate(Resources.asCharSource(
+                    Resources.getResource("template.text.freemarker"), Charsets.UTF_8).read())).put("person", person).put("version", version).importance(MessagePriority.HIGH).send();
         }
         finally {
             stop(wiser);

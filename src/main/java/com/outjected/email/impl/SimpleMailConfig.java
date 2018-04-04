@@ -36,6 +36,7 @@ public class SimpleMailConfig implements Serializable, SessionConfig {
     private Boolean auth = false;
     private String jndiSessionName;
 
+    @Override
     public String getServerHost() {
         return serverHost;
     }
@@ -44,6 +45,7 @@ public class SimpleMailConfig implements Serializable, SessionConfig {
         this.serverHost = serverHost;
     }
 
+    @Override
     public Integer getServerPort() {
         return serverPort;
     }
@@ -52,6 +54,7 @@ public class SimpleMailConfig implements Serializable, SessionConfig {
         this.serverPort = serverPort;
     }
 
+    @Override
     public String getDomainName() {
         return domainName;
     }
@@ -60,6 +63,7 @@ public class SimpleMailConfig implements Serializable, SessionConfig {
         this.domainName = domainName;
     }
 
+    @Override
     public String getUsername() {
         return username;
     }
@@ -68,6 +72,7 @@ public class SimpleMailConfig implements Serializable, SessionConfig {
         this.username = username;
     }
 
+    @Override
     public String getPassword() {
         return password;
     }
@@ -76,6 +81,7 @@ public class SimpleMailConfig implements Serializable, SessionConfig {
         this.password = password;
     }
 
+    @Override
     public Boolean getEnableTls() {
         return enableTls;
     }
@@ -84,6 +90,7 @@ public class SimpleMailConfig implements Serializable, SessionConfig {
         this.enableTls = enableTls;
     }
 
+    @Override
     public Boolean getRequireTls() {
         return requireTls;
     }
@@ -92,6 +99,7 @@ public class SimpleMailConfig implements Serializable, SessionConfig {
         this.requireTls = requireTls;
     }
 
+    @Override
     public Boolean getEnableSsl() {
         return enableSsl;
     }
@@ -100,6 +108,7 @@ public class SimpleMailConfig implements Serializable, SessionConfig {
         this.enableSsl = enableSsl;
     }
 
+    @Override
     public Boolean getAuth() {
         return auth;
     }
@@ -108,6 +117,7 @@ public class SimpleMailConfig implements Serializable, SessionConfig {
         this.auth = auth;
     }
 
+    @Override
     public String getJndiSessionName() {
         return jndiSessionName;
     }

@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Enumeration;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
 import java.util.Set;
@@ -144,7 +143,7 @@ public class MailUtility {
     }
 
     public static List<Header> getHeaders(Enumeration<?> allHeaders) {
-        List<Header> result = new LinkedList<Header>();
+        List<Header> result = new ArrayList<>();
         while (allHeaders.hasMoreElements()) {
             javax.mail.Header h = (javax.mail.Header) allHeaders.nextElement();
             result.add(new Header(h.getName(), h.getValue()));

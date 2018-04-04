@@ -73,7 +73,7 @@ public class BaseMailMessage {
 
     public void addRecipient(RecipientType recipientType, InternetAddress emailAddress) {
         try {
-            rootMimeMessage.addRecipient(recipientType.getRecipientType(), emailAddress);
+            rootMimeMessage.addRecipient(recipientType.asJavaMailType(), emailAddress);
         }
         catch (MessagingException e) {
             throw new RuntimeException("Unable to add recipient " + recipientType + ": " + emailAddress.toString() + " to MIME message", e);
@@ -82,7 +82,7 @@ public class BaseMailMessage {
 
     public void addRecipients(RecipientType recipientType, InternetAddress[] emailAddresses) {
         try {
-            rootMimeMessage.addRecipients(recipientType.getRecipientType(), emailAddresses);
+            rootMimeMessage.addRecipients(recipientType.asJavaMailType(), emailAddresses);
         }
         catch (MessagingException e) {
             throw new RuntimeException("Unable to add " + recipientType + ":  Collection<Recipients>to MIME message", e);
@@ -91,7 +91,7 @@ public class BaseMailMessage {
 
     public void addRecipients(RecipientType recipientType, Collection<InternetAddress> emailAddresses) {
         try {
-            rootMimeMessage.addRecipients(recipientType.getRecipientType(), MailUtility.getInternetAddressses(emailAddresses));
+            rootMimeMessage.addRecipients(recipientType.asJavaMailType(), MailUtility.getInternetAddressses(emailAddresses));
         }
         catch (MessagingException e) {
         }

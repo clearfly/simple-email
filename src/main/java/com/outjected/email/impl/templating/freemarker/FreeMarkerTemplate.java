@@ -12,14 +12,11 @@
 
 package com.outjected.email.impl.templating.freemarker;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.StringWriter;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,7 +24,7 @@ import com.outjected.email.api.TemplateProvider;
 import com.outjected.email.api.TemplatingException;
 
 import freemarker.template.Configuration;
-import freemarker.template.DefaultObjectWrapper;
+import freemarker.template.DefaultObjectWrapperBuilder;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
@@ -37,30 +34,27 @@ import freemarker.template.TemplateException;
 public class FreeMarkerTemplate implements TemplateProvider {
     private Configuration configuration;
     private Map<String, Object> rootMap = new HashMap<String, Object>();
-    private InputStream inputStream;
+    private String template;
 
-    public FreeMarkerTemplate(InputStream inputStream) {
-        this.inputStream = inputStream;
-        configuration = new Configuration();
-        configuration.setObjectWrapper(new DefaultObjectWrapper());
+    public FreeMarkerTemplate(String template) {
+        this.template = template;
+        configuration = new Configuration(Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS);
+        configuration.setObjectWrapper(new DefaultObjectWrapperBuilder(Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS).build());
     }
 
-    public FreeMarkerTemplate(String string) {
-        this(new ByteArrayInputStream(string.getBytes()));
+    public FreeMarkerTemplate(File file) throws IOException {
+        this(new String(Files.readAllBytes(file.toPath()), Charset.forName("UTF-8")));
     }
 
-    public FreeMarkerTemplate(File file) throws FileNotFoundException {
-        this(new FileInputStream(file));
-    }
-
+    @Override
     public String merge(Map<String, Object> context) {
         rootMap.putAll(context);
 
         StringWriter writer = new StringWriter();
 
         try {
-            Template template = new Template("mailGenerated", new InputStreamReader(inputStream), configuration);
-            template.process(rootMap, writer);
+            Template t = new Template("mailGenerated", template, configuration);
+            t.process(rootMap, writer);
         }
         catch (IOException e) {
             throw new TemplatingException("Error creating template", e);

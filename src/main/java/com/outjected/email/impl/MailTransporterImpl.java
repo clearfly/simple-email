@@ -31,6 +31,7 @@ public class MailTransporterImpl implements MailTransporter {
         this.session = session;
     }
 
+    @Override
     public EmailMessage send(EmailMessage emailMessage) {
         MailUtility.send(emailMessage, session);
         return emailMessage;

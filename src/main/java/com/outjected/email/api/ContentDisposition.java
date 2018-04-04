@@ -32,7 +32,7 @@ public enum ContentDisposition {
     ATTACHMENT(MimeBodyPart.ATTACHMENT),
     INLINE(MimeBodyPart.INLINE);
 
-    private String headerValue;
+    private final String headerValue;
 
     private ContentDisposition(String headerValue) {
         this.headerValue = headerValue;

@@ -12,13 +12,11 @@
 
 package com.outjected.email.impl.templating.velocity;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.IOException;
 import java.io.StringWriter;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
 import java.util.Map;
 
 import org.apache.velocity.VelocityContext;
@@ -37,29 +35,26 @@ import com.outjected.email.api.TemplatingException;
 public class VelocityTemplate implements TemplateProvider {
     private VelocityEngine velocityEngine;
     private VelocityContext velocityContext;
-    private InputStream inputStream;
+    private String template;
 
-    public VelocityTemplate(InputStream inputStream) {
+    public VelocityTemplate(String template) {
         velocityEngine = new VelocityEngine();
         velocityEngine.setProperty(RuntimeConstants.RUNTIME_LOG_LOGSYSTEM_CLASS, "org.apache.velocity.runtime.log.NullLogChute");
-        this.inputStream = inputStream;
+        this.template = template;
     }
 
-    public VelocityTemplate(String string) {
-        this(new ByteArrayInputStream(string.getBytes()));
+    public VelocityTemplate(File file) throws IOException {
+        this(new String(Files.readAllBytes(file.toPath()), Charset.forName("UTF-8")));
     }
 
-    public VelocityTemplate(File file) throws FileNotFoundException {
-        this(new FileInputStream(file));
-    }
-
+    @Override
     public String merge(Map<String, Object> context) {
         StringWriter writer = new StringWriter();
 
         velocityContext = new VelocityContext(context);
 
         try {
-            velocityEngine.evaluate(velocityContext, writer, "mailGenerated", new InputStreamReader(inputStream));
+            velocityEngine.evaluate(velocityContext, writer, "mailGenerated", template);
         }
         catch (ResourceNotFoundException e) {
             throw new TemplatingException("Unable to find template", e);

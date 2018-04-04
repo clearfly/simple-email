@@ -52,6 +52,7 @@ public class BaseAttachment implements EmailAttachment {
         this.contentId = UUID.randomUUID().toString();
     }
 
+    @Override
     @XmlElement
     public String getContentId() {
         return contentId;
@@ -61,6 +62,7 @@ public class BaseAttachment implements EmailAttachment {
         this.contentId = contentId;
     }
 
+    @Override
     @XmlElement
     public String getFileName() {
         return fileName;
@@ -70,6 +72,7 @@ public class BaseAttachment implements EmailAttachment {
         this.fileName = fileName;
     }
 
+    @Override
     @XmlElement
     public String getMimeType() {
         return mimeType;
@@ -79,6 +82,7 @@ public class BaseAttachment implements EmailAttachment {
         this.mimeType = mimeType;
     }
 
+    @Override
     @XmlElement
     public ContentDisposition getContentDisposition() {
         return contentDisposition;
@@ -88,6 +92,7 @@ public class BaseAttachment implements EmailAttachment {
         this.contentDisposition = contentDisposition;
     }
 
+    @Override
     @XmlElementWrapper(name = "headers")
     @XmlElement(name = "header")
     public List<Header> getHeaders() {
@@ -99,13 +104,14 @@ public class BaseAttachment implements EmailAttachment {
     }
 
     public void addHeader(Header header) {
-        headers.add(header);
+        this.headers.add(header);
     }
 
     public void addHeaders(Collection<Header> headers) {
-        headers.addAll(headers);
+       this.headers.addAll(headers);
     }
 
+    @Override
     @XmlElement
     public byte[] getBytes() {
         return bytes;

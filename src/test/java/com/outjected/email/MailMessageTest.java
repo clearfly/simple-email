@@ -20,8 +20,6 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.internet.MimeUtility;
 
-import junit.framework.Assert;
-
 import org.junit.Test;
 import org.subethamail.wiser.Wiser;
 
@@ -38,6 +36,8 @@ import com.outjected.email.impl.util.MailTestUtil;
 import com.outjected.email.impl.util.MailUtility;
 import com.outjected.email.impl.util.MessageConverter;
 import com.outjected.email.util.TestMailConfigs;
+
+import junit.framework.Assert;
 
 /**
  * @author Cody Lerum
@@ -72,9 +72,8 @@ public class MailMessageTest {
         try {
             wiser.start();
 
-            e =
-                    new MailMessageImpl(mailConfig).from(MailTestUtil.getAddressHeader(fromName, fromAddress)).replyTo(replyToAddress).to(MailTestUtil.getAddressHeader(toName, toAddress)).subject(
-                            subject).bodyText(textBody).importance(MessagePriority.HIGH).messageId(messageId).envelopeFrom(ENVELOPE_FROM_ADDRESS).send();
+            e = new MailMessageImpl(mailConfig).from(MailTestUtil.getAddressHeader(fromName, fromAddress)).replyTo(replyToAddress).to(MailTestUtil.getAddressHeader(toName, toAddress)).subject(subject)
+                    .bodyText(textBody).importance(MessagePriority.HIGH).messageId(messageId).envelopeFrom(ENVELOPE_FROM_ADDRESS).send();
         }
         finally {
             stop(wiser);
@@ -122,9 +121,8 @@ public class MailMessageTest {
         try {
             wiser.start();
 
-            e =
-                    new MailMessageImpl(mailConfig).from(MailTestUtil.getAddressHeader(fromName, fromAddress)).replyTo(replyToAddress).to(MailTestUtil.getAddressHeader(toName, toAddress)).subject(
-                            subject).bodyText(specialTextBody).importance(MessagePriority.HIGH).messageId(messageId).send();
+            e = new MailMessageImpl(mailConfig).from(MailTestUtil.getAddressHeader(fromName, fromAddress)).replyTo(replyToAddress).to(MailTestUtil.getAddressHeader(toName, toAddress)).subject(subject)
+                    .bodyText(specialTextBody).importance(MessagePriority.HIGH).messageId(messageId).send();
         }
         finally {
             stop(wiser);
@@ -161,10 +159,9 @@ public class MailMessageTest {
         wiser.setHostname(mailConfig.getServerHost());
         try {
             wiser.start();
-            e =
-                    new MailMessageImpl(mailConfig).from(MailTestUtil.getAddressHeader(fromName, fromAddress)).replyTo(MailTestUtil.getAddressHeader(replyToName, replyToAddress)).to(person).subject(
-                            subject).bodyHtml(htmlBody).importance(MessagePriority.HIGH).addAttachment(
-                            new URLAttachment("http://design.jboss.org/seam/logo/final/seam_mail_85px.png", "seamLogo.png", ContentDisposition.INLINE)).send();
+            e = new MailMessageImpl(mailConfig).from(MailTestUtil.getAddressHeader(fromName, fromAddress)).replyTo(MailTestUtil.getAddressHeader(replyToName, replyToAddress)).to(person).subject(
+                    subject).bodyHtml(htmlBody).importance(MessagePriority.HIGH).addAttachment(new URLAttachment("http://design.jboss.org/seam/logo/final/seam_mail_85px.png", "seamLogo.png",
+                            ContentDisposition.INLINE)).send();
         }
         finally {
             stop(wiser);
@@ -215,9 +212,9 @@ public class MailMessageTest {
             wiser.start();
 
             new MailMessageImpl(mailConfig).from(MailTestUtil.getAddressHeader(fromName, fromAddress)).to(person).subject(subject).bodyHtmlTextAlt(htmlBody, textBody).importance(MessagePriority.LOW)
-                    .deliveryReceipt(fromAddress).readReceipt("seam.test").addAttachment("template.text.velocity", "text/plain", ContentDisposition.ATTACHMENT,
-                            Resources.newInputStreamSupplier(Resources.getResource("template.text.velocity")).getInput()).addAttachment(
-                            new URLAttachment("http://design.jboss.org/seam/logo/final/seam_mail_85px.png", "seamLogo.png", ContentDisposition.INLINE)).send();
+                    .deliveryReceipt(fromAddress).readReceipt("seam.test").addAttachment("template.text.velocity", "text/plain", ContentDisposition.ATTACHMENT, Resources.asByteSource(Resources
+                            .getResource("template.text.velocity")).read()).addAttachment(new URLAttachment("http://design.jboss.org/seam/logo/final/seam_mail_85px.png", "seamLogo.png",
+                                    ContentDisposition.INLINE)).send();
         }
         finally {
             stop(wiser);
@@ -285,9 +282,8 @@ public class MailMessageTest {
         try {
             wiser.start();
 
-            e =
-                    new MailMessageImpl(mailConfig).from(MailTestUtil.getAddressHeader(longFromName, longFromAddress)).to(MailTestUtil.getAddressHeader(longToName, longToAddress)).cc(
-                            MailTestUtil.getAddressHeader(longCcName, longCcAddress)).subject(subject).bodyText(textBody).importance(MessagePriority.HIGH).send();
+            e = new MailMessageImpl(mailConfig).from(MailTestUtil.getAddressHeader(longFromName, longFromAddress)).to(MailTestUtil.getAddressHeader(longToName, longToAddress)).cc(MailTestUtil
+                    .getAddressHeader(longCcName, longCcAddress)).subject(subject).bodyText(textBody).importance(MessagePriority.HIGH).send();
         }
         finally {
             stop(wiser);
@@ -355,8 +351,8 @@ public class MailMessageTest {
         try {
             wiser.start();
 
-            new MailMessageImpl(mailConfig).from("seam seamerson@test.com", fromName).replyTo(replyToAddress).to(toAddress, toName).subject(subject).bodyText(textBody)
-                    .importance(MessagePriority.HIGH).messageId(messageId).send();
+            new MailMessageImpl(mailConfig).from("seam seamerson@test.com", fromName).replyTo(replyToAddress).to(toAddress, toName).subject(subject).bodyText(textBody).importance(MessagePriority.HIGH)
+                    .messageId(messageId).send();
         }
         finally {
             stop(wiser);
@@ -378,9 +374,8 @@ public class MailMessageTest {
         try {
             wiser.start();
 
-            e =
-                    new MailMessageImpl(mailConfig).from(MailTestUtil.getAddressHeader(fromName, fromAddress)).replyTo(replyToAddress).to(person).subject(subject).bodyText(textBody).importance(
-                            MessagePriority.HIGH).messageId(messageId).send();
+            e = new MailMessageImpl(mailConfig).from(MailTestUtil.getAddressHeader(fromName, fromAddress)).replyTo(replyToAddress).to(person).subject(subject).bodyText(textBody).importance(
+                    MessagePriority.HIGH).messageId(messageId).send();
         }
         finally {
             stop(wiser);
@@ -426,9 +421,8 @@ public class MailMessageTest {
         wiser.setHostname(mailConfig.getServerHost());
         try {
             wiser.start();
-            e =
-                    new MailMessageImpl(mailConfig).from(MailTestUtil.getAddressHeader(fromName, fromAddress)).replyTo(replyToAddress).to(person).subject(subject).bodyText(textBody).importance(
-                            MessagePriority.HIGH).messageId(messageId).send();
+            e = new MailMessageImpl(mailConfig).from(MailTestUtil.getAddressHeader(fromName, fromAddress)).replyTo(replyToAddress).to(person).subject(subject).bodyText(textBody).importance(
+                    MessagePriority.HIGH).messageId(messageId).send();
         }
         finally {
             stop(wiser);

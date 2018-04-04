@@ -20,7 +20,7 @@ public enum ContentType {
     MIXED("mixed"),
     RELATED("related");
 
-    private String value;
+    private final String value;
 
     private ContentType(String value) {
         this.value = value;

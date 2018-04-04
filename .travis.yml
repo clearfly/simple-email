@@ -1,0 +1,22 @@
+sudo: true
+dist: trusty
+group: travis_latest
+
+language: java
+
+notifications:
+  email:
+    on_success: change
+    on_failure: always
+
+jdk:
+ - oraclejdk8
+ 
+cache:
+  directories:
+  - $HOME/.m2
+ 
+install: false
+ 
+script: 
+- mvn clean test -P errorprone

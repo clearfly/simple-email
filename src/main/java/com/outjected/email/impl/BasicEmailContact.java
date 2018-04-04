@@ -31,6 +31,7 @@ public class BasicEmailContact implements EmailContact {
         this.name = name;
     }
 
+    @Override
     public String getAddress() {
         return address;
     }
@@ -39,6 +40,7 @@ public class BasicEmailContact implements EmailContact {
         this.address = address;
     }
 
+    @Override
     public String getName() {
         return name;
     }

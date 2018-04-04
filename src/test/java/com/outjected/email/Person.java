@@ -30,6 +30,7 @@ public class Person implements EmailContact {
         this.email = email;
     }
 
+    @Override
     public String getName() {
         return name;
     }
@@ -46,6 +47,7 @@ public class Person implements EmailContact {
         this.email = email;
     }
 
+    @Override
     public String getAddress() {
         return getEmail();
     }
