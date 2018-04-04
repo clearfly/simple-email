@@ -38,11 +38,9 @@ public class InternetAddressTest {
         Collection<EmailContact> addresses = new ArrayList<EmailContact>();
         addresses.add(seamey);
 
-        m.from("seam@domain.test", "Seam Seamerson<seam@domain.test>");
         m.from("Seam Seamerson<seam@domain.test>");
         m.from("seam@domain.test");
         m.from(seam);
-        m.from(addresses);
 
         m.to("seam@domain.test", "Seam Seamerson<seam@domain.test>");
         m.to("Seam Seamerson<seam@domain.test>");
@@ -62,11 +60,9 @@ public class InternetAddressTest {
         m.bcc(seam);
         m.bcc(addresses);
 
-        m.replyTo("seam@domain.test", "Seam Seamerson<seam@domain.test>");
         m.replyTo("Seam Seamerson<seam@domain.test>");
         m.replyTo("seam@domain.test");
         m.replyTo(seam);
-        m.replyTo(addresses);
     }
 
     @Test(expected = InvalidAddressException.class)
@@ -80,7 +76,7 @@ public class InternetAddressTest {
     public void invalidFromFullAddresses() {
         MailMessage m = new MailMessageImpl(TestMailConfigs.standardConfig());
 
-        m.from("foo @bar.com", "Woo");
+        m.from("Woo");
     }
 
     @Test(expected = InvalidAddressException.class)
@@ -135,8 +131,7 @@ public class InternetAddressTest {
     @Test(expected = InvalidAddressException.class)
     public void invalidReplyToFullAddresses() {
         MailMessage m = new MailMessageImpl(TestMailConfigs.standardConfig());
-
-        m.replyTo("foo @bar.com", "Woo");
+        m.replyTo("Woo");
     }
 
     @Test(expected = InvalidAddressException.class)

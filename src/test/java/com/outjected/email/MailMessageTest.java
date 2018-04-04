@@ -351,7 +351,7 @@ public class MailMessageTest {
         try {
             wiser.start();
 
-            new MailMessageImpl(mailConfig).from("seam seamerson@test.com", fromName).replyTo(replyToAddress).to(toAddress, toName).subject(subject).bodyText(textBody).importance(MessagePriority.HIGH)
+            new MailMessageImpl(mailConfig).from("seam seamerson@test.com").replyTo(replyToAddress).to(toAddress, toName).subject(subject).bodyText(textBody).importance(MessagePriority.HIGH)
                     .messageId(messageId).send();
         }
         finally {

@@ -79,14 +79,15 @@ public class MailMessageImpl implements MailMessage {
     // Begin Addressing
 
     @Override
-    public MailMessage from(String... address) {
-        emailMessage.getFromAddresses().addAll(MailUtility.internetAddress(address));
+    public MailMessage from(String address) {
+        from(MailUtility.internetAddress(address));
         return this;
     }
 
     @Override
     public MailMessage from(InternetAddress emailAddress) {
         if (emailAddress != null) {
+            emailMessage.getFromAddresses().clear();
             emailMessage.getFromAddresses().add(emailAddress);
         }
         return this;
@@ -95,26 +96,21 @@ public class MailMessageImpl implements MailMessage {
     @Override
     public MailMessage from(EmailContact emailContact) {
         if (emailContact != null) {
-            emailMessage.getFromAddresses().add(MailUtility.internetAddress(emailContact));
+            from(MailUtility.internetAddress(emailContact));
         }
         return this;
     }
 
     @Override
-    public MailMessage from(Collection<? extends EmailContact> emailContacts) {
-        emailMessage.getFromAddresses().addAll(MailUtility.internetAddress(emailContacts));
-        return this;
-    }
-
-    @Override
-    public MailMessage replyTo(String... address) {
-        emailMessage.getReplyToAddresses().addAll(MailUtility.internetAddress(address));
+    public MailMessage replyTo(String address) {
+        replyTo(MailUtility.internetAddress(address));
         return this;
     }
 
     @Override
     public MailMessage replyTo(InternetAddress emailAddress) {
         if (emailAddress != null) {
+            emailMessage.getReplyToAddresses().clear();
             emailMessage.getReplyToAddresses().add(emailAddress);
         }
         return this;
@@ -123,14 +119,8 @@ public class MailMessageImpl implements MailMessage {
     @Override
     public MailMessage replyTo(EmailContact emailContact) {
         if (emailContact != null) {
-            emailMessage.getReplyToAddresses().add(MailUtility.internetAddress(emailContact));
+            replyTo(MailUtility.internetAddress(emailContact));
         }
-        return this;
-    }
-
-    @Override
-    public MailMessage replyTo(Collection<? extends EmailContact> emailContacts) {
-        emailMessage.getReplyToAddresses().addAll(MailUtility.internetAddress(emailContacts));
         return this;
     }
 

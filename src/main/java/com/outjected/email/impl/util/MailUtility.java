@@ -50,7 +50,7 @@ public class MailUtility {
 
     public static InternetAddress internetAddress(String address) throws InvalidAddressException {
         try {
-            return new InternetAddress(address);
+            return new InternetAddress(address, true);
         }
         catch (AddressException e) {
             throw new InvalidAddressException("Must be in format of a@b.com or Name<a@b.com> but was: \"" + address + "\"", e);

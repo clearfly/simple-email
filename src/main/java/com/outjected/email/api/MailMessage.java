@@ -26,15 +26,14 @@ import javax.mail.internet.InternetAddress;
  */
 public interface MailMessage {
 
-    // Begin Recipients
 
     /**
-     * Convenience varargs method to add FROM address(es)
+     * Convenience varargs method to add FROM address. Only one is allowed.
      * 
      * @param address Address of the recipient eq "john.doe@example.com" or "John Doe<john.doe@example.com>"
      * @throws InvalidAddressException if address(es) are in an invalid format
      */
-    public MailMessage from(String... address);
+    public MailMessage from(String address);
 
     /**
      * Adds a From Address
@@ -51,19 +50,12 @@ public interface MailMessage {
     public MailMessage from(EmailContact emailContact);
 
     /**
-     * Adds a Collection of {@link EmailContact} as FROM addresses
-     * 
-     * @param emailContacts Collection of {@link EmailContact} to be added
-     */
-    public MailMessage from(Collection<? extends EmailContact> emailContacts);
-
-    /**
-     * Convenience varargs method to add REPLY-TO address(es)
+     * Convenience varargs method to add REPLY-TO address. Only one is allowed
      * 
      * @param address Address of the recipient eq "john.doe@example.com" or "John Doe<john.doe@example.com>"
      * @throws InvalidAddressException if address(es) are in an invalid format
      */
-    public MailMessage replyTo(String... address);
+    public MailMessage replyTo(String address);
 
     /**
      * Adds a REPLY-TO Address
@@ -78,13 +70,6 @@ public interface MailMessage {
      * @param emailContact {@link EmailContact} of the address to be added
      */
     public MailMessage replyTo(EmailContact emailContact);
-
-    /**
-     * Adds a Collection of {@link EmailContact} as REPLY-TO addresses
-     * 
-     * @param emailContacts Collection of {@link EmailContact} to be added
-     */
-    public MailMessage replyTo(Collection<? extends EmailContact> emailContacts);
 
     /**
      * Add header to the message.
