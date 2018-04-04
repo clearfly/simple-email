@@ -223,7 +223,7 @@ public class FreeMarkerMailMessageTest {
             emailMessage = new MailMessageImpl(mailConfig).from(MailTestUtil.getAddressHeader(fromName, fromAddress)).to(MailTestUtil.getAddressHeader(person.getName(), person.getEmail())).subject(
                     subject).put("person", person).put("version", version).bodyHtmlTextAlt(new FreeMarkerTemplate(Resources.asCharSource(Resources.getResource("template.html.freemarker"),
                             Charsets.UTF_8).read()), new FreeMarkerTemplate(Resources.asCharSource(Resources.getResource("template.text.freemarker"), Charsets.UTF_8).read())).importance(
-                                    MessagePriority.LOW).deliveryReceipt(fromAddress).readReceipt("seam.test").addAttachment("template.html.freemarker", "text/html", ContentDisposition.ATTACHMENT,
+                                    MessagePriority.LOW).deliveryReceipt(fromAddress).readReceipt(fromAddress).addAttachment("template.html.freemarker", "text/html", ContentDisposition.ATTACHMENT,
                                             Resources.asByteSource(Resources.getResource("template.html.freemarker")).read()).addAttachment(new URLAttachment(
                                                     "http://design.jboss.org/seam/logo/final/seam_mail_85px.png", "seamLogo.png", ContentDisposition.INLINE)).send();
         }
@@ -289,7 +289,7 @@ public class FreeMarkerMailMessageTest {
 
             new MailMessageImpl(mailConfig).from(fromAddress).to(person.getEmail()).subject(subject).put("person", person).put("version", "Seam 3").bodyHtmlTextAlt(new FreeMarkerTemplate(Resources
                     .asCharSource(Resources.getResource("template.html.freemarker"), Charsets.UTF_8).read()), new FreeMarkerTemplate(Resources.asCharSource(Resources.getResource(
-                            "template.text.freemarker"), Charsets.UTF_8).read())).importance(MessagePriority.LOW).deliveryReceipt(fromAddress).readReceipt("seam.test").addAttachment(
+                            "template.text.freemarker"), Charsets.UTF_8).read())).importance(MessagePriority.LOW).deliveryReceipt(fromAddress).readReceipt(fromAddress).addAttachment(
                                     "template.html.freemarker", "text/html", ContentDisposition.ATTACHMENT, Resources.asByteSource(Resources.getResource("template.html.freemarker")).read())
                     .addAttachment(new URLAttachment("http://design.jboss.org/seam/logo/final/seam_mail_85px.png", "seamLogo.png", ContentDisposition.INLINE)).send();
         }

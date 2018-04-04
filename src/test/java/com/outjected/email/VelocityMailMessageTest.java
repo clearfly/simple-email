@@ -226,7 +226,7 @@ public class VelocityMailMessageTest {
             emailMessage = new MailMessageImpl(mailConfig).from(MailTestUtil.getAddressHeader(fromName, fromAddress)).to(MailTestUtil.getAddressHeader(person.getName(), person.getEmail())).subject(
                     subject).put("version", version).put("person", person).bodyHtmlTextAlt(new VelocityTemplate(Resources.asCharSource(Resources.getResource("template.html.velocity"), Charsets.UTF_8)
                             .read()), new VelocityTemplate(Resources.asCharSource(Resources.getResource("template.text.velocity"), Charsets.UTF_8).read())).importance(MessagePriority.LOW)
-                    .deliveryReceipt(fromAddress).readReceipt("seam.test").addAttachment("template.html.velocity", "text/html", ContentDisposition.ATTACHMENT, Resources.asByteSource(Resources
+                    .deliveryReceipt(fromAddress).readReceipt(fromAddress).addAttachment("template.html.velocity", "text/html", ContentDisposition.ATTACHMENT, Resources.asByteSource(Resources
                             .getResource("template.html.velocity")).read()).addAttachment(new URLAttachment("http://design.jboss.org/seam/logo/final/seam_mail_85px.png", "seamLogo.png",
                                     ContentDisposition.INLINE)).send();
         }
@@ -290,7 +290,7 @@ public class VelocityMailMessageTest {
 
             new MailMessageImpl(mailConfig).from(fromAddress).to(person.getEmail()).subject(subject).put("version", "Seam 3").bodyHtmlTextAlt(new VelocityTemplate(Resources.asCharSource(Resources
                     .getResource("template.html.velocity"), Charsets.UTF_8).read()), new VelocityTemplate(Resources.asCharSource(Resources.getResource("template.text.velocity"), Charsets.UTF_8)
-                            .read())).importance(MessagePriority.LOW).deliveryReceipt(fromAddress).readReceipt("seam.test").addAttachment("template.html.velocity", "text/html",
+                            .read())).importance(MessagePriority.LOW).deliveryReceipt(fromAddress).readReceipt(fromAddress).addAttachment("template.html.velocity", "text/html",
                                     ContentDisposition.ATTACHMENT, Resources.asByteSource(Resources.getResource("template.html.velocity")).read()).addAttachment(new URLAttachment(
                                             "http://design.jboss.org/seam/logo/final/seam_mail_85px.png", "seamLogo.png", ContentDisposition.INLINE)).send();
         }
