@@ -80,6 +80,14 @@ public interface MailMessage {
     public MailMessage addHeader(String name, String value);
 
     /**
+     * Add header to the message.
+     *
+     * @param name Header name
+     * @param value Header value
+     */
+    public MailMessage addCustomVariable(String name, String value);
+
+    /**
      * Convenience varargs method to add TO address(es)
      * 
      * @param address Address of the recipient eq "john.doe@example.com" or "John Doe<john.doe@example.com>"

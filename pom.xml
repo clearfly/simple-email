@@ -14,8 +14,8 @@
 		<freemarker.version>2.3.27-incubating</freemarker.version>
 		<velocity.version>1.7</velocity.version>
 		<subetha.version>3.1.7</subetha.version>
-		<version.guava>24.1-jre</version.guava>
-		<version.maven.compiler>3.7.0</version.maven.compiler>
+		<version.guava>27.0.1-jre</version.guava>
+		<version.maven.compiler>3.8.0</version.maven.compiler>
 		<version.maven.source>3.0.1</version.maven.source>
 	</properties>
 

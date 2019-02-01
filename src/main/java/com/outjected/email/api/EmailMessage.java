@@ -10,9 +10,7 @@
 package com.outjected.email.api;
 
 import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 import javax.mail.internet.InternetAddress;
 import javax.xml.bind.annotation.XmlElement;
@@ -24,13 +22,11 @@ import com.outjected.email.impl.attachments.BaseAttachment;
 
 /**
  * Stores information about an EmailMessage while it is being built and after sending
- * 
+ *
  * @author Cody Lerum
  */
-@XmlRootElement
-@XmlType(propOrder = { "messageId", "importance", "charset", "fromAddresses", "replyToAddresses", "toAddresses", "ccAddresses", "bccAddresses", "envelopeFrom", "deliveryReceiptAddresses",
-        "readReceiptAddresses", "subject", "textBody", "htmlBody", "headers", "rootContentType", "type", "attachments" })
-public class EmailMessage {
+@XmlRootElement @XmlType(propOrder = { "messageId", "importance", "charset", "fromAddresses", "replyToAddresses", "toAddresses", "ccAddresses", "bccAddresses", "envelopeFrom",
+        "deliveryReceiptAddresses", "readReceiptAddresses", "subject", "textBody", "htmlBody", "headers", "customVariables", "rootContentType", "type", "attachments" }) public class EmailMessage {
     private String charset = Charset.defaultCharset().name();
     private ContentType rootContentType = ContentType.MIXED;
     private EmailMessageType type = EmailMessageType.STANDARD;
@@ -41,7 +37,8 @@ public class EmailMessage {
     private List<InternetAddress> ccAddresses = new ArrayList<InternetAddress>();
     private List<InternetAddress> bccAddresses = new ArrayList<InternetAddress>();
     private InternetAddress envelopeFrom;
-    private List<Header> headers = new ArrayList<Header>();
+    private List<Header> headers = new ArrayList<>();
+    private Map<String, String> customVariables = new TreeMap<>();
 
     private String subject;
     private String textBody;
@@ -56,17 +53,16 @@ public class EmailMessage {
 
     /**
      * Get the charset used to encode the EmailMessage
-     * 
+     *
      * @return charset of the EmailMessage
      */
-    @XmlElement
-    public String getCharset() {
+    @XmlElement public String getCharset() {
         return charset;
     }
 
     /**
      * Override the default charset of the JVM
-     * 
+     *
      * @param charset
      */
     public void setCharset(String charset) {
@@ -75,17 +71,16 @@ public class EmailMessage {
 
     /**
      * Get the Root Mime ContentType of the EmailMessage
-     * 
+     *
      * @return Root Mime ContentType of the EmailMessage
      */
-    @XmlElement
-    public ContentType getRootContentType() {
+    @XmlElement public ContentType getRootContentType() {
         return rootContentType;
     }
 
     /**
      * Set the Root Mime ContentType of the EmailMessage
-     * 
+     *
      * @param rootContentType SubType to set
      */
     public void setRootContentType(ContentType rootContentType) {
@@ -94,17 +89,16 @@ public class EmailMessage {
 
     /**
      * Get the current EmailMessageType of the EmailMessage
-     * 
+     *
      * @return EmailMessageType of this EmailMessage
      */
-    @XmlElement
-    public EmailMessageType getType() {
+    @XmlElement public EmailMessageType getType() {
         return type;
     }
 
     /**
      * Sets the EmailMessageType of the EmailMessage
-     * 
+     *
      * @param type EmailMessageType to set on the EmailMessage
      */
     public void setType(EmailMessageType type) {
@@ -113,17 +107,16 @@ public class EmailMessage {
 
     /**
      * Gets the Message-ID of the EmailMeassage. This nulled after sending.
-     * 
+     *
      * @return Message-ID of the EmailMeassage
      */
-    @XmlElement
-    public String getMessageId() {
+    @XmlElement public String getMessageId() {
         return messageId;
     }
 
     /**
      * Sets the Message-ID for the EmailMeassage. Should be in RFC822 format
-     * 
+     *
      * @param messageId Globally unique Message-ID example 1234.5678@test.com
      */
     public void setMessageId(String messageId) {
@@ -132,11 +125,10 @@ public class EmailMessage {
 
     /**
      * Get the Collection of FROM addresses on the EmailMeassage
-     * 
+     *
      * @return Collection of InternetAddresses addresses
      */
-    @XmlElement
-    public List<InternetAddress> getFromAddresses() {
+    @XmlElement public List<InternetAddress> getFromAddresses() {
         return fromAddresses;
     }
 
@@ -146,11 +138,10 @@ public class EmailMessage {
 
     /**
      * Get the Collection of REPLY-TO addresses on the EmailMeassage
-     * 
+     *
      * @return Collection of InternetAddresses addresses
      */
-    @XmlElement
-    public List<InternetAddress> getReplyToAddresses() {
+    @XmlElement public List<InternetAddress> getReplyToAddresses() {
         return replyToAddresses;
     }
 
@@ -160,21 +151,19 @@ public class EmailMessage {
 
     /**
      * Get the Collection of TO addresses on the EmailMeassage
-     * 
+     *
      * @return Collection of InternetAddresses addresses
      */
-    @XmlElement
-    public List<InternetAddress> getToAddresses() {
+    @XmlElement public List<InternetAddress> getToAddresses() {
         return toAddresses;
     }
 
     /**
      * Get the Collection of CC addresses on the EmailMeassage
-     * 
+     *
      * @return Collection of InternetAddresses addresses
      */
-    @XmlElement
-    public List<InternetAddress> getCcAddresses() {
+    @XmlElement public List<InternetAddress> getCcAddresses() {
         return ccAddresses;
     }
 
@@ -184,11 +173,10 @@ public class EmailMessage {
 
     /**
      * Get the Collection of BCC addresses on the EmailMeassage
-     * 
+     *
      * @return Collection of InternetAddresses addresses
      */
-    @XmlElement
-    public List<InternetAddress> getBccAddresses() {
+    @XmlElement public List<InternetAddress> getBccAddresses() {
         return bccAddresses;
     }
 
@@ -198,17 +186,16 @@ public class EmailMessage {
 
     /**
      * Gets the "Envelope From" address which is used for error messages
-     * 
+     *
      * @return
      */
-    @XmlElement
-    public InternetAddress getEnvelopeFrom() {
+    @XmlElement public InternetAddress getEnvelopeFrom() {
         return envelopeFrom;
     }
 
     /**
      * Sets the "Envelope From" address which is used for error messages
-     * 
+     *
      * @param address
      */
     public void setEnvelopeFrom(InternetAddress address) {
@@ -217,12 +204,10 @@ public class EmailMessage {
 
     /**
      * Get a Collection of additional headers added to the EmailMessage
-     * 
+     *
      * @return Collection of Header
      */
-    @XmlElementWrapper(name = "headers")
-    @XmlElement(name = "header")
-    public List<Header> getHeaders() {
+    @XmlElementWrapper(name = "headers") @XmlElement(name = "header") public List<Header> getHeaders() {
         return headers;
     }
 
@@ -230,19 +215,26 @@ public class EmailMessage {
         this.headers = headers;
     }
 
+    @XmlElementWrapper(name = "customVariables") @XmlElement(name = "customVariable") public Map<String, String> getCustomVariables() {
+        return customVariables;
+    }
+
+    public void setCustomVariables(Map<String, String> customVariables) {
+        this.customVariables = customVariables;
+    }
+
     /**
      * Get the Subject of the EmailMessage
-     * 
+     *
      * @return The Subject
      */
-    @XmlElement
-    public String getSubject() {
+    @XmlElement public String getSubject() {
         return subject;
     }
 
     /**
      * Sets the Subject on the EmailMessage
-     * 
+     *
      * @param subject Subject to be set
      */
     public void setSubject(String subject) {
@@ -251,17 +243,16 @@ public class EmailMessage {
 
     /**
      * Get the Text Body of the EmailMessage
-     * 
+     *
      * @return The EmailMessage Text Body.
      */
-    @XmlElement
-    public String getTextBody() {
+    @XmlElement public String getTextBody() {
         return textBody;
     }
 
     /**
      * Set the Text Body of the EmailMessage
-     * 
+     *
      * @param textBody Text Body to be set
      */
     public void setTextBody(String textBody) {
@@ -270,17 +261,16 @@ public class EmailMessage {
 
     /**
      * Get the HTML Body of the EmailMessage
-     * 
+     *
      * @return The EmailMessage HTML Body.
      */
-    @XmlElement
-    public String getHtmlBody() {
+    @XmlElement public String getHtmlBody() {
         return htmlBody;
     }
 
     /**
      * Set the HTML Body of the EmailMessage
-     * 
+     *
      * @param htmlBody HTML Body to be set
      */
     public void setHtmlBody(String htmlBody) {
@@ -289,11 +279,10 @@ public class EmailMessage {
 
     /**
      * Get the collection of InternetAddress which are Delivery Reciept addresses
-     * 
+     *
      * @return Collection of InternetAddress
      */
-    @XmlElement
-    public List<InternetAddress> getDeliveryReceiptAddresses() {
+    @XmlElement public List<InternetAddress> getDeliveryReceiptAddresses() {
         return deliveryReceiptAddresses;
     }
 
@@ -303,7 +292,7 @@ public class EmailMessage {
 
     /**
      * Get the collection of InternetAddress which are Read Receipt addresses
-     * 
+     *
      * @return Collection of InternetAddress
      */
     public List<InternetAddress> getReadReceiptAddresses() {
@@ -316,7 +305,7 @@ public class EmailMessage {
 
     /**
      * Get the Current Importance of the EmailMessage. Default is normal. No Header added
-     * 
+     *
      * @return MessagePriority of EmailMessage
      */
     public MessagePriority getImportance() {
@@ -325,7 +314,7 @@ public class EmailMessage {
 
     /**
      * Sets the MessagePriority of the EmailMessage
-     * 
+     *
      * @param importance MessagePriority to be set.
      */
     public void setImportance(MessagePriority importance) {
@@ -334,7 +323,7 @@ public class EmailMessage {
 
     /**
      * Adds an BaseAttachment to the EmailMessage
-     * 
+     *
      * @param attachment EmailAttachment to be added
      */
     public void addAttachment(BaseAttachment attachment) {
@@ -343,7 +332,7 @@ public class EmailMessage {
 
     /**
      * Adds an EmailAttachment to the EmailMessage
-     * 
+     *
      * @param attachment EmailAttachment to be added
      */
     public void addAttachment(EmailAttachment attachment) {
@@ -353,7 +342,7 @@ public class EmailMessage {
 
     /**
      * Adds a Collection of EmailAttachment to the EmailMessage
-     * 
+     *
      * @param attachments Collection of EmailAttachment
      */
     public void addAttachments(Collection<EmailAttachment> attachments) {
@@ -364,12 +353,10 @@ public class EmailMessage {
 
     /**
      * Gets a Collection representing all the Attachments on the EmailMessage
-     * 
+     *
      * @return Collection of EmailAttachment
      */
-    @XmlElementWrapper(name = "attachments")
-    @XmlElement(name = "attachment")
-    public List<BaseAttachment> getAttachments() {
+    @XmlElementWrapper(name = "attachments") @XmlElement(name = "attachment") public List<BaseAttachment> getAttachments() {
         return attachments;
     }
 

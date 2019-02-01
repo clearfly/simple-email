@@ -20,8 +20,7 @@ import com.outjected.email.util.XMLUtil;
 
 public class XMLTests {
 
-    @Test
-    public void simple() throws AddressException, JAXBException, IOException {
+    @Test public void simple() throws AddressException, JAXBException, IOException {
         EmailMessage msg = new EmailMessage();
         msg.setMessageId(UUID.randomUUID().toString() + "@test.org");
         msg.setImportance(MessagePriority.HIGH);
@@ -38,6 +37,8 @@ public class XMLTests {
         msg.getReplyToAddresses().add(new InternetAddress("reply-to@test.org"));
         msg.getHeaders().add(new Header("Sender", "sender@test.org"));
         msg.getHeaders().add(new Header("X-Sender", "xsender@test.org"));
+        msg.getCustomVariables().put("foo", "bar");
+        msg.getCustomVariables().put("x", "y");
 
         String xml = XMLUtil.marshal(msg);
         EmailMessage umsg = XMLUtil.unmarshal(EmailMessage.class, xml);
@@ -53,5 +54,7 @@ public class XMLTests {
         Assert.assertTrue(msg.getHtmlBody().equals(umsg.getHtmlBody()));
         Assert.assertTrue(msg.getMessageId().equals(umsg.getMessageId()));
         Assert.assertTrue(msg.getAttachments().get(0).getFileName().equals(umsg.getAttachments().get(0).getFileName()));
+        Assert.assertEquals(msg.getCustomVariables().get("foo"), umsg.getCustomVariables().get("foo"));
+        Assert.assertEquals(msg.getCustomVariables().get("x"), umsg.getCustomVariables().get("x"));
     }
 }
