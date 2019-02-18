@@ -31,8 +31,7 @@ public class BasicEmailContact implements EmailContact {
         this.name = name;
     }
 
-    @Override
-    public String getAddress() {
+    @Override public String getAddress() {
         return address;
     }
 
@@ -40,8 +39,7 @@ public class BasicEmailContact implements EmailContact {
         this.address = address;
     }
 
-    @Override
-    public String getName() {
+    @Override public String getName() {
         return name;
     }
 
@@ -49,20 +47,20 @@ public class BasicEmailContact implements EmailContact {
         this.name = name;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        EmailContact e = (EmailContact) o;
-
-        return toString().equals(e.toString());
+    @Override public boolean equals(Object o) {
+        if (o instanceof EmailContact) {
+            return toString().equals(o.toString());
+        }
+        else {
+            return false;
+        }
     }
 
-    @Override
-    public int hashCode() {
+    @Override public int hashCode() {
         return toString().hashCode();
     }
 
-    @Override
-    public String toString() {
+    @Override public String toString() {
         if (name == null || name.length() == 0) {
             return address;
         }

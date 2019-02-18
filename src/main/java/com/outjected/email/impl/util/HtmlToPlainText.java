@@ -13,8 +13,7 @@ public class HtmlToPlainText {
     public static String convert(String html) {
         Document doc = Jsoup.parse(html);
         HtmlToPlainText formatter = new HtmlToPlainText();
-        final String converted = formatter.getPlainText(doc);
-        return converted;
+        return formatter.getPlainText(doc);
     }
 
     /**
@@ -23,20 +22,20 @@ public class HtmlToPlainText {
      * @param element the root element to format
      * @return formatted text
      */
-    public String getPlainText(Element element) {
+    private String getPlainText(Element element) {
         FormattingVisitor formatter = new FormattingVisitor();
         NodeTraversor.traverse(formatter, element); // walk the DOM, and call .head() and .tail() for each node
         return formatter.toString();
     }
 
     // the formatting rules, implemented in a breadth-first DOM traverse
-    private class FormattingVisitor implements NodeVisitor {
+    private static class FormattingVisitor implements NodeVisitor {
         private static final int maxWidth = 80;
         private int width = 0;
         private StringBuilder accum = new StringBuilder(); // holds the accumulated text
 
         // hit when the node is first seen
-        public void head(Node node, int depth) {
+        @Override public void head(Node node, int depth) {
             String name = node.nodeName();
             if (node instanceof TextNode) {
                 if (node.parent().nodeName().equals("title")) {
@@ -57,7 +56,7 @@ public class HtmlToPlainText {
         }
 
         // hit when all of the node's children (if any) have been visited
-        public void tail(Node node, int depth) {
+        @Override public void tail(Node node, int depth) {
             String name = node.nodeName();
             if (Strings.in(name, "br", "dd", "dt", "p", "h1", "h2", "h3", "h4", "h5", "div")) {
                 append("\n");
@@ -81,7 +80,7 @@ public class HtmlToPlainText {
             }
 
             if (text.length() + width > maxWidth) { // won't fit, needs to wrap
-                String[] words = text.split("\\s+");
+                String[] words = text.split("\\s+", -1);
                 for (int i = 0; i < words.length; i++) {
                     String word = words[i];
                     boolean last = i == words.length - 1;
@@ -105,8 +104,7 @@ public class HtmlToPlainText {
             }
         }
 
-        @Override
-        public String toString() {
+        @Override public String toString() {
             return accum.toString();
         }
     }
