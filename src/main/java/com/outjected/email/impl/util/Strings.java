@@ -25,4 +25,13 @@ public class Strings {
     public static boolean isNullOrBlank(String string) {
         return string == null || string.trim().length() == 0;
     }
+
+    public static boolean in(final String needle, final String... haystack) {
+        final int len = haystack.length;
+        for (int i = 0; i < len; i++) {
+            if (haystack[i].equals(needle))
+                return true;
+        }
+        return false;
+    }
 }

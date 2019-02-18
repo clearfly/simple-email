@@ -37,6 +37,7 @@ import com.outjected.email.impl.attachments.BaseAttachment;
 import com.outjected.email.impl.attachments.FileAttachment;
 import com.outjected.email.impl.attachments.InputStreamAttachment;
 import com.outjected.email.impl.util.EmailAttachmentUtil;
+import com.outjected.email.impl.util.HtmlToPlainText;
 import com.outjected.email.impl.util.MailUtility;
 
 /**
@@ -53,8 +54,9 @@ public class MailMessageImpl implements MailMessage {
     private TemplateProvider subjectTemplate;
     private TemplateProvider textTemplate;
     private TemplateProvider htmlTemplate;
-    private Map<String, Object> templateContext = new HashMap<String, Object>();
+    private Map<String, Object> templateContext = new HashMap<>();
     private boolean templatesMerged;
+    private boolean createTextAlternative = false;
 
     private MailMessageImpl() {
         emailMessage = new EmailMessage();
@@ -251,6 +253,11 @@ public class MailMessageImpl implements MailMessage {
         return this;
     }
 
+    @Override public MailMessage createTextAlternative(boolean value){
+        createTextAlternative = value;
+        return this;
+    }
+
     @Override public MailMessage bodyHtmlTextAlt(String html, String text) {
         emailMessage.setTextBody(text);
         emailMessage.setHtmlBody(html);
@@ -376,6 +383,10 @@ public class MailMessageImpl implements MailMessage {
 
         if (htmlTemplate != null) {
             emailMessage.setHtmlBody(htmlTemplate.merge(templateContext));
+        }
+
+        if (emailMessage.getHtmlBody() != null && createTextAlternative) {
+            emailMessage.setTextBody(HtmlToPlainText.convert(emailMessage.getHtmlBody()));
         }
 
         templatesMerged = true;

@@ -328,6 +328,8 @@ public interface MailMessage {
      */
     public MailMessage bodyHtml(String html);
 
+    public MailMessage createTextAlternative(boolean value);
+
     /**
      * Sets the body of the message to a HTML body with a plain text alternative
      * 

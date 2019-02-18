@@ -44,17 +44,17 @@ import junit.framework.Assert;
  */
 public class MailMessageTest {
 
-    String fromName = "Seam Framework";
-    String fromAddress = "seam@jboss.org";
-    String replyToName = "No Reply";
-    String replyToAddress = "no-reply@seam-mal.test";
-    String toName = "Seamy Seamerson";
-    String toAddress = "seamy.seamerson@seam-mail.test";
-    String ccName = "Red Hatty";
-    String ccAddress = "red.hatty@jboss.org";
+    private final String fromName = "Seam Framework";
+    private final String fromAddress = "seam@jboss.org";
+    private final String replyToName = "No Reply";
+    private final String replyToAddress = "no-reply@seam-mal.test";
+    private final String toName = "Seamy Seamerson";
+    private final String toAddress = "seamy.seamerson@seam-mail.test";
+    private final String ccName = "Red Hatty";
+    private final String ccAddress = "red.hatty@jboss.org";
 
-    String htmlBody = "<html><body><b>Hello</b> World!</body></html>";
-    String textBody = "This is a Text Body!";
+    private final String htmlBody = "<html><body><b>Hello</b> World!</body></html>";
+    private final String textBody = "This is a Text Body!";
 
     private static final String ENVELOPE_FROM_ADDRESS = "ef@jboss.org";
 
@@ -261,6 +261,68 @@ public class MailMessageTest {
         EmailMessage convertedMessage = MessageConverter.convert(mess);
         Assert.assertEquals(convertedMessage.getSubject(), subject);
     }
+
+    @Test
+    public void testHTMLAutoTextAltMailMessage() throws MessagingException, IOException {
+        SessionConfig mailConfig = TestMailConfigs.standardConfig();
+        String subject = "HTML+Text Message from Seam Mail - " + java.util.UUID.randomUUID().toString();
+        Person person = new Person(toName, toAddress);
+        Wiser wiser = new Wiser(mailConfig.getServerPort());
+        wiser.setHostname(mailConfig.getServerHost());
+        try {
+            wiser.start();
+
+            new MailMessageImpl(mailConfig).from(MailTestUtil.getAddressHeader(fromName, fromAddress)).to(person).subject(subject).bodyHtml(htmlBody).createTextAlternative(true).importance(MessagePriority.LOW)
+                    .deliveryReceipt(fromAddress).readReceipt(fromAddress).addAttachment("template.text.velocity", "text/plain", ContentDisposition.ATTACHMENT, Resources.asByteSource(Resources
+                    .getResource("template.text.velocity")).read()).addAttachment(new URLAttachment("http://design.jboss.org/seam/logo/final/seam_mail_85px.png", "seamLogo.png",
+                    ContentDisposition.INLINE)).send();
+        }
+        finally {
+            stop(wiser);
+        }
+
+        Assert.assertTrue("Didn't receive the expected amount of messages. Expected 1 got " + wiser.getMessages().size(), wiser.getMessages().size() == 1);
+
+        MimeMessage mess = wiser.getMessages().get(0).getMimeMessage();
+
+        Assert.assertEquals(MailTestUtil.getAddressHeader(fromName, fromAddress), mess.getHeader("From", null));
+        Assert.assertEquals(MailTestUtil.getAddressHeader(toName, toAddress), mess.getHeader("To", null));
+        Assert.assertEquals("Subject has been modified", subject, MimeUtility.unfold(mess.getHeader("Subject", null)));
+        Assert.assertEquals(MessagePriority.LOW.getPriority(), mess.getHeader("Priority", null));
+        Assert.assertEquals(MessagePriority.LOW.getX_priority(), mess.getHeader("X-Priority", null));
+        Assert.assertEquals(MessagePriority.LOW.getImportance(), mess.getHeader("Importance", null));
+        Assert.assertTrue(mess.getHeader("Content-Type", null).startsWith("multipart/mixed"));
+
+        MimeMultipart mixed = (MimeMultipart) mess.getContent();
+        MimeMultipart related = (MimeMultipart) mixed.getBodyPart(0).getContent();
+        MimeMultipart alternative = (MimeMultipart) related.getBodyPart(0).getContent();
+        BodyPart attachment = mixed.getBodyPart(1);
+        BodyPart inlineAttachment = related.getBodyPart(1);
+
+        BodyPart textAlt = alternative.getBodyPart(0);
+        BodyPart html = alternative.getBodyPart(1);
+
+        Assert.assertTrue(mixed.getContentType().startsWith("multipart/mixed"));
+        Assert.assertEquals(2, mixed.getCount());
+
+        Assert.assertTrue(related.getContentType().startsWith("multipart/related"));
+        Assert.assertEquals(2, related.getCount());
+
+        Assert.assertTrue(html.getContentType().startsWith("text/html"));
+        Assert.assertEquals(htmlBody, MailTestUtil.getStringContent(html));
+
+        Assert.assertTrue(textAlt.getContentType().startsWith("text/plain"));
+        Assert.assertEquals("Hello World!", MailTestUtil.getStringContent(textAlt));
+
+        Assert.assertTrue(attachment.getContentType().startsWith("text/plain"));
+        Assert.assertEquals("template.text.velocity", attachment.getFileName());
+
+        Assert.assertTrue(inlineAttachment.getContentType().startsWith("image/png;"));
+        Assert.assertEquals("seamLogo.png", inlineAttachment.getFileName());
+        EmailMessage convertedMessage = MessageConverter.convert(mess);
+        Assert.assertEquals(convertedMessage.getSubject(), subject);
+    }
+
 
     @Test
     public void testTextMailMessageLongFields() throws MessagingException, IOException {
