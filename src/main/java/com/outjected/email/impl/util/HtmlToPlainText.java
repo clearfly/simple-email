@@ -30,7 +30,7 @@ public class HtmlToPlainText {
 
     // the formatting rules, implemented in a breadth-first DOM traverse
     private static class FormattingVisitor implements NodeVisitor {
-        private static final int maxWidth = 80;
+        private static final int maxWidth = 200;
         private int width = 0;
         private StringBuilder accum = new StringBuilder(); // holds the accumulated text
 
@@ -42,7 +42,12 @@ public class HtmlToPlainText {
                     //skip title;
                     return;
                 }
-                append(((TextNode) node).text()); // TextNodes carry all user-readable text in the DOM.
+                if (node.parentNode().nodeName().equals("p")) {
+                    append(((TextNode) node).getWholeText()); // TextNodes carry all user-readable text in the DOM.
+                }
+                else {
+                    append(((TextNode) node).text()); // TextNodes carry all user-readable text in the DOM.
+                }
             }
             else if (name.equals("li")) {
                 append("\n * ");
@@ -50,7 +55,7 @@ public class HtmlToPlainText {
             else if (name.equals("dt")) {
                 append("  ");
             }
-            else if (Strings.in(name, "p", "h1", "h2", "h3", "h4", "h5", "tr")) {
+            else if (in(name, "p", "h1", "h2", "h3", "h4", "h5", "tr")) {
                 append("\n");
             }
         }
@@ -58,7 +63,7 @@ public class HtmlToPlainText {
         // hit when all of the node's children (if any) have been visited
         @Override public void tail(Node node, int depth) {
             String name = node.nodeName();
-            if (Strings.in(name, "br", "dd", "dt", "p", "h1", "h2", "h3", "h4", "h5", "div")) {
+            if (in(name, "br", "dd", "dt", "p", "h1", "h2", "h3", "h4", "h5", "div")) {
                 append("\n");
             }
             else if (name.equals("a")) {
@@ -68,14 +73,14 @@ public class HtmlToPlainText {
 
         // appends text to the string builder with a simple word wrap method
         private void append(String text) {
-            if (accum.length() == 0 && Strings.isNullOrBlank(text)) {
+            if (accum.length() == 0 && isNullOrBlank(text)) {
                 return;
             }
 
             if (text.startsWith("\n")) {
                 width = 0; // reset counter if starts with a newline. only from formats above, not in natural text
             }
-            if (text.equals(" ") && (accum.length() == 0 || Strings.in(accum.substring(accum.length() - 1), " ", "\n"))) {
+            if (text.equals(" ") && (accum.length() == 0 || in(accum.substring(accum.length() - 1), " ", "\n"))) {
                 return; // don't accumulate long runs of empty spaces
             }
 
@@ -107,5 +112,18 @@ public class HtmlToPlainText {
         @Override public String toString() {
             return accum.toString();
         }
+    }
+
+    private static boolean in(final String needle, final String... haystack) {
+        for (String s : haystack) {
+            if (s.equals(needle)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean isNullOrBlank(String string) {
+        return string == null || string.trim().length() == 0;
     }
 }
