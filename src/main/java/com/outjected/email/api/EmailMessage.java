@@ -9,8 +9,13 @@
 
 package com.outjected.email.api;
 
+import java.io.Serializable;
 import java.nio.charset.Charset;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import javax.mail.internet.InternetAddress;
 import javax.xml.bind.annotation.XmlElement;
@@ -25,8 +30,10 @@ import com.outjected.email.impl.attachments.BaseAttachment;
  *
  * @author Cody Lerum
  */
-@XmlRootElement @XmlType(propOrder = { "messageId", "importance", "charset", "fromAddresses", "replyToAddresses", "toAddresses", "ccAddresses", "bccAddresses", "envelopeFrom",
-        "deliveryReceiptAddresses", "readReceiptAddresses", "subject", "textBody", "htmlBody", "headers", "customVariables", "rootContentType", "type", "attachments" }) public class EmailMessage {
+@XmlRootElement
+@XmlType(propOrder = { "messageId", "importance", "charset", "fromAddresses", "replyToAddresses", "toAddresses", "ccAddresses", "bccAddresses", "envelopeFrom", "deliveryReceiptAddresses",
+        "readReceiptAddresses", "subject", "textBody", "htmlBody", "headers", "customVariables", "rootContentType", "type", "attachments" })
+public class EmailMessage implements Serializable {
     private String charset = Charset.defaultCharset().name();
     private ContentType rootContentType = ContentType.MIXED;
     private EmailMessageType type = EmailMessageType.STANDARD;
@@ -56,7 +63,8 @@ import com.outjected.email.impl.attachments.BaseAttachment;
      *
      * @return charset of the EmailMessage
      */
-    @XmlElement public String getCharset() {
+    @XmlElement
+    public String getCharset() {
         return charset;
     }
 
@@ -74,7 +82,8 @@ import com.outjected.email.impl.attachments.BaseAttachment;
      *
      * @return Root Mime ContentType of the EmailMessage
      */
-    @XmlElement public ContentType getRootContentType() {
+    @XmlElement
+    public ContentType getRootContentType() {
         return rootContentType;
     }
 
@@ -92,7 +101,8 @@ import com.outjected.email.impl.attachments.BaseAttachment;
      *
      * @return EmailMessageType of this EmailMessage
      */
-    @XmlElement public EmailMessageType getType() {
+    @XmlElement
+    public EmailMessageType getType() {
         return type;
     }
 
@@ -110,7 +120,8 @@ import com.outjected.email.impl.attachments.BaseAttachment;
      *
      * @return Message-ID of the EmailMeassage
      */
-    @XmlElement public String getMessageId() {
+    @XmlElement
+    public String getMessageId() {
         return messageId;
     }
 
@@ -128,7 +139,8 @@ import com.outjected.email.impl.attachments.BaseAttachment;
      *
      * @return Collection of InternetAddresses addresses
      */
-    @XmlElement public List<InternetAddress> getFromAddresses() {
+    @XmlElement
+    public List<InternetAddress> getFromAddresses() {
         return fromAddresses;
     }
 
@@ -141,7 +153,8 @@ import com.outjected.email.impl.attachments.BaseAttachment;
      *
      * @return Collection of InternetAddresses addresses
      */
-    @XmlElement public List<InternetAddress> getReplyToAddresses() {
+    @XmlElement
+    public List<InternetAddress> getReplyToAddresses() {
         return replyToAddresses;
     }
 
@@ -154,7 +167,8 @@ import com.outjected.email.impl.attachments.BaseAttachment;
      *
      * @return Collection of InternetAddresses addresses
      */
-    @XmlElement public List<InternetAddress> getToAddresses() {
+    @XmlElement
+    public List<InternetAddress> getToAddresses() {
         return toAddresses;
     }
 
@@ -163,7 +177,8 @@ import com.outjected.email.impl.attachments.BaseAttachment;
      *
      * @return Collection of InternetAddresses addresses
      */
-    @XmlElement public List<InternetAddress> getCcAddresses() {
+    @XmlElement
+    public List<InternetAddress> getCcAddresses() {
         return ccAddresses;
     }
 
@@ -176,7 +191,8 @@ import com.outjected.email.impl.attachments.BaseAttachment;
      *
      * @return Collection of InternetAddresses addresses
      */
-    @XmlElement public List<InternetAddress> getBccAddresses() {
+    @XmlElement
+    public List<InternetAddress> getBccAddresses() {
         return bccAddresses;
     }
 
@@ -189,7 +205,8 @@ import com.outjected.email.impl.attachments.BaseAttachment;
      *
      * @return
      */
-    @XmlElement public InternetAddress getEnvelopeFrom() {
+    @XmlElement
+    public InternetAddress getEnvelopeFrom() {
         return envelopeFrom;
     }
 
@@ -207,7 +224,9 @@ import com.outjected.email.impl.attachments.BaseAttachment;
      *
      * @return Collection of Header
      */
-    @XmlElementWrapper(name = "headers") @XmlElement(name = "header") public List<Header> getHeaders() {
+    @XmlElementWrapper(name = "headers")
+    @XmlElement(name = "header")
+    public List<Header> getHeaders() {
         return headers;
     }
 
@@ -215,7 +234,9 @@ import com.outjected.email.impl.attachments.BaseAttachment;
         this.headers = headers;
     }
 
-    @XmlElementWrapper(name = "customVariables") @XmlElement(name = "customVariable") public Map<String, String> getCustomVariables() {
+    @XmlElementWrapper(name = "customVariables")
+    @XmlElement(name = "customVariable")
+    public Map<String, String> getCustomVariables() {
         return customVariables;
     }
 
@@ -228,7 +249,8 @@ import com.outjected.email.impl.attachments.BaseAttachment;
      *
      * @return The Subject
      */
-    @XmlElement public String getSubject() {
+    @XmlElement
+    public String getSubject() {
         return subject;
     }
 
@@ -246,7 +268,8 @@ import com.outjected.email.impl.attachments.BaseAttachment;
      *
      * @return The EmailMessage Text Body.
      */
-    @XmlElement public String getTextBody() {
+    @XmlElement
+    public String getTextBody() {
         return textBody;
     }
 
@@ -264,7 +287,8 @@ import com.outjected.email.impl.attachments.BaseAttachment;
      *
      * @return The EmailMessage HTML Body.
      */
-    @XmlElement public String getHtmlBody() {
+    @XmlElement
+    public String getHtmlBody() {
         return htmlBody;
     }
 
@@ -282,7 +306,8 @@ import com.outjected.email.impl.attachments.BaseAttachment;
      *
      * @return Collection of InternetAddress
      */
-    @XmlElement public List<InternetAddress> getDeliveryReceiptAddresses() {
+    @XmlElement
+    public List<InternetAddress> getDeliveryReceiptAddresses() {
         return deliveryReceiptAddresses;
     }
 
@@ -356,7 +381,9 @@ import com.outjected.email.impl.attachments.BaseAttachment;
      *
      * @return Collection of EmailAttachment
      */
-    @XmlElementWrapper(name = "attachments") @XmlElement(name = "attachment") public List<BaseAttachment> getAttachments() {
+    @XmlElementWrapper(name = "attachments")
+    @XmlElement(name = "attachment")
+    public List<BaseAttachment> getAttachments() {
         return attachments;
     }
 

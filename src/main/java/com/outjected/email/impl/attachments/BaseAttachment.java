@@ -12,6 +12,7 @@
 
 package com.outjected.email.impl.attachments;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -27,7 +28,7 @@ import com.outjected.email.api.Header;
 /**
  * @author Cody Lerum
  */
-public class BaseAttachment implements EmailAttachment {
+public class BaseAttachment implements EmailAttachment, Serializable {
     private String contentId;
     private String fileName;
     private String mimeType;
