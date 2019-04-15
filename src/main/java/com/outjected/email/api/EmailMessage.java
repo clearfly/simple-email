@@ -34,6 +34,8 @@ import com.outjected.email.impl.attachments.BaseAttachment;
 @XmlType(propOrder = { "messageId", "importance", "charset", "fromAddresses", "replyToAddresses", "toAddresses", "ccAddresses", "bccAddresses", "envelopeFrom", "deliveryReceiptAddresses",
         "readReceiptAddresses", "subject", "textBody", "htmlBody", "headers", "customVariables", "rootContentType", "type", "attachments" })
 public class EmailMessage implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private String charset = Charset.defaultCharset().name();
     private ContentType rootContentType = ContentType.MIXED;
     private EmailMessageType type = EmailMessageType.STANDARD;

@@ -24,6 +24,8 @@ import com.outjected.email.impl.util.Streams;
  * @author Cody Lerum
  */
 public class InputStreamAttachment extends BaseAttachment {
+    private static final long serialVersionUID = 1L;
+
     public InputStreamAttachment(String fileName, String mimeType, ContentDisposition contentDisposition, InputStream inputStream) {
         super();
 

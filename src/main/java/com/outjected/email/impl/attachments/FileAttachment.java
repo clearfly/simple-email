@@ -25,6 +25,7 @@ import com.outjected.email.api.Header;
  * @author Cody Lerum
  */
 public class FileAttachment extends BaseAttachment {
+    private static final long serialVersionUID = 1L;
 
     public FileAttachment(ContentDisposition contentDisposition, Path path) {
         super();
