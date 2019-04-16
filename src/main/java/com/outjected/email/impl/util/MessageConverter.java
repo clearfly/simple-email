@@ -91,7 +91,7 @@ public class MessageConverter {
         else if (bp.getContentType().toLowerCase().contains("text/html")) {
             emailMessage.setHtmlBody((String) bp.getContent());
         }
-        else if (bp.getContentType().toLowerCase().contains("application/octet-stream")) {
+        else {
             emailMessage.addAttachment(new InputStreamAttachment(bp.getFileName(), bp.getContentType(), ContentDisposition.mapValue(bp.getDisposition()), bp.getInputStream()));
         }
     }

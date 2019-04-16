@@ -29,6 +29,8 @@ import com.outjected.email.api.Header;
  * @author Cody Lerum
  */
 public class BaseAttachment implements EmailAttachment, Serializable {
+    private static final long serialVersionUID = 1L;
+
     private String contentId;
     private String fileName;
     private String mimeType;
@@ -109,7 +111,7 @@ public class BaseAttachment implements EmailAttachment, Serializable {
     }
 
     public void addHeaders(Collection<Header> headers) {
-       this.headers.addAll(headers);
+        this.headers.addAll(headers);
     }
 
     @Override

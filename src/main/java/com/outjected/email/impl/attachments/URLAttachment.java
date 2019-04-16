@@ -27,6 +27,8 @@ import com.outjected.email.impl.util.Streams;
  * @author Cody Lerum
  */
 public class URLAttachment extends BaseAttachment {
+    private static final long serialVersionUID = 1L;
+
     public URLAttachment(String url, String fileName, ContentDisposition contentDisposition) {
         super();
         URLDataSource uds;
