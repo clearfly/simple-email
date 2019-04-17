@@ -5,18 +5,18 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.outjected</groupId>
     <artifactId>simple-email</artifactId>
-    <version>1.5-SNAPSHOT</version>
+    <version>1.5</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <version.java>1.8</version.java>
-        <version.errorprone>2.3.2</version.errorprone>
+        <version.errorprone>2.3.3</version.errorprone>
         <version.errorprone.compiler>2.8.5</version.errorprone.compiler>
         <freemarker.version>2.3.27-incubating</freemarker.version>
         <version.jsoup>1.11.3</version.jsoup>
         <velocity.version>1.7</velocity.version>
         <subetha.version>3.1.7</subetha.version>
-        <version.guava>27.0.1-jre</version.guava>
+        <version.guava>27.1-jre</version.guava>
         <version.maven.compiler>3.8.0</version.maven.compiler>
         <version.maven.source>3.0.1</version.maven.source>
     </properties>
@@ -179,6 +179,7 @@
                             <target>${version.java}</target>
                             <compilerArgs>
                                 <arg>-Xep:InsecureCryptoUsage:OFF</arg>
+                                <arg>-Xep:UnusedVariable:OFF</arg>
                             </compilerArgs>
                         </configuration>
                         <dependencies>
