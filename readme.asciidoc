@@ -1,3 +1,32 @@
-Simple Email is a continuation of the Seam 3 Mail Module.
+**simple-email** is a continuation of the Seam 3 Mail Module.
 
-Has been refactored to com.outjected.mail packaging and CDI integration removed for simplicity.
+It has been refactored to `com.outjected.mail` packaging and CDI integration has been removed for simplicity.
+
+**To run errorprone Tests:**
+
+`mvn clean package -P errorprone`
+
+**To install locally:**
+
+`mvn clean install`
+
+**Or simply add the following dependency to your POM:**
+
+```
+<dependency>
+	<groupId>com.outjected</groupId>
+	<artifactId>simple-email</artifactId>
+	<version>1.5</version>
+</dependency>
+```
+
+The artifact is published in the following repository:
+
+```
+<repository>
+	<id>clearfly-releases</id>
+	<name>Clearfly Releases Maven Repository</name>
+	<url>https://mvn.clearfly.net/artifactory/libs-release</url>
+	<layout>default</layout>
+</repository>
+```
