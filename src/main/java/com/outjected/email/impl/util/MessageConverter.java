@@ -13,6 +13,7 @@
 package com.outjected.email.impl.util;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import javax.mail.BodyPart;
 import javax.mail.Message;
@@ -32,7 +33,16 @@ import com.outjected.email.impl.attachments.InputStreamAttachment;
  */
 public class MessageConverter {
 
+    private final ContentDisposition defaultDisposition;
     private EmailMessage emailMessage;
+
+    public MessageConverter() {
+        defaultDisposition = ContentDisposition.INLINE;
+    }
+
+    public MessageConverter(ContentDisposition defaultDisposition) {
+        this.defaultDisposition = defaultDisposition;
+    }
 
     public static EmailMessage convert(Message m) throws MailException {
         MessageConverter mc = new MessageConverter();
@@ -81,7 +91,6 @@ public class MessageConverter {
     }
 
     private void addPart(BodyPart bp) throws MessagingException, IOException {
-
         if (bp.getContentType().toLowerCase().contains("multipart/")) {
             addMultiPart((MimeMultipart) bp.getContent());
         }
@@ -92,7 +101,16 @@ public class MessageConverter {
             emailMessage.setHtmlBody((String) bp.getContent());
         }
         else {
-            emailMessage.addAttachment(new InputStreamAttachment(bp.getFileName(), bp.getContentType(), ContentDisposition.mapValue(bp.getDisposition()), bp.getInputStream()));
+            ContentDisposition attachmentDisposition = defaultDisposition;
+            try {
+                if (Objects.nonNull(bp.getDisposition())) {
+                    attachmentDisposition = ContentDisposition.mapValue(bp.getDisposition());
+                }
+            }
+            catch (UnsupportedOperationException e) {
+                // NOOP - Fall back to default disposition if disposition is unknown
+            }
+            emailMessage.addAttachment(new InputStreamAttachment(bp.getFileName(), bp.getContentType(), attachmentDisposition, bp.getInputStream()));
         }
     }
 }
