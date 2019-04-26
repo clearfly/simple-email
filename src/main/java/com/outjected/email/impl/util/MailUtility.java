@@ -16,6 +16,7 @@ import java.util.Collection;
 import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Properties;
 import java.util.Set;
 
@@ -25,6 +26,8 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeUtility;
+import javax.mail.internet.ParseException;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
@@ -280,6 +283,30 @@ public class MailUtility {
         }
         catch (MessagingException e1) {
             throw new SendFailedException("Unable to read Message-ID from sent message");
+        }
+    }
+
+    /**
+     * Evaluate a string to determine if it is RFC 2047 encoded. If so, attempt to decode. If not, or upon exception, return
+     * original value
+     * 
+     * @param value String to be evaluated
+     * @return The evaluated and possibly decoded string
+     */
+    public static String decodeString(String value) {
+        if (Objects.isNull(value)) {
+            return null;
+        }
+        if (value.matches("^=\\?.*\\?[bBqQ]\\?.*\\?=$")) {
+            try {
+                return MimeUtility.decodeWord(value);
+            }
+            catch (ParseException | UnsupportedEncodingException e) {
+                return value;
+            }
+        }
+        else {
+            return value;
         }
     }
 }
