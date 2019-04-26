@@ -110,7 +110,7 @@ public class MessageConverter {
             catch (UnsupportedOperationException e) {
                 // NOOP - Fall back to default disposition if disposition is unknown
             }
-            emailMessage.addAttachment(new InputStreamAttachment(bp.getFileName(), bp.getContentType(), attachmentDisposition, bp.getInputStream()));
+            emailMessage.addAttachment(new InputStreamAttachment(MailUtility.decodeString(bp.getFileName()), bp.getContentType(), attachmentDisposition, bp.getInputStream()));
         }
     }
 }
