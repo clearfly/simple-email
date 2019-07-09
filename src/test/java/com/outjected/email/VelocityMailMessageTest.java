@@ -170,7 +170,7 @@ public class VelocityMailMessageTest {
 
             emailMessage = new MailMessageImpl(mailConfig).from(MailTestUtil.getAddressHeader(fromName, fromAddress)).replyTo(MailTestUtil.getAddressHeader(replyToName, replyToAddress)).to(person)
                     .subject(subject).bodyHtml(new VelocityTemplate(Resources.asCharSource(Resources.getResource("template.html.velocity"), Charsets.UTF_8).read())).put("version", version).put(
-                            "person", person).importance(MessagePriority.HIGH).addAttachment(new URLAttachment("http://design.jboss.org/seam/logo/final/seam_mail_85px.png", "seamLogo.png",
+                            "person", person).importance(MessagePriority.HIGH).addAttachment(new URLAttachment("https://design.jboss.org/seam/logo/final/seam_mail_85px.png", "seamLogo.png",
                                     ContentDisposition.INLINE)).send();
         }
         finally {
@@ -227,7 +227,7 @@ public class VelocityMailMessageTest {
                     subject).put("version", version).put("person", person).bodyHtmlTextAlt(new VelocityTemplate(Resources.asCharSource(Resources.getResource("template.html.velocity"), Charsets.UTF_8)
                             .read()), new VelocityTemplate(Resources.asCharSource(Resources.getResource("template.text.velocity"), Charsets.UTF_8).read())).importance(MessagePriority.LOW)
                     .deliveryReceipt(fromAddress).readReceipt(fromAddress).addAttachment("template.html.velocity", "text/html", ContentDisposition.ATTACHMENT, Resources.asByteSource(Resources
-                            .getResource("template.html.velocity")).read()).addAttachment(new URLAttachment("http://design.jboss.org/seam/logo/final/seam_mail_85px.png", "seamLogo.png",
+                            .getResource("template.html.velocity")).read()).addAttachment(new URLAttachment("https://design.jboss.org/seam/logo/final/seam_mail_85px.png", "seamLogo.png",
                                     ContentDisposition.INLINE)).send();
         }
         finally {
@@ -292,7 +292,7 @@ public class VelocityMailMessageTest {
                     .getResource("template.html.velocity"), Charsets.UTF_8).read()), new VelocityTemplate(Resources.asCharSource(Resources.getResource("template.text.velocity"), Charsets.UTF_8)
                             .read())).importance(MessagePriority.LOW).deliveryReceipt(fromAddress).readReceipt(fromAddress).addAttachment("template.html.velocity", "text/html",
                                     ContentDisposition.ATTACHMENT, Resources.asByteSource(Resources.getResource("template.html.velocity")).read()).addAttachment(new URLAttachment(
-                                            "http://design.jboss.org/seam/logo/final/seam_mail_85px.png", "seamLogo.png", ContentDisposition.INLINE)).send();
+                                            "https://design.jboss.org/seam/logo/final/seam_mail_85px.png", "seamLogo.png", ContentDisposition.INLINE)).send();
         }
         finally {
             stop(wiser);

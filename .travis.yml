@@ -1,6 +1,4 @@
-sudo: true
-dist: trusty
-group: travis_latest
+dist: xenial
 
 language: java
 
@@ -10,7 +8,7 @@ notifications:
     on_failure: always
 
 jdk:
- - oraclejdk8
+ - openjdk8
  
 cache:
   directories:
