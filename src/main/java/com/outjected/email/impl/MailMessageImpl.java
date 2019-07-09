@@ -80,12 +80,14 @@ public class MailMessageImpl implements MailMessage {
 
     // Begin Addressing
 
-    @Override public MailMessage from(String address) {
+    @Override
+    public MailMessage from(String address) {
         from(MailUtility.internetAddress(address));
         return this;
     }
 
-    @Override public MailMessage from(InternetAddress emailAddress) {
+    @Override
+    public MailMessage from(InternetAddress emailAddress) {
         if (emailAddress != null) {
             emailMessage.getFromAddresses().clear();
             emailMessage.getFromAddresses().add(emailAddress);
@@ -93,19 +95,22 @@ public class MailMessageImpl implements MailMessage {
         return this;
     }
 
-    @Override public MailMessage from(EmailContact emailContact) {
+    @Override
+    public MailMessage from(EmailContact emailContact) {
         if (emailContact != null) {
             from(MailUtility.internetAddress(emailContact));
         }
         return this;
     }
 
-    @Override public MailMessage replyTo(String address) {
+    @Override
+    public MailMessage replyTo(String address) {
         replyTo(MailUtility.internetAddress(address));
         return this;
     }
 
-    @Override public MailMessage replyTo(InternetAddress emailAddress) {
+    @Override
+    public MailMessage replyTo(InternetAddress emailAddress) {
         if (emailAddress != null) {
             emailMessage.getReplyToAddresses().clear();
             emailMessage.getReplyToAddresses().add(emailAddress);
@@ -113,103 +118,120 @@ public class MailMessageImpl implements MailMessage {
         return this;
     }
 
-    @Override public MailMessage replyTo(EmailContact emailContact) {
+    @Override
+    public MailMessage replyTo(EmailContact emailContact) {
         if (emailContact != null) {
             replyTo(MailUtility.internetAddress(emailContact));
         }
         return this;
     }
 
-    @Override public MailMessage addHeader(String name, String value) {
+    @Override
+    public MailMessage addHeader(String name, String value) {
         emailMessage.getHeaders().add(new Header(name, value));
         return this;
     }
 
-    @Override public MailMessage addCustomVariable(String name, String value) {
+    @Override
+    public MailMessage addCustomVariable(String name, String value) {
         emailMessage.getCustomVariables().put(name, value);
         return this;
     }
 
-    @Override public MailMessage to(String... address) {
+    @Override
+    public MailMessage to(String... address) {
         emailMessage.getToAddresses().addAll(MailUtility.internetAddress(address));
         return this;
     }
 
-    @Override public MailMessage to(InternetAddress emailAddress) {
+    @Override
+    public MailMessage to(InternetAddress emailAddress) {
         if (emailAddress != null) {
             emailMessage.getToAddresses().add(emailAddress);
         }
         return this;
     }
 
-    @Override public MailMessage to(EmailContact emailContact) {
+    @Override
+    public MailMessage to(EmailContact emailContact) {
         if (emailContact != null) {
             emailMessage.getToAddresses().add(MailUtility.internetAddress(emailContact));
         }
         return this;
     }
 
-    @Override public MailMessage to(Collection<? extends EmailContact> emailContacts) {
+    @Override
+    public MailMessage to(Collection<? extends EmailContact> emailContacts) {
         emailMessage.getToAddresses().addAll(MailUtility.internetAddress(emailContacts));
         return this;
     }
 
-    @Override public MailMessage cc(String... address) {
+    @Override
+    public MailMessage cc(String... address) {
         emailMessage.getCcAddresses().addAll(MailUtility.internetAddress(address));
         return this;
     }
 
-    @Override public MailMessage cc(InternetAddress emailAddress) {
+    @Override
+    public MailMessage cc(InternetAddress emailAddress) {
         if (emailAddress != null) {
             emailMessage.getCcAddresses().add(emailAddress);
         }
         return this;
     }
 
-    @Override public MailMessage cc(EmailContact emailContact) {
+    @Override
+    public MailMessage cc(EmailContact emailContact) {
         if (emailContact != null) {
             emailMessage.getCcAddresses().add(MailUtility.internetAddress(emailContact));
         }
         return this;
     }
 
-    @Override public MailMessage cc(Collection<? extends EmailContact> emailContacts) {
+    @Override
+    public MailMessage cc(Collection<? extends EmailContact> emailContacts) {
         emailMessage.getCcAddresses().addAll(MailUtility.internetAddress(emailContacts));
         return this;
     }
 
-    @Override public MailMessage bcc(String... address) {
+    @Override
+    public MailMessage bcc(String... address) {
         emailMessage.getBccAddresses().addAll(MailUtility.internetAddress(address));
         return this;
     }
 
-    @Override public MailMessage bcc(InternetAddress emailAddress) {
+    @Override
+    public MailMessage bcc(InternetAddress emailAddress) {
         if (emailAddress != null) {
             emailMessage.getBccAddresses().add(emailAddress);
         }
         return this;
     }
 
-    @Override public MailMessage bcc(EmailContact emailContact) {
+    @Override
+    public MailMessage bcc(EmailContact emailContact) {
         if (emailContact != null) {
             emailMessage.getBccAddresses().add(MailUtility.internetAddress(emailContact));
         }
         return this;
     }
 
-    @Override public MailMessage bcc(Collection<? extends EmailContact> emailContacts) {
+    @Override
+    public MailMessage bcc(Collection<? extends EmailContact> emailContacts) {
         emailMessage.getBccAddresses().addAll(MailUtility.internetAddress(emailContacts));
         return this;
     }
 
-    @Override public MailMessage envelopeFrom(EmailContact emailContact) {
+    @Override
+    public MailMessage envelopeFrom(EmailContact emailContact) {
         if (emailContact != null) {
             emailMessage.setEnvelopeFrom(MailUtility.internetAddress(emailContact));
         }
         return this;
     }
 
-    @Override public MailMessage envelopeFrom(String address) {
+    @Override
+    public MailMessage envelopeFrom(String address) {
         if (address != null) {
             emailMessage.setEnvelopeFrom(MailUtility.internetAddress(address));
         }
@@ -218,47 +240,56 @@ public class MailMessageImpl implements MailMessage {
 
     // End Addressing
 
-    @Override public MailMessage subject(String value) {
+    @Override
+    public MailMessage subject(String value) {
         emailMessage.setSubject(value);
         return this;
     }
 
-    @Override public MailMessage deliveryReceipt(String address) {
+    @Override
+    public MailMessage deliveryReceipt(String address) {
         emailMessage.getDeliveryReceiptAddresses().add(MailUtility.internetAddress(address));
         return this;
     }
 
-    @Override public MailMessage readReceipt(String address) {
+    @Override
+    public MailMessage readReceipt(String address) {
         emailMessage.getReadReceiptAddresses().add(MailUtility.internetAddress(address));
         return this;
     }
 
-    @Override public MailMessage importance(MessagePriority messagePriority) {
+    @Override
+    public MailMessage importance(MessagePriority messagePriority) {
         emailMessage.setImportance(messagePriority);
         return this;
     }
 
-    @Override public MailMessage messageId(String messageId) {
+    @Override
+    public MailMessage messageId(String messageId) {
         emailMessage.setMessageId(messageId);
         return this;
     }
 
-    @Override public MailMessage bodyText(String text) {
+    @Override
+    public MailMessage bodyText(String text) {
         emailMessage.setTextBody(text);
         return this;
     }
 
-    @Override public MailMessage bodyHtml(String html) {
+    @Override
+    public MailMessage bodyHtml(String html) {
         emailMessage.setHtmlBody(html);
         return this;
     }
 
-    @Override public MailMessage createTextAlternative(boolean value){
+    @Override
+    public MailMessage createTextAlternative(boolean value) {
         createTextAlternative = value;
         return this;
     }
 
-    @Override public MailMessage bodyHtmlTextAlt(String html, String text) {
+    @Override
+    public MailMessage bodyHtmlTextAlt(String html, String text) {
         emailMessage.setTextBody(text);
         emailMessage.setHtmlBody(html);
         return this;
@@ -266,27 +297,32 @@ public class MailMessageImpl implements MailMessage {
 
     // Begin Attachments
 
-    @Override public MailMessage addAttachment(EmailAttachment attachment) {
+    @Override
+    public MailMessage addAttachment(EmailAttachment attachment) {
         emailMessage.addAttachment(attachment);
         return this;
     }
 
-    @Override public MailMessage addAttachments(Collection<EmailAttachment> attachments) {
+    @Override
+    public MailMessage addAttachments(Collection<EmailAttachment> attachments) {
         emailMessage.addAttachments(attachments);
         return this;
     }
 
-    @Override public MailMessage addAttachment(String fileName, String mimeType, ContentDisposition contentDispostion, byte[] bytes) {
+    @Override
+    public MailMessage addAttachment(String fileName, String mimeType, ContentDisposition contentDispostion, byte[] bytes) {
         addAttachment(new BaseAttachment(fileName, mimeType, contentDispostion, bytes));
         return this;
     }
 
-    @Override public MailMessage addAttachment(String fileName, String mimeType, ContentDisposition contentDispostion, InputStream inputStream) {
+    @Override
+    public MailMessage addAttachment(String fileName, String mimeType, ContentDisposition contentDispostion, InputStream inputStream) {
         addAttachment(new InputStreamAttachment(fileName, mimeType, contentDispostion, inputStream));
         return this;
     }
 
-    @Override public MailMessage addAttachment(ContentDisposition contentDispostion, File file) {
+    @Override
+    public MailMessage addAttachment(ContentDisposition contentDispostion, File file) {
         addAttachment(new FileAttachment(contentDispostion, file));
         return this;
     }
@@ -295,7 +331,8 @@ public class MailMessageImpl implements MailMessage {
 
     // Begin Calendar
 
-    @Override public MailMessage iCal(String htmlBody, String textBody, ICalMethod method, byte[] bytes) {
+    @Override
+    public MailMessage iCal(String htmlBody, String textBody, ICalMethod method, byte[] bytes) {
         emailMessage.setType(EmailMessageType.INVITE_ICAL);
         emailMessage.setHtmlBody(htmlBody);
         emailMessage.setTextBody(textBody);
@@ -303,7 +340,8 @@ public class MailMessageImpl implements MailMessage {
         return this;
     }
 
-    @Override public MailMessage iCal(String textBody, ICalMethod method, byte[] bytes) {
+    @Override
+    public MailMessage iCal(String textBody, ICalMethod method, byte[] bytes) {
         emailMessage.setType(EmailMessageType.INVITE_ICAL);
         emailMessage.setTextBody(textBody);
         emailMessage.addAttachment(new BaseAttachment(null, "text/calendar;method=" + method, ContentDisposition.INLINE, bytes, "urn:content-classes:calendarmessage"));
@@ -312,52 +350,79 @@ public class MailMessageImpl implements MailMessage {
 
     // End Calendar
 
-    @Override public MailMessage subject(TemplateProvider subject) {
+    @Override
+    public MailMessage subject(TemplateProvider subject) {
         subjectTemplate = subject;
         return this;
     }
 
-    @Override public MailMessage bodyText(TemplateProvider textBody) {
+    @Override
+    public MailMessage bodyText(TemplateProvider textBody) {
         textTemplate = textBody;
         return this;
     }
 
-    @Override public MailMessage bodyHtml(TemplateProvider htmlBody) {
+    @Override
+    public MailMessage bodyHtml(TemplateProvider htmlBody) {
         htmlTemplate = htmlBody;
         return this;
     }
 
-    @Override public MailMessage bodyHtmlTextAlt(TemplateProvider htmlBody, TemplateProvider textBody) {
+    @Override
+    public MailMessage bodyHtmlTextAlt(TemplateProvider htmlBody, TemplateProvider textBody) {
         bodyHtml(htmlBody);
         bodyText(textBody);
         return this;
     }
 
-    @Override public MailMessage charset(String charset) {
+    @Override
+    public MailMessage charset(String charset) {
         emailMessage.setCharset(charset);
         return this;
     }
 
-    @Override public MailMessage contentType(ContentType contentType) {
+    @Override
+    public MailMessage contentType(ContentType contentType) {
         emailMessage.setRootContentType(contentType);
         return this;
     }
 
-    @Override public MailMessage put(String key, Object value) {
+    @Override
+    public MailMessage put(String key, Object value) {
         templateContext.put(key, value);
         return this;
     }
 
-    @Override public MailMessage put(Map<String, Object> values) {
+    @Override
+    public MailMessage put(Map<String, Object> values) {
         templateContext.putAll(values);
         return this;
     }
 
-    @Override public EmailMessage getEmailMessage() {
+    /**
+     * Enable click tracking
+     *
+     * @return
+     */
+    @Override
+    public MailMessage enableClickTracking() {
+        emailMessage.setTrackClicks(true);
+        return this;
+    }
+
+    @Override
+    public MailMessage disableClickTracking() {
+        emailMessage.setTrackClicks(true);
+        return this;
+    }
+
+    @Override
+    public EmailMessage getEmailMessage() {
         return emailMessage;
     }
 
-    @Override public void setEmailMessage(EmailMessage emailMessage) {
+    @Override
+    public void setEmailMessage(EmailMessage emailMessage) {
         this.emailMessage = emailMessage;
     }
 
@@ -369,7 +434,8 @@ public class MailMessageImpl implements MailMessage {
         this.session = session;
     }
 
-    @Override public EmailMessage mergeTemplates() {
+    @Override
+    public EmailMessage mergeTemplates() {
 
         put("mailContext", new MailContext(EmailAttachmentUtil.getEmailAttachmentMap(emailMessage.getAttachments())));
 
@@ -417,7 +483,8 @@ public class MailMessageImpl implements MailMessage {
         return send(MailUtility.createSession(mailConfig));
     }
 
-    @Override public EmailMessage send() throws SendFailedException {
+    @Override
+    public EmailMessage send() throws SendFailedException {
         if (mailTransporter != null) {
             return send(mailTransporter);
         }

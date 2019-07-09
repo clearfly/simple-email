@@ -35,7 +35,7 @@ public class BaseAttachment implements EmailAttachment, Serializable {
     private String fileName;
     private String mimeType;
     private ContentDisposition contentDisposition;
-    private List<Header> headers = new ArrayList<Header>();
+    private List<Header> headers = new ArrayList<>();
     private byte[] bytes;
 
     public BaseAttachment(String fileName, String mimeType, ContentDisposition contentDisposition, byte[] bytes) {

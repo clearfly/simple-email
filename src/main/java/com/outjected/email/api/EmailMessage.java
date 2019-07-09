@@ -32,7 +32,7 @@ import com.outjected.email.impl.attachments.BaseAttachment;
  */
 @XmlRootElement
 @XmlType(propOrder = { "messageId", "importance", "charset", "fromAddresses", "replyToAddresses", "toAddresses", "ccAddresses", "bccAddresses", "envelopeFrom", "deliveryReceiptAddresses",
-        "readReceiptAddresses", "subject", "textBody", "htmlBody", "headers", "customVariables", "rootContentType", "type", "attachments" })
+        "readReceiptAddresses", "subject", "textBody", "htmlBody", "headers", "customVariables", "rootContentType", "type", "trackClicks", "attachments" })
 public class EmailMessage implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -40,11 +40,11 @@ public class EmailMessage implements Serializable {
     private ContentType rootContentType = ContentType.MIXED;
     private EmailMessageType type = EmailMessageType.STANDARD;
     private String messageId;
-    private List<InternetAddress> fromAddresses = new ArrayList<InternetAddress>();
-    private List<InternetAddress> replyToAddresses = new ArrayList<InternetAddress>();
-    private List<InternetAddress> toAddresses = new ArrayList<InternetAddress>();
-    private List<InternetAddress> ccAddresses = new ArrayList<InternetAddress>();
-    private List<InternetAddress> bccAddresses = new ArrayList<InternetAddress>();
+    private List<InternetAddress> fromAddresses = new ArrayList<>();
+    private List<InternetAddress> replyToAddresses = new ArrayList<>();
+    private List<InternetAddress> toAddresses = new ArrayList<>();
+    private List<InternetAddress> ccAddresses = new ArrayList<>();
+    private List<InternetAddress> bccAddresses = new ArrayList<>();
     private InternetAddress envelopeFrom;
     private List<Header> headers = new ArrayList<>();
     private Map<String, String> customVariables = new TreeMap<>();
@@ -53,12 +53,14 @@ public class EmailMessage implements Serializable {
     private String textBody;
     private String htmlBody;
 
-    private List<BaseAttachment> attachments = new ArrayList<BaseAttachment>();
+    private List<BaseAttachment> attachments = new ArrayList<>();
 
-    private List<InternetAddress> deliveryReceiptAddresses = new ArrayList<InternetAddress>();
-    private List<InternetAddress> readReceiptAddresses = new ArrayList<InternetAddress>();
+    private List<InternetAddress> deliveryReceiptAddresses = new ArrayList<>();
+    private List<InternetAddress> readReceiptAddresses = new ArrayList<>();
 
     private MessagePriority importance = MessagePriority.NORMAL;
+
+    private boolean trackClicks;
 
     /**
      * Get the charset used to encode the EmailMessage
@@ -346,6 +348,20 @@ public class EmailMessage implements Serializable {
      */
     public void setImportance(MessagePriority importance) {
         this.importance = importance;
+    }
+
+    /**
+     * Track clicks if the provider supports it
+     *
+     * @return true if click tracking is enabled
+     */
+    @XmlElement
+    public boolean isTrackClicks() {
+        return trackClicks;
+    }
+
+    public void setTrackClicks(boolean trackClicks) {
+        this.trackClicks = trackClicks;
     }
 
     /**
