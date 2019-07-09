@@ -1,6 +1,4 @@
-sudo: true
-dist: trusty
-group: travis_latest
+dist: xenial
 
 language: java
 
