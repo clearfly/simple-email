@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.outjected</groupId>
     <artifactId>simple-email</artifactId>
-    <version>1.8-SNAPSHOT</version>
+    <version>1.8</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -13,7 +13,7 @@
         <version.errorprone>2.3.3</version.errorprone>
         <version.errorprone.compiler>2.8.5</version.errorprone.compiler>
         <freemarker.version>2.3.27-incubating</freemarker.version>
-        <version.jsoup>1.11.3</version.jsoup>
+        <version.jsoup>1.12.1</version.jsoup>
         <velocity.version>1.7</velocity.version>
         <subetha.version>3.1.7</subetha.version>
         <version.guava>27.1-jre</version.guava>
