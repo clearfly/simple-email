@@ -95,6 +95,7 @@ public class MailUtility {
 
     public static Collection<InternetAddress> internetAddress(Collection<? extends EmailContact> emailContacts) throws InvalidAddressException {
         Set<InternetAddress> internetAddresses = new HashSet<InternetAddress>();
+        emailContacts.removeIf(Objects::isNull);
 
         for (EmailContact ec : emailContacts) {
             internetAddresses.add(MailUtility.internetAddress(ec));
@@ -105,11 +106,11 @@ public class MailUtility {
 
     public static InternetAddress[] getInternetAddressses(InternetAddress emailAddress) {
         InternetAddress[] internetAddresses = { emailAddress };
-
         return internetAddresses;
     }
 
     public static InternetAddress[] getInternetAddressses(Collection<InternetAddress> recipients) {
+        recipients.removeIf(Objects::isNull);
         InternetAddress[] result = new InternetAddress[recipients.size()];
         recipients.toArray(result);
         return result;
@@ -289,7 +290,7 @@ public class MailUtility {
     /**
      * Evaluate a string to determine if it is RFC 2047 encoded. If so, attempt to decode. If not, or upon exception, return
      * original value
-     * 
+     *
      * @param value String to be evaluated
      * @return The evaluated and possibly decoded string
      */
