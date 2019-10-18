@@ -16,6 +16,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.Map;
 
@@ -39,12 +40,11 @@ public class VelocityTemplate implements TemplateProvider {
 
     public VelocityTemplate(String template) {
         velocityEngine = new VelocityEngine();
-        velocityEngine.setProperty(RuntimeConstants.RUNTIME_LOG_LOGSYSTEM_CLASS, "org.apache.velocity.runtime.log.NullLogChute");
         this.template = template;
     }
 
     public VelocityTemplate(File file) throws IOException {
-        this(new String(Files.readAllBytes(file.toPath()), Charset.forName("UTF-8")));
+        this(new String(Files.readAllBytes(file.toPath()), StandardCharsets.UTF_8));
     }
 
     @Override
@@ -56,10 +56,7 @@ public class VelocityTemplate implements TemplateProvider {
         try {
             velocityEngine.evaluate(velocityContext, writer, "mailGenerated", template);
         }
-        catch (ResourceNotFoundException e) {
-            throw new TemplatingException("Unable to find template", e);
-        }
-        catch (ParseErrorException e) {
+        catch (ResourceNotFoundException | ParseErrorException e) {
             throw new TemplatingException("Unable to find template", e);
         }
         catch (MethodInvocationException e) {
