@@ -13,6 +13,7 @@
 package com.outjected.email.impl.util;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.Objects;
 
 import javax.mail.BodyPart;
@@ -27,29 +28,27 @@ import com.outjected.email.api.MailException;
 import com.outjected.email.impl.attachments.InputStreamAttachment;
 
 /**
- * 
  * @author Cody Lerum
- * 
  */
 public class MessageConverter {
 
     private final ContentDisposition defaultDisposition;
     private EmailMessage emailMessage;
 
-    public MessageConverter() {
-        defaultDisposition = ContentDisposition.INLINE;
-    }
-
-    public MessageConverter(ContentDisposition defaultDisposition) {
+    private MessageConverter(ContentDisposition defaultDisposition) {
         this.defaultDisposition = defaultDisposition;
     }
 
-    public static EmailMessage convert(Message m) throws MailException {
-        MessageConverter mc = new MessageConverter();
+    public static EmailMessage convert(Message m) throws MailException, UnsupportedEncodingException {
+        return convert(m, ContentDisposition.INLINE);
+    }
+
+    public static EmailMessage convert(Message m, ContentDisposition defaultDisposition) throws MailException, UnsupportedEncodingException {
+        MessageConverter mc = new MessageConverter(defaultDisposition);
         return mc.convertMessage(m);
     }
 
-    public EmailMessage convertMessage(Message m) throws MailException {
+    private EmailMessage convertMessage(Message m) throws MailException, UnsupportedEncodingException {
         emailMessage = new EmailMessage();
 
         try {
@@ -68,10 +67,10 @@ public class MessageConverter {
                 emailMessage.setTextBody((String) m.getContent());
             }
         }
-        catch (IOException e) {
-            throw new MailException(e);
+        catch (UnsupportedEncodingException e) {
+            throw e;
         }
-        catch (MessagingException e) {
+        catch (IOException | MessagingException e) {
             throw new MailException(e);
         }
 
