@@ -16,7 +16,7 @@ It has been refactored to `com.outjected.mail` packaging and CDI integration has
 <dependency>
 	<groupId>com.outjected</groupId>
 	<artifactId>simple-email</artifactId>
-	<version>1.7</version>
+	<version>2.2</version>
 </dependency>
 ```
 
@@ -24,9 +24,9 @@ The artifact is published in the following repository:
 
 ```
 <repository>
-	<id>clearfly-releases</id>
-	<name>Clearfly Releases Maven Repository</name>
-	<url>https://mvn.clearfly.net/artifactory/libs-release</url>
+	<id>clearfly-github</id>
+	<name>GitHub Clearfly Maven Repository</name>
+	<url>https://maven.pkg.github.com/clearfly/mvn</url>
 	<layout>default</layout>
 </repository>
 ```
