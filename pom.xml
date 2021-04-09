@@ -10,7 +10,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <version.java>1.8</version.java>
-        <version.errorprone>2.3.4</version.errorprone>
+        <version.errorprone>2.6.0</version.errorprone>
         <version.errorprone.compiler>2.8.5</version.errorprone.compiler>
         <version.jsoup>1.12.1</version.jsoup>
         <velocity.version>2.1</velocity.version>
