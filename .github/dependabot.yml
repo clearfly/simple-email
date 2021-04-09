@@ -1,0 +1,17 @@
+version: 2
+updates:
+  - package-ecosystem: maven
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 10
+    allow:
+      - dependency-name: org.apache.velocity:*
+      - dependency-name: org.subethamail:*
+      - dependency-name: com.google.guava:*
+      - dependency-name: com.google.errorprone:*
+
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: "weekly"
