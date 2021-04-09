@@ -13,7 +13,7 @@
         <version.errorprone>2.3.4</version.errorprone>
         <version.errorprone.compiler>2.8.5</version.errorprone.compiler>
         <version.jsoup>1.12.1</version.jsoup>
-        <velocity.version>2.1</velocity.version>
+        <velocity.version>2.3</velocity.version>
         <subetha.version>3.1.7</subetha.version>
         <version.guava>29.0-jre</version.guava>
         <version.maven.compiler>3.8.1</version.maven.compiler>
