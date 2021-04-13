@@ -1,12 +1,13 @@
 package com.outjected.email;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import com.outjected.email.impl.util.MailUtility;
 
-import junit.framework.Assert;
 
 public class MailUtilityTest {
+
     @Test
     public void decodeString() {
         Assert.assertEquals(null, MailUtility.decodeString(null));

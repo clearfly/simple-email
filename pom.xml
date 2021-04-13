@@ -164,8 +164,6 @@
                         <configuration>
                             <fork>true</fork>
                             <compilerArgs combine.children="append">
-                                <arg>-Xep:InsecureCryptoUsage:OFF</arg>
-                                <arg>-Xep:UnusedVariable:OFF</arg>
                                 <arg>-J-Xbootclasspath/p:${settings.localRepository}/com/google/errorprone/javac/${version.errorprone.javac}/javac-${version.errorprone.javac}.jar</arg>
                             </compilerArgs>
                         </configuration>

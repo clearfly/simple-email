@@ -21,8 +21,7 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.internet.MimeUtility;
 
-import junit.framework.Assert;
-
+import org.junit.Assert;
 import org.junit.Test;
 import org.subethamail.smtp.auth.EasyAuthenticationHandlerFactory;
 import org.subethamail.wiser.Wiser;
