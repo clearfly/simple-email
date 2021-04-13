@@ -1,0 +1,247 @@
+Date: Tue, 13 Apr 2021 21:45:41 +0000
+Sender: foo@bar.foo.net
+X-Mailgun-Variables: {"X-Portal-Resource-Code": "INV101200",
+ "X-Portal-User": "foo@bar.net"}
+Message-Id: <44bc3280-aac6-4a31-9039-b725d9e30528@foo.net>
+To: test@test.com
+From: Foo Bar <foo@bar.net>
+Subject: Ticket T29345 - New Comment
+Mime-Version: 1.0
+Content-Type: multipart/mixed; boundary="ce2d9dfab9b842f591ca6f737117c6dd"
+
+--ce2d9dfab9b842f591ca6f737117c6dd
+Mime-Version: 1.0
+Content-Type: multipart/alternative; boundary="93ba36b45c4540f99b8c5bb58e7e7103"
+
+--93ba36b45c4540f99b8c5bb58e7e7103
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="ascii"
+Mime-Version: 1.0
+
+Ticket T29345 - New Comment
+
+
+(Public) Scott Scotsman (04/13/2021 03:45 PM MDT)
+
+I emailed Teresa to log in and re add an email address to receive our invoice. I tried calling first but no one is available to take the call
+
+Line 1
+Line 2
+Line 3
+
+Line 4
+
+Some things were in bold while others are in italics. Some are even links SBN100001 (https://foo.com/s/c/summaryAccount/view.xhtml?oid=100001) or P8158
+(https://foo.com/s/c/project/view.xhtml?oid=8158) or FAX2 (https://foo.com/s/c/voice/fax/view.xhtml?oid=2)
+
+There was also a code block. You can also have Inline Code if you want
+INVITE sip:7018456150@10.10.10.10:5060;user=phone SIP/2.0 Via: SIP/2.0/UDP 192.168.20.20:5060;branch=z9hG4bK-359FDD9193A8 From: sip:7018458272@192.168.20.20:5060;tag=11848DF25251 To:
+sip:7018456150@10.10.10.10:5060 Call-ID: A93FBE8B-F7A2-4D6B-93E8-3408FAA44922@192.168.20.20
+Here is a link: https://www.google.com"); (https://www.google.com");)
+
+Here are some numbers
+
+4066001234
+4066001235
+4066001236
+4066001237
+4066001238`
+
+Blockquote
+
+ * List Item 1"
+ * List Item 2
+ * List Item 3
+There should be a line above this
+
+
+
+Ticket Details
+
+Ticket T29345
+Subject One Way Audio
+Assigned To Customer
+Account SBN101300 - Globex
+Billing Account BAN100120
+Voice Group VG2020
+Click here
+(https://foo.com/r/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWJqZWN0IjoicmVkaXJlY3QiLCJpZCI6IjI5MzQ1IiwidHlwZSI6IlRJQ0tFVCIsImV4cCI6MTY0OTg4NjM0MCwiaWF0IjoxNjE4MzUwMzQwfQ.kSbDhmLg7fotCqWILvJwS1SemUUsbgF_Z8-VZWG3wwE)
+ to interact with this ticket via the Foo Portal
+- Foo
+Sent from send-only email address. Please do not reply.
+
+--93ba36b45c4540f99b8c5bb58e7e7103
+Content-Transfer-Encoding: 7bit
+Content-Type: text/html; charset="ascii"
+Mime-Version: 1.0
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml" style="font-family: Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+
+<head>
+	<meta name="viewport" content="width=device-width" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Foo Ticket Update</title>
+
+<style>img {
+max-width: 100%;
+}
+body {
+-webkit-font-smoothing: antialiased; -webkit-text-size-adjust: none; width: 100% !important; height: 100%; line-height: 1.6em;
+}
+body {
+background-color: #f6f6f6;
+}
+@media only screen and (max-width: 840px) {
+  body {
+    padding: 0 !important;
+  }
+  h1 {
+    font-weight: 800 !important; margin: 20px 0 5px !important;
+  }
+  h2 {
+    font-weight: 800 !important; margin: 20px 0 5px !important;
+  }
+  h3 {
+    font-weight: 800 !important; margin: 20px 0 5px !important;
+  }
+  h4 {
+    font-weight: 800 !important; margin: 20px 0 5px !important;
+  }
+  h1 {
+    font-size: 22px !important;
+  }
+  h2 {
+    font-size: 18px !important;
+  }
+  h3 {
+    font-size: 16px !important;
+  }
+  .container {
+    padding: 0 !important; width: 100% !important;
+  }
+  .content {
+    padding: 0 !important;
+  }
+  .content-wrap {
+    padding: 10px !important;
+  }
+  .invoice {
+    width: 100% !important;
+  }
+}
+</style></head>
+
+<body style="font-family: Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: none; width: 100% !important; height: 100%; line-height: 1.6em; background-color: #f6f6f6; margin: 0;">
+	<div style="min-width: 600px; font-family: Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"></div>
+	<table style="font-family: Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; background-color: #f6f6f6; width: 100%; margin: 0;">
+		<tr style="font-family: Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+			<td style="font-family: Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0;"></td>
+			<td style="font-family: Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; display: block !important; max-width: 800px !important; min-width: 600px !important; clear: both !important; margin: 0 auto;">
+				<div style="font-family: Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; max-width: 800px; display: block; margin: 0 auto; padding: 20px;">
+					<table width="100%" cellpadding="0" cellspacing="0" style="font-family: Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; background-color: #fff; border-radius: 3px; margin: 0; border: 1px solid #e9e9e9;">
+						<tr style="font-family: Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+							<td style="font-family: Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 20px;">
+								<table width="100%" cellpadding="0" cellspacing="0" style="font-family: Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+									<tr style="font-family: Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+										<td style="font-family: Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 16px; vertical-align: top; color: #fff; font-weight: bold; text-align: center; border-radius: 3px 3px 0 0; background-color: #348eda; margin: 0; padding: 20px;">Ticket T29345 - New Comment</td>
+									</tr>
+									<tr style="font-family: Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+										<td style="font-family: Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;"></td>
+									</tr>
+									<tr style="font-family: Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+										<td style="font-family: Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;">
+											<h5 style="font-family: Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">(Public) Scott Scotsman (04/13/2021 03:45 PM MDT)</h5>
+											<div style="font-family: Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><p>I emailed Teresa to log in and re add an email address to receive our invoice. I tried calling first but no one is available to take the call</p>
+<p>Line 1<br />Line 2<br />Line 3</p>
+<p>Line 4</p>
+<p>Some things were in <strong>bold</strong> while others are in <em>italics</em>. Some are even links <a href="https://foo.com/s/c/summaryAccount/view.xhtml?oid=100001" target="_blank">SBN100001</a> or <a href="https://foo.com/s/c/project/view.xhtml?oid=8158" target="_blank">P8158</a> or <a href="https://foo.com/s/c/voice/fax/view.xhtml?oid=2" target="_blank">FAX2</a></p>
+<p>There was also a code block. You can also have <code style="padding: 2px 4px;font-size:90%;color:black;background-color:#ffffd5;border-radius:4px;user-select: all!important">Inline Code</code> if you want</p>
+<pre style="padding: 2px 4px;font-size:90%;color:#333;background-color:#f5f5f5;border-radius:4px"><code style="padding: 2px 4px;font-size:90%;color:#333;background-color:#f5f5f5;border-radius:4px">INVITE sip:7018456150@10.10.10.10:5060;user=phone SIP/2.0
+Via: SIP/2.0/UDP 192.168.20.20:5060;branch=z9hG4bK-359FDD9193A8
+From: sip:7018458272@192.168.20.20:5060;tag=11848DF25251
+To: sip:7018456150@10.10.10.10:5060
+Call-ID: A93FBE8B-F7A2-4D6B-93E8-3408FAA44922@192.168.20.20
+</code></pre>
+<p>Here is a link: <a href="https://www.google.com&quot;);" target="_blank">https://www.google.com&quot;);</a></p>
+<p>Here are some numbers</p>
+<p>4066001234<br />4066001235<br />4066001236<br />4066001237<br />4066001238`</p>
+<blockquote style="border-left: 5px solid #eee;padding-left:5px">
+<p>Blockquote</p>
+</blockquote>
+<ul>
+<li>List Item 1&quot;</li>
+<li>List Item 2</li>
+<li>List Item 3</li>
+</ul>
+<p>There should be a line above this</p>
+</div>
+										</td>
+									</tr>
+									<tr style="font-family: Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+										<td style="font-family: Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;">
+											<h5 style="font-family: Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">Ticket Details</h5>
+											<hr style="font-family: Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;" />
+											<table cellpadding="0" cellspacing="0" style="font-family: Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+												<tr style="font-family: Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+													<td width="150" style="font-family: Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0;"><strong style="font-family: Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">Ticket</strong></td>
+													<td style="font-family: Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0;">T29345</td>
+												</tr>
+												<tr style="font-family: Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+													<td style="font-family: Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0;"><strong style="font-family: Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">Subject</strong></td>
+													<td style="font-family: Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0;">One Way Audio</td>
+												</tr>
+												<tr style="font-family: Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+													<td style="font-family: Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0;"><strong style="font-family: Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">Assigned To</strong></td>
+													<td style="font-family: Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0;">Customer</td>
+												</tr>
+												<tr style="font-family: Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+													<td style="font-family: Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0;"><strong style="font-family: Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">Account</strong></td>
+													<td style="font-family: Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0;">SBN101300 - Globex</td>
+												</tr>
+ 												<tr style="font-family: Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+													<td style="font-family: Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0;"><strong style="font-family: Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">Billing Account<strong style="font-family: Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"></strong></strong></td>
+													<td style="font-family: Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0;">BAN100120</td>
+												</tr>
+  												<tr style="font-family: Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+													<td style="font-family: Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0;"><strong style="font-family: Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">Voice Group</strong></td>
+													<td style="font-family: Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0;">VG2020</td>
+												</tr>
+
+											</table>
+										</td>
+									</tr>
+									<tr style="font-family: Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+										<td style="font-family: Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;">
+											<a href="https://foo.com/r/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWJqZWN0IjoicmVkaXJlY3QiLCJpZCI6IjI5MzQ1IiwidHlwZSI6IlRJQ0tFVCIsImV4cCI6MTY0OTg4NjM0MCwiaWF0IjoxNjE4MzUwMzQwfQ.kSbDhmLg7fotCqWILvJwS1SemUUsbgF_Z8-VZWG3wwE" style="font-family: Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; color: #348eda; text-decoration: underline; margin: 0;">Click here</a> to interact with this ticket via the Foo Portal
+										</td>
+									</tr>
+									<tr style="font-family: Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+										<td style="font-family: Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;">- Foo</td>
+									</tr>
+									<tr style="font-family: Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+										<td style="font-style: italic; font-family: Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;">Sent from send-only email address. Please do not reply.</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</td>
+			<td style="font-family: Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0;"></td>
+		</tr>
+	</table>
+</body>
+
+</html>
+
+--93ba36b45c4540f99b8c5bb58e7e7103--
+
+--ce2d9dfab9b842f591ca6f737117c6dd
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="test.csv"
+Content-Type: text/csv; charset="ascii"; name="test.csv"
+Mime-Version: 1.0
+
+MSwyLDM=
+--ce2d9dfab9b842f591ca6f737117c6dd--

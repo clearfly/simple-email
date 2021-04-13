@@ -20,10 +20,6 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.internet.MimeUtility;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.subethamail.wiser.Wiser;
-
 import com.google.common.io.Resources;
 import com.outjected.email.api.ContentDisposition;
 import com.outjected.email.api.EmailMessage;
@@ -37,6 +33,9 @@ import com.outjected.email.impl.util.MailTestUtil;
 import com.outjected.email.impl.util.MailUtility;
 import com.outjected.email.impl.util.MessageConverter;
 import com.outjected.email.util.TestMailConfigs;
+import org.junit.Assert;
+import org.junit.Test;
+import org.subethamail.wiser.Wiser;
 
 /**
  * @author Cody Lerum
@@ -105,7 +104,7 @@ public class MailMessageTest {
     public void testTextMailMessageSpecialCharacters() throws MessagingException, IOException {
         SessionConfig mailConfig = TestMailConfigs.standardConfig();
 
-        String subject = "Sometimes subjects have speical characters like ü - " + java.util.UUID.randomUUID();
+        String subject = "Sometimes subjects have special characters like ü - " + java.util.UUID.randomUUID();
         String specialTextBody = "This is a Text Body with a special character - ü";
 
         EmailMessage e;

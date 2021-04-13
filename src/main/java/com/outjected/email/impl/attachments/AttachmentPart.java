@@ -89,7 +89,7 @@ public class AttachmentPart extends MimeBodyPart {
             return ContentDisposition.mapValue(getDisposition());
         }
         catch (MessagingException e) {
-            throw new RuntimeException("Unable to get Content-Dispostion on attachment");
+            throw new RuntimeException("Unable to get Content-Disposition on attachment");
         }
     }
 
@@ -98,7 +98,7 @@ public class AttachmentPart extends MimeBodyPart {
             setDisposition(contentDisposition.headerValue());
         }
         catch (MessagingException e) {
-            throw new RuntimeException("Unable to set Content-Dispostion on attachment");
+            throw new RuntimeException("Unable to set Content-Disposition on attachment");
         }
     }
 

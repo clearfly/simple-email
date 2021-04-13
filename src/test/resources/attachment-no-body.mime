@@ -1,0 +1,13 @@
+From: "Foo" <foo@bar.org>
+To: bar@foo.com
+Subject: Test Subject
+Date: Mon, 12 Apr 2021 09:49:57 -0700
+MIME-Version: 1.0 (produced by Synapse)
+Content-type: application/PDF; name="Messages.pdf"
+Content-Description: Attached file: Messages.pdf
+Content-Disposition: attachment; FileName="Messages.pdf"
+Content-Transfer-Encoding: Base64
+Message-ID:
+ <ca3ce550-0144-48a6-aa98-61c2fa39496d@bar.com>
+
+dGVzdA==

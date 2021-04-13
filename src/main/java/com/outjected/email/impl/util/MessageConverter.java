@@ -20,6 +20,7 @@ import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.Message.RecipientType;
 import javax.mail.MessagingException;
+import javax.mail.Part;
 import javax.mail.internet.MimeMultipart;
 
 import com.outjected.email.api.ContentDisposition;
@@ -66,6 +67,9 @@ public class MessageConverter {
             else if (m.isMimeType("text/plain")) {
                 emailMessage.setTextBody((String) m.getContent());
             }
+            else if (m.getDisposition().toLowerCase().startsWith(Part.ATTACHMENT)) {
+                addAttachment(m);
+            }
         }
         catch (UnsupportedEncodingException e) {
             throw e;
@@ -75,6 +79,11 @@ public class MessageConverter {
         }
 
         return emailMessage;
+    }
+
+    private void addAttachment(Message m) throws MessagingException, IOException {
+        ContentDisposition attachmentDisposition = determineContentDisposition(m.getDisposition());
+        emailMessage.addAttachment(new InputStreamAttachment(MailUtility.decodeString(m.getFileName()), m.getContentType(), attachmentDisposition, m.getInputStream()));
     }
 
     private void addMultiPart(MimeMultipart mp) throws MessagingException, IOException {
@@ -100,16 +109,21 @@ public class MessageConverter {
             emailMessage.setHtmlBody((String) bp.getContent());
         }
         else {
-            ContentDisposition attachmentDisposition = defaultDisposition;
-            try {
-                if (Objects.nonNull(bp.getDisposition())) {
-                    attachmentDisposition = ContentDisposition.mapValue(bp.getDisposition());
-                }
-            }
-            catch (UnsupportedOperationException e) {
-                // NOOP - Fall back to default disposition if disposition is unknown
-            }
+            ContentDisposition attachmentDisposition = determineContentDisposition(bp.getDisposition());
             emailMessage.addAttachment(new InputStreamAttachment(MailUtility.decodeString(bp.getFileName()), bp.getContentType(), attachmentDisposition, bp.getInputStream()));
         }
+    }
+
+    private ContentDisposition determineContentDisposition(String disposition) {
+        ContentDisposition attachmentDisposition = defaultDisposition;
+        try {
+            if (Objects.nonNull(disposition)) {
+                attachmentDisposition = ContentDisposition.mapValue(disposition);
+            }
+        }
+        catch (UnsupportedOperationException e) {
+            // NOOP - Fall back to default disposition if disposition is unknown
+        }
+        return attachmentDisposition;
     }
 }
