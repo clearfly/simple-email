@@ -11,6 +11,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <version.java>1.8</version.java>
         <version.errorprone>2.6.0</version.errorprone>
+        <version.errorprone.javac>9+181-r4173-1</version.errorprone.javac>
         <version.errorprone.compiler>2.8.5</version.errorprone.compiler>
         <version.jsoup>1.12.1</version.jsoup>
         <velocity.version>2.1</velocity.version>
@@ -157,32 +158,17 @@
             <build>
                 <plugins>
                     <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-compiler-plugin</artifactId>
                         <version>${version.maven.compiler}</version>
                         <configuration>
-                            <compilerId>javac-with-errorprone</compilerId>
-                            <forceJavacCompilerUse>true</forceJavacCompilerUse>
-                            <showWarnings>true</showWarnings>
-                            <failOnWarning>true</failOnWarning>
-                            <source>${version.java}</source>
-                            <target>${version.java}</target>
-                            <compilerArgs>
+                            <fork>true</fork>
+                            <compilerArgs combine.children="append">
                                 <arg>-Xep:InsecureCryptoUsage:OFF</arg>
                                 <arg>-Xep:UnusedVariable:OFF</arg>
+                                <arg>-J-Xbootclasspath/p:${settings.localRepository}/com/google/errorprone/javac/${version.errorprone.javac}/javac-${version.errorprone.javac}.jar</arg>
                             </compilerArgs>
                         </configuration>
-                        <dependencies>
-                            <dependency>
-                                <groupId>org.codehaus.plexus</groupId>
-                                <artifactId>plexus-compiler-javac-errorprone</artifactId>
-                                <version>${version.errorprone.compiler}</version>
-                            </dependency>
-                            <dependency>
-                                <groupId>com.google.errorprone</groupId>
-                                <artifactId>error_prone_core</artifactId>
-                                <version>${version.errorprone}</version>
-                            </dependency>
-                        </dependencies>
                     </plugin>
                 </plugins>
             </build>
