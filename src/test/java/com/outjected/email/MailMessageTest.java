@@ -20,6 +20,7 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.internet.MimeUtility;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.subethamail.wiser.Wiser;
 
@@ -36,8 +37,6 @@ import com.outjected.email.impl.util.MailTestUtil;
 import com.outjected.email.impl.util.MailUtility;
 import com.outjected.email.impl.util.MessageConverter;
 import com.outjected.email.util.TestMailConfigs;
-
-import junit.framework.Assert;
 
 /**
  * @author Cody Lerum
