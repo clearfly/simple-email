@@ -45,12 +45,9 @@ public class MailMessageTest {
 
     private final String fromName = "Seam Framework";
     private final String fromAddress = "seam@jboss.org";
-    private final String replyToName = "No Reply";
     private final String replyToAddress = "no-reply@seam-mal.test";
     private final String toName = "Seamy Seamerson";
     private final String toAddress = "seamy.seamerson@seam-mail.test";
-    private final String ccName = "Red Hatty";
-    private final String ccAddress = "red.hatty@jboss.org";
 
     private final String htmlBody = "<html><body><b>Hello</b> World!</body></html>";
     private final String textBody = "This is a Text Body!";
@@ -61,7 +58,7 @@ public class MailMessageTest {
     public void testTextMailMessage() throws MessagingException, IOException {
         SessionConfig mailConfig = TestMailConfigs.standardConfig();
 
-        String subject = "Text Message from Seam Mail - " + java.util.UUID.randomUUID().toString();
+        String subject = "Text Message from Seam Mail - " + java.util.UUID.randomUUID();
         String messageId = "1234@seam.test.com";
 
         EmailMessage e;
@@ -78,7 +75,7 @@ public class MailMessageTest {
             stop(wiser);
         }
 
-        Assert.assertTrue("Didn't receive the expected amount of messages. Expected 1 got " + wiser.getMessages().size(), wiser.getMessages().size() == 1);
+        Assert.assertEquals("Didn't receive the expected amount of messages. Expected 1 got " + wiser.getMessages().size(), 1, wiser.getMessages().size());
 
         MimeMessage mess = wiser.getMessages().get(0).getMimeMessage();
 
@@ -108,7 +105,7 @@ public class MailMessageTest {
     public void testTextMailMessageSpecialCharacters() throws MessagingException, IOException {
         SessionConfig mailConfig = TestMailConfigs.standardConfig();
 
-        String subject = "Sometimes subjects have speical characters like ü - " + java.util.UUID.randomUUID().toString();
+        String subject = "Sometimes subjects have speical characters like ü - " + java.util.UUID.randomUUID();
         String specialTextBody = "This is a Text Body with a special character - ü";
 
         EmailMessage e;
@@ -127,7 +124,7 @@ public class MailMessageTest {
             stop(wiser);
         }
 
-        Assert.assertTrue("Didn't receive the expected amount of messages. Expected 1 got " + wiser.getMessages().size(), wiser.getMessages().size() == 1);
+        Assert.assertEquals("Didn't receive the expected amount of messages. Expected 1 got " + wiser.getMessages().size(), 1, wiser.getMessages().size());
 
         MimeMessage mess = wiser.getMessages().get(0).getMimeMessage();
 
@@ -149,13 +146,14 @@ public class MailMessageTest {
     public void testHTMLMailMessage() throws MessagingException, IOException {
         SessionConfig mailConfig = TestMailConfigs.standardConfig();
 
-        String subject = "HTML Message from Seam Mail - " + java.util.UUID.randomUUID().toString();
+        String subject = "HTML Message from Seam Mail - " + java.util.UUID.randomUUID();
         Person person = new Person(toName, toAddress);
 
         EmailMessage e;
 
         Wiser wiser = new Wiser(mailConfig.getServerPort());
         wiser.setHostname(mailConfig.getServerHost());
+        String replyToName = "No Reply";
         try {
             wiser.start();
             e = new MailMessageImpl(mailConfig).from(MailTestUtil.getAddressHeader(fromName, fromAddress)).replyTo(MailTestUtil.getAddressHeader(replyToName, replyToAddress)).to(person).subject(
@@ -166,7 +164,7 @@ public class MailMessageTest {
             stop(wiser);
         }
 
-        Assert.assertTrue("Didn't receive the expected amount of messages. Expected 1 got " + wiser.getMessages().size(), wiser.getMessages().size() == 1);
+        Assert.assertEquals("Didn't receive the expected amount of messages. Expected 1 got " + wiser.getMessages().size(), 1, wiser.getMessages().size());
 
         MimeMessage mess = wiser.getMessages().get(0).getMimeMessage();
 
@@ -203,7 +201,7 @@ public class MailMessageTest {
     @Test
     public void testHTMLTextAltMailMessage() throws MessagingException, IOException {
         SessionConfig mailConfig = TestMailConfigs.standardConfig();
-        String subject = "HTML+Text Message from Seam Mail - " + java.util.UUID.randomUUID().toString();
+        String subject = "HTML+Text Message from Seam Mail - " + java.util.UUID.randomUUID();
         Person person = new Person(toName, toAddress);
         Wiser wiser = new Wiser(mailConfig.getServerPort());
         wiser.setHostname(mailConfig.getServerHost());
@@ -219,7 +217,7 @@ public class MailMessageTest {
             stop(wiser);
         }
 
-        Assert.assertTrue("Didn't receive the expected amount of messages. Expected 1 got " + wiser.getMessages().size(), wiser.getMessages().size() == 1);
+        Assert.assertEquals("Didn't receive the expected amount of messages. Expected 1 got " + wiser.getMessages().size(), 1, wiser.getMessages().size());
 
         MimeMessage mess = wiser.getMessages().get(0).getMimeMessage();
 
@@ -264,7 +262,7 @@ public class MailMessageTest {
     @Test
     public void testHTMLAutoTextAltMailMessage() throws MessagingException, IOException {
         SessionConfig mailConfig = TestMailConfigs.standardConfig();
-        String subject = "HTML+Text Message from Seam Mail - " + java.util.UUID.randomUUID().toString();
+        String subject = "HTML+Text Message from Seam Mail - " + java.util.UUID.randomUUID();
         Person person = new Person(toName, toAddress);
         Wiser wiser = new Wiser(mailConfig.getServerPort());
         wiser.setHostname(mailConfig.getServerHost());
@@ -280,7 +278,7 @@ public class MailMessageTest {
             stop(wiser);
         }
 
-        Assert.assertTrue("Didn't receive the expected amount of messages. Expected 1 got " + wiser.getMessages().size(), wiser.getMessages().size() == 1);
+        Assert.assertEquals("Didn't receive the expected amount of messages. Expected 1 got " + wiser.getMessages().size(), 1, wiser.getMessages().size());
 
         MimeMessage mess = wiser.getMessages().get(0).getMimeMessage();
 
@@ -326,7 +324,7 @@ public class MailMessageTest {
     public void testTextMailMessageLongFields() throws MessagingException, IOException {
         SessionConfig mailConfig = TestMailConfigs.standardConfig();
 
-        String subject = "Sometimes it is important to have a really long subject even if nobody is going to read it - " + java.util.UUID.randomUUID().toString();
+        String subject = "Sometimes it is important to have a really long subject even if nobody is going to read it - " + java.util.UUID.randomUUID();
 
         String longFromName = "FromSometimesPeopleHaveNamesWhichAreALotLongerThanYouEverExpectedSomeoneToHaveSoItisGoodToTestUpTo100CharactersOrSo YouKnow?";
         String longFromAddress = "sometimesPeopleHaveNamesWhichAreALotLongerThanYouEverExpectedSomeoneToHaveSoItisGoodToTestUpTo100CharactersOrSo@jboss.org";
@@ -349,7 +347,7 @@ public class MailMessageTest {
             stop(wiser);
         }
 
-        Assert.assertTrue("Didn't receive the expected amount of messages. Expected 2 got " + wiser.getMessages().size(), wiser.getMessages().size() == 2);
+        Assert.assertEquals("Didn't receive the expected amount of messages. Expected 2 got " + wiser.getMessages().size(), 2, wiser.getMessages().size());
 
         MimeMessage mess = wiser.getMessages().get(0).getMimeMessage();
 
@@ -378,7 +376,7 @@ public class MailMessageTest {
     public void testTextMailMessageSendFailed() {
         SessionConfig mailConfig = TestMailConfigs.standardConfig();
 
-        String subject = "Text Message from Seam Mail - " + java.util.UUID.randomUUID().toString();
+        String subject = "Text Message from Seam Mail - " + java.util.UUID.randomUUID();
         String messageId = "1234@seam.test.com";
 
         // Port is one off so this should fail
@@ -400,7 +398,7 @@ public class MailMessageTest {
     public void testTextMailMessageInvalidAddress() throws SendFailedException {
         SessionConfig mailConfig = TestMailConfigs.standardConfig();
 
-        String subject = "Text Message from Seam Mail - " + java.util.UUID.randomUUID().toString();
+        String subject = "Text Message from Seam Mail - " + java.util.UUID.randomUUID();
 
         String messageId = "1234@seam.test.com";
 
@@ -423,7 +421,7 @@ public class MailMessageTest {
     public void testTextMailMessageUsingPerson() throws MessagingException, IOException {
         SessionConfig mailConfig = TestMailConfigs.standardConfig();
 
-        String subject = "Text Message from Seam Mail - " + java.util.UUID.randomUUID().toString();
+        String subject = "Text Message from Seam Mail - " + java.util.UUID.randomUUID();
         Person person = new Person(toName, toAddress);
         String messageId = "1234@seam.test.com";
 
@@ -441,7 +439,7 @@ public class MailMessageTest {
             stop(wiser);
         }
 
-        Assert.assertTrue("Didn't receive the expected amount of messages. Expected 1 got " + wiser.getMessages().size(), wiser.getMessages().size() == 1);
+        Assert.assertEquals("Didn't receive the expected amount of messages. Expected 1 got " + wiser.getMessages().size(), 1, wiser.getMessages().size());
 
         MimeMessage mess = wiser.getMessages().get(0).getMimeMessage();
 
@@ -471,7 +469,7 @@ public class MailMessageTest {
     public void testTextMailMessageUsingDefaultSession() throws MessagingException, IOException {
         SessionConfig mailConfig = TestMailConfigs.standardConfig();
         Person person = new Person(toName, toAddress);
-        String subject = "Text Message from Seam Mail - " + java.util.UUID.randomUUID().toString();
+        String subject = "Text Message from Seam Mail - " + java.util.UUID.randomUUID();
 
         String messageId = "1234@seam.test.com";
 
@@ -488,7 +486,7 @@ public class MailMessageTest {
             stop(wiser);
         }
 
-        Assert.assertTrue("Didn't receive the expected amount of messages. Expected 1 got " + wiser.getMessages().size(), wiser.getMessages().size() == 1);
+        Assert.assertEquals("Didn't receive the expected amount of messages. Expected 1 got " + wiser.getMessages().size(), 1, wiser.getMessages().size());
 
         MimeMessage mess = wiser.getMessages().get(0).getMimeMessage();
 
@@ -515,13 +513,15 @@ public class MailMessageTest {
     }
 
     @Test
-    public void testTextMailWithCC() throws MessagingException, IOException {
+    public void testTextMailWithCC() throws MessagingException {
         SessionConfig mailConfig = TestMailConfigs.standardConfig();
-        String subject = "Text Message from Seam Mail - " + java.util.UUID.randomUUID().toString();
+        String subject = "Text Message from Seam Mail - " + java.util.UUID.randomUUID();
         String messageId = "1234@seam.test.com";
 
         Wiser wiser = new Wiser(mailConfig.getServerPort());
         wiser.setHostname(mailConfig.getServerHost());
+        String ccName = "Red Hatty";
+        String ccAddress = "red.hatty@jboss.org";
         try {
             wiser.start();
             new MailMessageImpl(mailConfig).from(MailTestUtil.getAddressHeader(fromName, fromAddress)).replyTo(replyToAddress).to(MailTestUtil.getAddressHeader(toName, toAddress)).cc(MailTestUtil
@@ -531,7 +531,7 @@ public class MailMessageTest {
             stop(wiser);
         }
 
-        Assert.assertTrue("Didn't receive the expected amount of messages. Expected 2 got " + wiser.getMessages().size(), wiser.getMessages().size() == 2);
+        Assert.assertEquals("Didn't receive the expected amount of messages. Expected 2 got " + wiser.getMessages().size(), 2, wiser.getMessages().size());
 
         MimeMessage mess = wiser.getMessages().get(0).getMimeMessage();
 

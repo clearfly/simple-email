@@ -10,7 +10,7 @@ public class MailUtilityTest {
 
     @Test
     public void decodeString() {
-        Assert.assertEquals(null, MailUtility.decodeString(null));
+        Assert.assertNull(MailUtility.decodeString(null));
         Assert.assertEquals("Invoice.pdf", MailUtility.decodeString("=?utf-8?B?SW52b2ljZS5wZGY=?="));
         Assert.assertEquals("Invoice.pdf", MailUtility.decodeString("=?utf-8?b?SW52b2ljZS5wZGY=?="));
         Assert.assertEquals("Invoice.pdf", MailUtility.decodeString("Invoice.pdf"));
