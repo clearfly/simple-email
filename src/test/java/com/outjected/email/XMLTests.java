@@ -7,9 +7,6 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.xml.bind.JAXBException;
 
-import org.junit.Assert;
-import org.junit.Test;
-
 import com.google.common.io.Resources;
 import com.outjected.email.api.ContentDisposition;
 import com.outjected.email.api.EmailMessage;
@@ -17,12 +14,14 @@ import com.outjected.email.api.Header;
 import com.outjected.email.api.MessagePriority;
 import com.outjected.email.impl.attachments.BaseAttachment;
 import com.outjected.email.util.XMLUtil;
+import org.junit.Assert;
+import org.junit.Test;
 
 public class XMLTests {
 
-    @Test public void simple() throws AddressException, JAXBException, IOException {
+    @Test public void simple() throws AddressException, IOException, JAXBException {
         EmailMessage msg = new EmailMessage();
-        msg.setMessageId(UUID.randomUUID().toString() + "@test.org");
+        msg.setMessageId(UUID.randomUUID() + "@test.org");
         msg.setImportance(MessagePriority.HIGH);
         msg.getFromAddresses().add(new InternetAddress("from@test.org", "Mr. From"));
         msg.getToAddresses().add(new InternetAddress("to@test.org"));
@@ -42,18 +41,18 @@ public class XMLTests {
 
         String xml = XMLUtil.marshal(msg);
         EmailMessage umsg = XMLUtil.unmarshal(EmailMessage.class, xml);
-        Assert.assertTrue(msg.getType().equals(umsg.getType()));
-        Assert.assertTrue(msg.getCharset().equals(umsg.getCharset()));
-        Assert.assertTrue(msg.getImportance().equals(umsg.getImportance()));
-        Assert.assertTrue(msg.getToAddresses().get(0).equals(umsg.getToAddresses().get(0)));
-        Assert.assertTrue(msg.getFromAddresses().get(0).equals(umsg.getFromAddresses().get(0)));
-        Assert.assertTrue(msg.getCcAddresses().get(0).equals(umsg.getCcAddresses().get(0)));
-        Assert.assertTrue(msg.getBccAddresses().get(0).equals(umsg.getBccAddresses().get(0)));
-        Assert.assertTrue(msg.getSubject().equals(umsg.getSubject()));
-        Assert.assertTrue(msg.getTextBody().equals(umsg.getTextBody()));
-        Assert.assertTrue(msg.getHtmlBody().equals(umsg.getHtmlBody()));
-        Assert.assertTrue(msg.getMessageId().equals(umsg.getMessageId()));
-        Assert.assertTrue(msg.getAttachments().get(0).getFileName().equals(umsg.getAttachments().get(0).getFileName()));
+        Assert.assertEquals(msg.getType(), umsg.getType());
+        Assert.assertEquals(msg.getCharset(), umsg.getCharset());
+        Assert.assertEquals(msg.getImportance(), umsg.getImportance());
+        Assert.assertEquals(msg.getToAddresses().get(0), umsg.getToAddresses().get(0));
+        Assert.assertEquals(msg.getFromAddresses().get(0), umsg.getFromAddresses().get(0));
+        Assert.assertEquals(msg.getCcAddresses().get(0), umsg.getCcAddresses().get(0));
+        Assert.assertEquals(msg.getBccAddresses().get(0), umsg.getBccAddresses().get(0));
+        Assert.assertEquals(msg.getSubject(), umsg.getSubject());
+        Assert.assertEquals(msg.getTextBody(), umsg.getTextBody());
+        Assert.assertEquals(msg.getHtmlBody(), umsg.getHtmlBody());
+        Assert.assertEquals(msg.getMessageId(), umsg.getMessageId());
+        Assert.assertEquals(msg.getAttachments().get(0).getFileName(), umsg.getAttachments().get(0).getFileName());
         Assert.assertEquals(msg.getCustomVariables().get("foo"), umsg.getCustomVariables().get("foo"));
         Assert.assertEquals(msg.getCustomVariables().get("x"), umsg.getCustomVariables().get("x"));
     }

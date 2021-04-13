@@ -35,7 +35,7 @@ public class InternetAddressTest {
         BasicEmailContact seam = new BasicEmailContact("seam@domain.test");
         BasicEmailContact seamey = new BasicEmailContact("seamey@domain.test");
 
-        Collection<EmailContact> addresses = new ArrayList<EmailContact>();
+        Collection<EmailContact> addresses = new ArrayList<>();
         addresses.add(seamey);
 
         m.from("Seam Seamerson<seam@domain.test>");

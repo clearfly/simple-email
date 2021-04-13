@@ -13,7 +13,6 @@
 package com.outjected.email;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 
 import javax.mail.BodyPart;
 import javax.mail.MessagingException;
@@ -21,18 +20,13 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.internet.MimeUtility;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.subethamail.smtp.auth.EasyAuthenticationHandlerFactory;
-import org.subethamail.wiser.Wiser;
-
 import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
 import com.outjected.email.api.ContentDisposition;
 import com.outjected.email.api.EmailMessage;
-import com.outjected.email.api.SessionConfig;
 import com.outjected.email.api.MessagePriority;
 import com.outjected.email.api.SendFailedException;
+import com.outjected.email.api.SessionConfig;
 import com.outjected.email.impl.MailMessageImpl;
 import com.outjected.email.impl.attachments.URLAttachment;
 import com.outjected.email.impl.templating.velocity.VelocityTemplate;
@@ -41,6 +35,10 @@ import com.outjected.email.impl.util.MailTestUtil;
 import com.outjected.email.impl.util.MessageConverter;
 import com.outjected.email.util.SMTPAuthenticator;
 import com.outjected.email.util.TestMailConfigs;
+import org.junit.Assert;
+import org.junit.Test;
+import org.subethamail.smtp.auth.EasyAuthenticationHandlerFactory;
+import org.subethamail.wiser.Wiser;
 
 /**
  * @author Cody Lerum
@@ -78,7 +76,7 @@ public class VelocityMailMessageTest {
             stop(wiser);
         }
 
-        Assert.assertTrue("Didn't receive the expected amount of messages. Expected 1 got " + wiser.getMessages().size(), wiser.getMessages().size() == 1);
+        Assert.assertEquals("Didn't receive the expected amount of messages. Expected 1 got " + wiser.getMessages().size(), 1, wiser.getMessages().size());
 
         MimeMessage mess = wiser.getMessages().get(0).getMimeMessage();
 
@@ -133,7 +131,7 @@ public class VelocityMailMessageTest {
             stop(wiser);
         }
 
-        Assert.assertTrue("Didn't receive the expected amount of messages. Expected 1 got " + wiser.getMessages().size(), wiser.getMessages().size() == 1);
+        Assert.assertEquals("Didn't receive the expected amount of messages. Expected 1 got " + wiser.getMessages().size(), 1, wiser.getMessages().size());
 
         MimeMessage mess = wiser.getMessages().get(0).getMimeMessage();
 
@@ -155,7 +153,7 @@ public class VelocityMailMessageTest {
     public void testVelocityHTMLMailMessage() throws MessagingException, IOException {
         SessionConfig mailConfig = TestMailConfigs.standardConfig();
         Person person = new Person(toName, toAddress);
-        String subject = "HTML Message from Seam Mail - " + java.util.UUID.randomUUID().toString();
+        String subject = "HTML Message from Seam Mail - " + java.util.UUID.randomUUID();
         String version = "Seam 3";
         EmailMessage emailMessage;
 
@@ -176,7 +174,7 @@ public class VelocityMailMessageTest {
             stop(wiser);
         }
 
-        Assert.assertTrue("Didn't receive the expected amount of messages. Expected 1 got " + wiser.getMessages().size(), wiser.getMessages().size() == 1);
+        Assert.assertEquals("Didn't receive the expected amount of messages. Expected 1 got " + wiser.getMessages().size(), 1, wiser.getMessages().size());
 
         MimeMessage mess = wiser.getMessages().get(0).getMimeMessage();
 
@@ -213,7 +211,7 @@ public class VelocityMailMessageTest {
     public void testVelocityHTMLTextAltMailMessage() throws MessagingException, IOException {
         SessionConfig mailConfig = TestMailConfigs.standardConfig();
         Person person = new Person(toName, toAddress);
-        String subject = "HTML+Text Message from Seam Mail - " + java.util.UUID.randomUUID().toString();
+        String subject = "HTML+Text Message from Seam Mail - " + java.util.UUID.randomUUID();
         String version = "Seam 3";
         EmailMessage emailMessage;
 
@@ -233,7 +231,7 @@ public class VelocityMailMessageTest {
             stop(wiser);
         }
 
-        Assert.assertTrue("Didn't receive the expected amount of messages. Expected 1 got " + wiser.getMessages().size(), wiser.getMessages().size() == 1);
+        Assert.assertEquals("Didn't receive the expected amount of messages. Expected 1 got " + wiser.getMessages().size(), 1, wiser.getMessages().size());
 
         MimeMessage mess = wiser.getMessages().get(0).getMimeMessage();
 
@@ -279,7 +277,7 @@ public class VelocityMailMessageTest {
     public void testSMTPSessionAuthentication() throws MessagingException, IOException {
         SessionConfig mailConfig = TestMailConfigs.standardConfig();
         Person person = new Person(toName, toAddress);
-        String subject = "HTML+Text Message from Seam Mail - " + java.util.UUID.randomUUID().toString();
+        String subject = "HTML+Text Message from Seam Mail - " + java.util.UUID.randomUUID();
 
         Wiser wiser = new Wiser(mailConfig.getServerPort());
         wiser.setHostname(mailConfig.getServerHost());
@@ -297,7 +295,7 @@ public class VelocityMailMessageTest {
             stop(wiser);
         }
 
-        Assert.assertTrue("Didn't receive the expected amount of messages. Expected 1 got " + wiser.getMessages().size(), wiser.getMessages().size() == 1);
+        Assert.assertEquals("Didn't receive the expected amount of messages. Expected 1 got " + wiser.getMessages().size(), 1, wiser.getMessages().size());
 
         MimeMessage mess = wiser.getMessages().get(0).getMimeMessage();
 
@@ -307,7 +305,7 @@ public class VelocityMailMessageTest {
     }
 
     @Test(expected = SendFailedException.class)
-    public void testVelocityTextMailMessageSendFailed() throws UnsupportedEncodingException, IOException {
+    public void testVelocityTextMailMessageSendFailed() throws IOException {
         SessionConfig mailConfig = TestMailConfigs.standardConfig();
         String uuid = java.util.UUID.randomUUID().toString();
         String subject = "Text Message from $version Mail - " + uuid;
@@ -341,27 +339,15 @@ public class VelocityMailMessageTest {
     }
 
     private static String expectedHtmlBody(EmailMessage emailMessage, String name, String email, String version) {
-        StringBuilder sb = new StringBuilder();
 
-        sb.append("<html xmlns=\"http://www.w3.org/1999/xhtml\">" + "\r\n");
-        sb.append("<body>" + "\r\n");
-        sb.append("<p><b>Dear <a href=\"mailto:" + email + "\">" + name + "</a>,</b></p>" + "\r\n");
-        sb.append("<p>This is an example <i>HTML</i> email sent by " + version + " and Velocity.</p>" + "\r\n");
-        sb.append("<p><img src=\"cid:" + EmailAttachmentUtil.getEmailAttachmentMap(emailMessage.getAttachments()).get("seamLogo.png").getContentId() + "\" /></p>" + "\r\n");
-        sb.append("<p>It has an alternative text body for mail readers that don't support html.</p>" + "\r\n");
-        sb.append("</body>" + "\r\n");
-        sb.append("</html>");
-
-        return sb.toString();
+        return "<html xmlns=\"http://www.w3.org/1999/xhtml\">" + "\r\n" + "<body>" + "\r\n" + "<p><b>Dear <a href=\"mailto:" + email + "\">" + name + "</a>,</b></p>" + "\r\n"
+                + "<p>This is an example <i>HTML</i> email sent by " + version + " and Velocity.</p>" + "\r\n" + "<p><img src=\"cid:" + EmailAttachmentUtil
+                .getEmailAttachmentMap(emailMessage.getAttachments()).get("seamLogo.png").getContentId() + "\" /></p>" + "\r\n"
+                + "<p>It has an alternative text body for mail readers that don't support html.</p>" + "\r\n" + "</body>" + "\r\n" + "</html>";
     }
 
     private static String expectedTextBody(String name, String version) {
-        StringBuilder sb = new StringBuilder();
 
-        sb.append("Hello " + name + ",\r\n");
-        sb.append("\r\n");
-        sb.append("This is the alternative text body for mail readers that don't support html. This was sent with " + version + " and Velocity.");
-
-        return sb.toString();
+        return "Hello " + name + ",\r\n" + "\r\n" + "This is the alternative text body for mail readers that don't support html. This was sent with " + version + " and Velocity.";
     }
 }
