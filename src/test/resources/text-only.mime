@@ -1,0 +1,24 @@
+Received: from NAM10-MW2-obe.outbound.protection.bar.com (mail-mw2nam10on2114.outbound.protection.bar.com [8.8.8.8])
+ by mxa.mailgun.org with ESMTP id 6094125f.7f73f2bfa768-api-n12;
+ Thu, 06 May 2021 15:59:27 -0000 (UTC)
+From: John Doe <foo@bor.com>
+To: "4065555555@bar.io" <4065555555@sendfax.io>
+Subject: Plaintext Test
+Thread-Topic: Plaintext Test
+Thread-Index: AddCkLblE2OCuIsZSAebs7TXmkPlvQ==
+Disposition-Notification-To: John Doe <foo@bor.com>
+Return-Receipt-To: <foo@bor.com>
+Date: Thu, 6 May 2021 15:59:23 +0000
+Message-ID:
+ <CO2PR0801MB219801BAC933B097F79F6A4193589@CO2PR0801MB2198.namprd08.prod.bar.com>
+Accept-Language: en-US
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+Testing 1,2,3,4
+
+
+This is a test plain text, non-multipart body.
+© 2021 Mailgun Technologies, Inc.Ter

@@ -11,17 +11,23 @@ package com.outjected.email.impl.util;
 
 import java.io.UnsupportedEncodingException;
 import java.net.UnknownHostException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Properties;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.mail.Address;
 import javax.mail.MessagingException;
+import javax.mail.Part;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.AddressException;
@@ -50,6 +56,7 @@ import com.sun.mail.smtp.SMTPMessage;
 public class MailUtility {
 
     public static final String DOMAIN_PROPERTY_KEY = "com.outjected.email.domainName";
+    public static final Pattern CHARSET_EXTRACT = Pattern.compile("charset=(.+?)($|;)", Pattern.CASE_INSENSITIVE);
 
     public static InternetAddress internetAddress(String address) throws InvalidAddressException {
         try {
@@ -308,6 +315,30 @@ public class MailUtility {
         }
         else {
             return value;
+        }
+    }
+
+    /**
+     * Determines the content type of the part, or empty if it cannot determine
+     *
+     * @param part
+     * @return charset
+     * @throws MessagingException
+     */
+    public static Optional<Charset> determineCharset(Part part) throws MessagingException {
+        Optional<String> contentTypeValue = Arrays.stream(part.getHeader("Content-Type")).findFirst();
+        if (contentTypeValue.isPresent()) {
+            final String value = contentTypeValue.get();
+            Matcher matcher = CHARSET_EXTRACT.matcher(value);
+            if (matcher.find()) {
+                return Optional.of(Charset.forName(matcher.group(1).trim()));
+            }
+            else {
+                return Optional.empty();
+            }
+        }
+        else {
+            return Optional.empty();
         }
     }
 }
