@@ -2,10 +2,12 @@ package com.outjected.email;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Properties;
 
 import javax.mail.MessagingException;
 import javax.mail.Session;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 
 import com.google.common.io.Resources;
@@ -17,6 +19,21 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class MailUtilityTest {
+
+    @Test
+    public void determineCharset() throws MessagingException {
+        MimeBodyPart part = new MimeBodyPart();
+        part.addHeader("Content-Type", "text/plain;charset=utf-8; Content-Transfer-Encoding:base64");
+        Assert.assertEquals(StandardCharsets.UTF_8, MailUtility.determineCharset(part).orElseThrow(RuntimeException::new));
+    }
+
+    @Test
+    public void determineCharsetNoSemiColon() throws MessagingException {
+        MimeBodyPart part = new MimeBodyPart();
+        part.addHeader("Content-Type", "text/plain;charset=utf-8");
+        Assert.assertEquals(StandardCharsets.UTF_8, MailUtility.determineCharset(part).orElseThrow(RuntimeException::new));
+    }
+
 
     @Test
     public void decodeString() {
@@ -53,6 +70,30 @@ public class MailUtilityTest {
             Assert.assertNull(emailMessage.getTextBody());
             Assert.assertNull(emailMessage.getHtmlBody());
             Assert.assertEquals("Test Subject", emailMessage.getSubject());
+        }
+    }
+
+    @Test
+    public void parseQpInputStream() throws IOException, MessagingException {
+        try (InputStream inputStream = Resources.getResource("qp-inputstrem.mime").openStream()) {
+            MimeMessage mimeMessage = new MimeMessage(Session.getDefaultInstance(new Properties()), inputStream);
+            EmailMessage emailMessage = MessageConverter.convert(mimeMessage);
+            Assert.assertEquals(1, emailMessage.getAttachments().size());
+            Assert.assertEquals("05062021scan05062021.pdf", emailMessage.getAttachments().get(0).getFileName());
+            Assert.assertEquals(ContentDisposition.ATTACHMENT, emailMessage.getAttachments().get(0).getContentDisposition());
+            Assert.assertTrue(emailMessage.getTextBody().contains("HIPAA CONFIDENTIALITY NOTICE"));
+            Assert.assertNull(emailMessage.getHtmlBody());
+            Assert.assertEquals("SWC Scanned", emailMessage.getSubject());
+        }
+    }
+
+    @Test
+    public void textOnly() throws IOException, MessagingException {
+        try (InputStream inputStream = Resources.getResource("text-only.mime").openStream()) {
+            MimeMessage mimeMessage = new MimeMessage(Session.getDefaultInstance(new Properties()), inputStream);
+            EmailMessage emailMessage = MessageConverter.convert(mimeMessage);
+            Assert.assertTrue(emailMessage.getTextBody().contains("Testing 1,2,3,4"));
+            Assert.assertEquals("Plaintext Test", emailMessage.getSubject());
         }
     }
 }

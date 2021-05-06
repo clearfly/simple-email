@@ -14,6 +14,8 @@ package com.outjected.email.impl.util;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
 import javax.mail.BodyPart;
@@ -27,6 +29,7 @@ import com.outjected.email.api.ContentDisposition;
 import com.outjected.email.api.EmailMessage;
 import com.outjected.email.api.MailException;
 import com.outjected.email.impl.attachments.InputStreamAttachment;
+import com.sun.mail.util.QPDecoderStream;
 
 /**
  * @author Cody Lerum
@@ -65,7 +68,7 @@ public class MessageConverter {
                 addMultiPart((MimeMultipart) m.getContent());
             }
             else if (m.isMimeType("text/plain")) {
-                emailMessage.setTextBody((String) m.getContent());
+                emailMessage.setTextBody(convertTextBody(m));
             }
             else if (m.getDisposition().toLowerCase().startsWith(Part.ATTACHMENT)) {
                 addAttachment(m);
@@ -103,7 +106,7 @@ public class MessageConverter {
             addMultiPart((MimeMultipart) bp.getContent());
         }
         else if (bp.getContentType().toLowerCase().contains("text/plain")) {
-            emailMessage.setTextBody((String) bp.getContent());
+            emailMessage.setTextBody(convertTextBody(bp));
         }
         else if (bp.getContentType().toLowerCase().contains("text/html")) {
             emailMessage.setHtmlBody((String) bp.getContent());
@@ -125,5 +128,20 @@ public class MessageConverter {
             // NOOP - Fall back to default disposition if disposition is unknown
         }
         return attachmentDisposition;
+    }
+
+    private String convertTextBody(Part part) throws MessagingException, IOException {
+        final Object content = part.getContent();
+        if (content instanceof String) {
+            return (String) content;
+        }
+        else if (content instanceof QPDecoderStream) {
+            final Charset charset = MailUtility.determineCharset(part).orElse(StandardCharsets.UTF_8);
+            QPDecoderStream qpDecoderStream = (QPDecoderStream) content;
+            return new String(Streams.toByteArray(qpDecoderStream), charset);
+        }
+        else {
+            throw new RuntimeException("Unsupported Content Object: " + content.getClass().getName());
+        }
     }
 }
