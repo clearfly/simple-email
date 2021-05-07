@@ -18,7 +18,6 @@ package com.outjected.email.api;
  * @author Cody Lerum
  */
 public class TemplatingException extends MailException {
-    private static final long serialVersionUID = 1L;
 
     public TemplatingException() {
         super();

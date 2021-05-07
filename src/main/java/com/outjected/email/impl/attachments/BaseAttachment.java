@@ -29,7 +29,6 @@ import com.outjected.email.api.Header;
  * @author Cody Lerum
  */
 public class BaseAttachment implements EmailAttachment, Serializable {
-    private static final long serialVersionUID = 1L;
 
     private String contentId;
     private String fileName;

@@ -42,7 +42,7 @@ public class BaseMailMessage {
     private RootMimeMessage rootMimeMessage;
     private String charset;
     private ContentType rootContentType;
-    private Map<String, AttachmentPart> attachments = new HashMap<String, AttachmentPart>();
+    private Map<String, AttachmentPart> attachments = new HashMap<>();
     private MimeMultipart rootMultipart;
     private MimeMultipart relatedMultipart = new MimeMultipart(ContentType.RELATED.getValue());
     private Session session;
@@ -94,6 +94,7 @@ public class BaseMailMessage {
             rootMimeMessage.addRecipients(recipientType.asJavaMailType(), MailUtility.getInternetAddressses(emailAddresses));
         }
         catch (MessagingException e) {
+            //Noop
         }
     }
 
@@ -127,7 +128,7 @@ public class BaseMailMessage {
     }
 
     public void setReplyTo(InternetAddress emailAddress) {
-        List<InternetAddress> emailAddresses = new ArrayList<InternetAddress>();
+        List<InternetAddress> emailAddresses = new ArrayList<>();
         emailAddresses.add(emailAddress);
         setReplyTo(emailAddresses);
     }
@@ -171,10 +172,10 @@ public class BaseMailMessage {
         String mailerDomainName = session.getProperty(MailUtility.DOMAIN_PROPERTY_KEY);
 
         if (mailerDomainName != null && mailerDomainName.length() > 0) {
-            setMessageID(UUID.randomUUID().toString() + "@" + mailerDomainName);
+            setMessageID(UUID.randomUUID() + "@" + mailerDomainName);
         }
         else {
-            setMessageID(UUID.randomUUID().toString() + "@" + MailUtility.getHostName());
+            setMessageID(UUID.randomUUID() + "@" + MailUtility.getHostName());
         }
     }
 

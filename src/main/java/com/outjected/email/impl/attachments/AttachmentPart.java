@@ -72,7 +72,7 @@ public class AttachmentPart extends MimeBodyPart {
     }
 
     public AttachmentPart(byte[] bytes, String uid, String fileName, String mimeType, ContentDisposition contentDisposition) {
-        this(getByteArrayDataSource(bytes, mimeType), uid, fileName, new ArrayList<Header>(), contentDisposition);
+        this(getByteArrayDataSource(bytes, mimeType), uid, fileName, new ArrayList<>(), contentDisposition);
     }
 
     public String getAttachmentFileName() {
@@ -112,7 +112,6 @@ public class AttachmentPart extends MimeBodyPart {
     }
 
     private static ByteArrayDataSource getByteArrayDataSource(byte[] bytes, String mimeType) {
-        ByteArrayDataSource bads = new ByteArrayDataSource(bytes, mimeType);
-        return bads;
+        return new ByteArrayDataSource(bytes, mimeType);
     }
 }

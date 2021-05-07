@@ -68,7 +68,7 @@ public class MailUtility {
     }
 
     public static Collection<InternetAddress> internetAddress(String... addresses) throws InvalidAddressException {
-        ArrayList<InternetAddress> result = new ArrayList<InternetAddress>();
+        ArrayList<InternetAddress> result = new ArrayList<>();
 
         for (String address : addresses) {
             result.add(MailUtility.internetAddress(address));
@@ -83,10 +83,7 @@ public class MailUtility {
             internetAddress.setPersonal(name);
             return internetAddress;
         }
-        catch (AddressException e) {
-            throw new InvalidAddressException(e);
-        }
-        catch (UnsupportedEncodingException e) {
+        catch (AddressException | UnsupportedEncodingException e) {
             throw new InvalidAddressException(e);
         }
     }
@@ -101,7 +98,7 @@ public class MailUtility {
     }
 
     public static Collection<InternetAddress> internetAddress(Collection<? extends EmailContact> emailContacts) throws InvalidAddressException {
-        Set<InternetAddress> internetAddresses = new HashSet<InternetAddress>();
+        Set<InternetAddress> internetAddresses = new HashSet<>();
         emailContacts.removeIf(Objects::isNull);
 
         for (EmailContact ec : emailContacts) {
@@ -112,8 +109,7 @@ public class MailUtility {
     }
 
     public static InternetAddress[] getInternetAddressses(InternetAddress emailAddress) {
-        InternetAddress[] internetAddresses = { emailAddress };
-        return internetAddresses;
+        return new InternetAddress[] { emailAddress };
     }
 
     public static InternetAddress[] getInternetAddressses(Collection<InternetAddress> recipients) {
@@ -134,7 +130,7 @@ public class MailUtility {
     }
 
     public static List<InternetAddress> getInternetAddressses(Address[] addresses) throws InvalidAddressException {
-        List<InternetAddress> result = new ArrayList<InternetAddress>();
+        List<InternetAddress> result = new ArrayList<>();
         if (addresses != null) {
             for (Address a : addresses) {
                 if (a.getType().equals("rfc822")) {

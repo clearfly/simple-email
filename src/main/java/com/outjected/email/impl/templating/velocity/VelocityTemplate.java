@@ -15,27 +15,23 @@ package com.outjected.email.impl.templating.velocity;
 import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.Map;
 
+import com.outjected.email.api.TemplateProvider;
+import com.outjected.email.api.TemplatingException;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.exception.MethodInvocationException;
 import org.apache.velocity.exception.ParseErrorException;
 import org.apache.velocity.exception.ResourceNotFoundException;
-import org.apache.velocity.runtime.RuntimeConstants;
-
-import com.outjected.email.api.TemplateProvider;
-import com.outjected.email.api.TemplatingException;
 
 /**
  * @author Cody Lerum
  */
 public class VelocityTemplate implements TemplateProvider {
     private VelocityEngine velocityEngine;
-    private VelocityContext velocityContext;
     private String template;
 
     public VelocityTemplate(String template) {
@@ -49,9 +45,8 @@ public class VelocityTemplate implements TemplateProvider {
 
     @Override
     public String merge(Map<String, Object> context) {
-        StringWriter writer = new StringWriter();
-
-        velocityContext = new VelocityContext(context);
+        final StringWriter writer = new StringWriter();
+        final VelocityContext velocityContext = new VelocityContext(context);
 
         try {
             velocityEngine.evaluate(velocityContext, writer, "mailGenerated", template);

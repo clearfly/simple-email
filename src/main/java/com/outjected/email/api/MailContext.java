@@ -28,9 +28,7 @@ public class MailContext {
     }
 
     public String insert(String fileName) {
-        BaseAttachment attachment = null;
-
-        attachment = attachments.get(fileName);
+        final BaseAttachment attachment = attachments.get(fileName);
 
         if (attachment == null) {
             throw new RuntimeException("Unable to find attachment: " + fileName);

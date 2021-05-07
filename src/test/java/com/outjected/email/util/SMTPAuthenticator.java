@@ -29,12 +29,8 @@ public class SMTPAuthenticator implements UsernamePasswordValidator {
 
     @Override
     public void login(String username, String password) throws LoginFailedException {
-        if (this.username.equals(username) && this.password.equals(password)) {
-            return;
-        }
-        else {
+        if (!this.username.equals(username) || !this.password.equals(password)) {
             throw new LoginFailedException();
         }
     }
-
 }

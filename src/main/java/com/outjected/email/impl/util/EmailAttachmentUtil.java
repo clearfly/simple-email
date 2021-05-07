@@ -23,7 +23,7 @@ import com.outjected.email.impl.attachments.BaseAttachment;
  */
 public class EmailAttachmentUtil {
     public static Map<String, BaseAttachment> getEmailAttachmentMap(Collection<BaseAttachment> attachments) {
-        Map<String, BaseAttachment> emailAttachmentMap = new HashMap<String, BaseAttachment>();
+        Map<String, BaseAttachment> emailAttachmentMap = new HashMap<>();
 
         for (BaseAttachment ea : attachments) {
             if (!Strings.isNullOrBlank(ea.getFileName())) {
