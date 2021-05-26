@@ -23,8 +23,6 @@ import com.outjected.email.api.SessionConfig;
  */
 public class SimpleMailConfig implements Serializable, SessionConfig {
 
-    private static final long serialVersionUID = 1L;
-
     private String serverHost = "localhost";
     private Integer serverPort = 25;
     private String domainName;
@@ -136,11 +134,7 @@ public class SimpleMailConfig implements Serializable, SessionConfig {
             return false;
         }
 
-        if (serverPort == 0) {
-            return false;
-        }
-
-        return true;
+        return serverPort != 0;
     }
 
 }

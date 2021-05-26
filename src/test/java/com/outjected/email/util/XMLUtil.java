@@ -19,7 +19,7 @@ public class XMLUtil {
 
     public static String marshal(Object o) {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        marshal(o, bos, new HashMap<String, Object>());
+        marshal(o, bos, new HashMap<>());
         return bos.toString();
     }
 
@@ -30,7 +30,7 @@ public class XMLUtil {
     }
 
     public static void marshal(Object o, OutputStream os) {
-        marshal(o, os, new HashMap<String, Object>());
+        marshal(o, os, new HashMap<>());
     }
 
     public static void marshal(Object o, OutputStream os, Map<String, Object> properties) {

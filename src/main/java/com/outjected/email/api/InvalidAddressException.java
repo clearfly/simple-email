@@ -18,7 +18,6 @@ package com.outjected.email.api;
  * @author Cody Lerum
  */
 public class InvalidAddressException extends MailException {
-    private static final long serialVersionUID = 1L;
 
     public InvalidAddressException() {
         super();

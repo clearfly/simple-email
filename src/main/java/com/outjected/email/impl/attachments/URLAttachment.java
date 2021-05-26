@@ -13,7 +13,6 @@
 package com.outjected.email.impl.attachments;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 import javax.activation.URLDataSource;
@@ -27,7 +26,6 @@ import com.outjected.email.impl.util.Streams;
  * @author Cody Lerum
  */
 public class URLAttachment extends BaseAttachment {
-    private static final long serialVersionUID = 1L;
 
     public URLAttachment(String url, String fileName, ContentDisposition contentDisposition) {
         super();
@@ -38,9 +36,6 @@ public class URLAttachment extends BaseAttachment {
             super.setMimeType(uds.getContentType());
             super.setContentDisposition(contentDisposition);
             super.setBytes(Streams.toByteArray(uds.getInputStream()));
-        }
-        catch (MalformedURLException e) {
-            throw new AttachmentException("Wasn't able to create email attachment from URL: " + url, e);
         }
         catch (IOException e) {
             throw new AttachmentException("Wasn't able to create email attachment from URL: " + url, e);
