@@ -17,7 +17,7 @@ import com.outjected.email.util.XMLUtil;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class XMLTests {
+public class XMLTest {
 
     @Test public void simple() throws AddressException, IOException, JAXBException {
         EmailMessage msg = new EmailMessage();

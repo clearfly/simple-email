@@ -1,0 +1,35 @@
+Received: from foo.bar.net (foo.bar.net [8.8.8.8])
+ by mxa.mailgun.org with ESMTP id 60ae8455.7f099d5d05e0-api-n13;
+ Wed, 26 May 2021 17:24:37 -0000 (UTC)
+Received: from localhost ([1.1.1.1]) by mrelay.bar.net (mreueus003
+ [8.8.8.8]) with ESMTPSA (Nemesis) id 0Lj0HI-1l8mEf472M-00dIj1 for
+ <55555555@bar.foo>; Wed, 26 May 2021 19:24:36 +0200
+MIME-Version: 1.0
+Date: Wed, 26 May 2021 12:24:33 -0500
+From: Foo Bar <foo@bar.com>
+Subject: Test fax
+Thread-Topic: Test fax
+Message-ID: <2197E981-7602-5743-A8DF-BEDA6721715A@bar.foo>
+To: <55555555@bar.foo>
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html; charset="utf-8"
+X-Provags-ID: V03:K1:CzkZH6qRKmwXtgurBe1DlynVtXVS1QhsDV/Lp86QJzdUROvLgKf
+ kRRyD8EuqBp4YAhqbg+kD1k7tQbxgVKw0RwUvem3OPIm2SvhrRLj3oRDhzrE2IYZpIlu20W
+ IYxhhFhl0nPb9DRiahXMMGHyfo7FNYSorei4xGWf/ea7puA4Cy4XJ/PoXmukb6b7m1d9QmH
+ 3sOD151nEnYviMXa0CbRA==
+X-Spam-Flag: NO
+X-UI-Out-Filterresults: notjunk:1;V03:K0:Mt6ck5gGY7A=:H0Ti1+S6KJdQnmlg5v7l6U
+ H+cS8cEvl9P+Uy+GCf1fzju3cJ2XaL3q08my2zIHYydqV0qGHSzpCtPefr8NATlhJGbTFr0FS
+ I5bnd86QGANRZqW/qMtPwirwwyR25WsptdjQ3nnEKc6WOTEjfpTpygdJZv5FMhxtIFrA+DLTC
+ 6YbTHIt8VjMOCWKxrFG/r2XWQBVv0/CtcpuC48r7rBy0QlN1jOXpM/CWhf3x5wvaUIcKqKV6x
+ uag2CdG1+iz4TzJvhrLDOpq/9CyPMT7IEyyyHBttBml+FEM0foaDUljehYoTTX8mzPxVuCzWz
+ m/b9gdHN7p6wJVGVbLOK5XURnpcI8uL0QzhR8ohjUlWnRPMWy5vrWloYPmdnPhGX33wSyGgH+
+ wi2ZasUS2oyS1qKn1C/DNveNdIm6U9iJ9dRo68vMZw152XuvBCzyD7mgkiQYrCkJuQkbNN9Vi
+ C5KUNn/5z/ubd9WY7rbdY2VTK08Z7Nsg9aGS7Oz25em22SJ6JAjBkriyq/wvGoIeVgeoKNnhe
+ v/BXQ6QyWktugG68dogGIqBaUQ8l+R07koTATPNV9a4URTzH1e/7/mH2AEmTrPA7JzNf2mQV9
+ lmpwZ9zAMMMG0J0iqIeypCR4WHLfBlra42
+
+<html><body><div style=3D"color: rgb(33, 33, 33); background-color: rgb(255=
+, 255, 255);" dir=3D"auto">Testfax</div><div id=3D"ms-outlook-mobile-signat=
+ure"><div><br></div>Get <a href=3D"https://aka.ms/AAb9ysg">Outlook for Andr=
+oid</a></div></body></html>=

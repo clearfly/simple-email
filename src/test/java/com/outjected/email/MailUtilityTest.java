@@ -34,7 +34,6 @@ public class MailUtilityTest {
         Assert.assertEquals(StandardCharsets.UTF_8, MailUtility.determineCharset(part).orElseThrow(RuntimeException::new));
     }
 
-
     @Test
     public void decodeString() {
         Assert.assertNull(MailUtility.decodeString(null));
@@ -93,7 +92,19 @@ public class MailUtilityTest {
             MimeMessage mimeMessage = new MimeMessage(Session.getDefaultInstance(new Properties()), inputStream);
             EmailMessage emailMessage = MessageConverter.convert(mimeMessage);
             Assert.assertTrue(emailMessage.getTextBody().contains("Testing 1,2,3,4"));
+            Assert.assertNull(emailMessage.getHtmlBody());
             Assert.assertEquals("Plaintext Test", emailMessage.getSubject());
+        }
+    }
+
+    @Test
+    public void htmlOnly() throws IOException, MessagingException {
+        try (InputStream inputStream = Resources.getResource("html-only.mime").openStream()) {
+            MimeMessage mimeMessage = new MimeMessage(Session.getDefaultInstance(new Properties()), inputStream);
+            EmailMessage emailMessage = MessageConverter.convert(mimeMessage);
+            Assert.assertTrue(emailMessage.getHtmlBody().contains("Outlook for Android"));
+            Assert.assertNull(emailMessage.getTextBody());
+            Assert.assertEquals("Test fax", emailMessage.getSubject());
         }
     }
 }

@@ -50,7 +50,7 @@ public enum ContentDisposition {
             return ContentDisposition.INLINE;
         }
         else {
-            throw new UnsupportedOperationException("Unsupported Content DispostionType: " + value);
+            throw new UnsupportedOperationException("Unsupported Content Disposition Type: " + value);
         }
     }
 }

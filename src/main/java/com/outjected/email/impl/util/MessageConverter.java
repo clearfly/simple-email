@@ -17,6 +17,7 @@ import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
+import java.util.Optional;
 
 import javax.mail.BodyPart;
 import javax.mail.Message;
@@ -67,10 +68,13 @@ public class MessageConverter {
             if (m.getContentType().toLowerCase().contains("multipart/")) {
                 addMultiPart((MimeMultipart) m.getContent());
             }
-            else if (m.isMimeType("text/plain")) {
-                emailMessage.setTextBody(convertTextBody(m));
+            else if (m.isMimeType("text/html")) {
+                emailMessage.setHtmlBody(convertBodyPart(m));
             }
-            else if (m.getDisposition().toLowerCase().startsWith(Part.ATTACHMENT)) {
+            else if (m.isMimeType("text/plain")) {
+                emailMessage.setTextBody(convertBodyPart(m));
+            }
+            else if (Optional.ofNullable(m.getDisposition()).orElse("inline").startsWith(Part.ATTACHMENT)) {
                 addAttachment(m);
             }
         }
@@ -106,10 +110,10 @@ public class MessageConverter {
             addMultiPart((MimeMultipart) bp.getContent());
         }
         else if (bp.getContentType().toLowerCase().contains("text/plain")) {
-            emailMessage.setTextBody(convertTextBody(bp));
+            emailMessage.setTextBody(convertBodyPart(bp));
         }
         else if (bp.getContentType().toLowerCase().contains("text/html")) {
-            emailMessage.setHtmlBody((String) bp.getContent());
+            emailMessage.setHtmlBody(convertBodyPart(bp));
         }
         else {
             ContentDisposition attachmentDisposition = determineContentDisposition(bp.getDisposition());
@@ -130,7 +134,7 @@ public class MessageConverter {
         return attachmentDisposition;
     }
 
-    private String convertTextBody(Part part) throws MessagingException, IOException {
+    private String convertBodyPart(Part part) throws MessagingException, IOException {
         final Object content = part.getContent();
         if (content instanceof String) {
             return (String) content;
