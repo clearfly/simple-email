@@ -13,7 +13,7 @@
         <version.errorprone>2.6.0</version.errorprone>
         <version.errorprone.javac>9+181-r4173-1</version.errorprone.javac>
         <version.errorprone.compiler>2.8.5</version.errorprone.compiler>
-        <version.jsoup>1.12.1</version.jsoup>
+        <version.jsoup>1.14.2</version.jsoup>
         <velocity.version>2.3</velocity.version>
         <subetha.version>3.1.7</subetha.version>
         <version.guava>30.1.1-jre</version.guava>
