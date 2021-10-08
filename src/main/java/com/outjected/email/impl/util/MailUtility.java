@@ -16,14 +16,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Enumeration;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Properties;
-import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import javax.mail.Address;
 import javax.mail.MessagingException;
@@ -98,14 +97,7 @@ public class MailUtility {
     }
 
     public static Collection<InternetAddress> internetAddress(Collection<? extends EmailContact> emailContacts) throws InvalidAddressException {
-        Set<InternetAddress> internetAddresses = new HashSet<>();
-        emailContacts.removeIf(Objects::isNull);
-
-        for (EmailContact ec : emailContacts) {
-            internetAddresses.add(MailUtility.internetAddress(ec));
-        }
-
-        return internetAddresses;
+        return emailContacts.stream().filter(Objects::nonNull).map(MailUtility::internetAddress).collect(Collectors.toList());
     }
 
     public static InternetAddress[] getInternetAddressses(InternetAddress emailAddress) {
@@ -113,10 +105,7 @@ public class MailUtility {
     }
 
     public static InternetAddress[] getInternetAddressses(Collection<InternetAddress> recipients) {
-        recipients.removeIf(Objects::isNull);
-        InternetAddress[] result = new InternetAddress[recipients.size()];
-        recipients.toArray(result);
-        return result;
+        return recipients.stream().filter(Objects::nonNull).toArray(InternetAddress[]::new);
     }
 
     public static String getHostName() {
