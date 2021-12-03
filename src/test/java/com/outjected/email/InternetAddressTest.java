@@ -15,19 +15,16 @@ package com.outjected.email;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import org.junit.Test;
-
 import com.outjected.email.api.EmailContact;
 import com.outjected.email.api.InvalidAddressException;
 import com.outjected.email.api.MailMessage;
 import com.outjected.email.impl.BasicEmailContact;
 import com.outjected.email.impl.MailMessageImpl;
 import com.outjected.email.util.TestMailConfigs;
+import org.junit.Test;
 
-/**
- * @author Cody Lerum
- */
 public class InternetAddressTest {
+
     @Test
     public void validAddresses() {
         MailMessage m = new MailMessageImpl(TestMailConfigs.standardConfig());

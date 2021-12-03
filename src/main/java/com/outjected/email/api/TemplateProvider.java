@@ -14,11 +14,6 @@ package com.outjected.email.api;
 
 import java.util.Map;
 
-/**
- * 
- * @author Cody Lerum
- * 
- */
 public interface TemplateProvider {
     public String merge(Map<String, Object> context);
 }

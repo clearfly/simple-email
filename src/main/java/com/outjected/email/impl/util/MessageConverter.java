@@ -32,9 +32,6 @@ import com.outjected.email.api.MailException;
 import com.outjected.email.impl.attachments.InputStreamAttachment;
 import com.sun.mail.util.QPDecoderStream;
 
-/**
- * @author Cody Lerum
- */
 public class MessageConverter {
 
     private final ContentDisposition defaultDisposition;

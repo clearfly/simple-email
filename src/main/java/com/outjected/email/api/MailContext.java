@@ -16,9 +16,6 @@ import java.util.Map;
 
 import com.outjected.email.impl.attachments.BaseAttachment;
 
-/**
- * @author Cody Lerum
- */
 public class MailContext {
 
     private Map<String, BaseAttachment> attachments;

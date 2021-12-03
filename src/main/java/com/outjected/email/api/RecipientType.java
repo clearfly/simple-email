@@ -12,9 +12,6 @@
 
 package com.outjected.email.api;
 
-/**
- * @author Cody Lerum
- */
 public enum RecipientType {
     TO("To"),
     CC("Cc"),

@@ -21,8 +21,6 @@ import javax.mail.internet.InternetAddress;
 
 /**
  * Base interface for creating email messages.
- *
- * @author Cody Lerum
  */
 public interface MailMessage {
 
@@ -175,17 +173,11 @@ public interface MailMessage {
 
     /**
      * Set the "Envelope From" address which is used for error messages
-     *
-     * @param emailContact
-     * @return
      */
     public MailMessage envelopeFrom(EmailContact emailContact);
 
     /**
      * Set the "Envelope From" address which is used for error messages
-     *
-     * @param address
-     * @return
      */
     public MailMessage envelopeFrom(String address);
 
@@ -202,36 +194,21 @@ public interface MailMessage {
 
     /**
      * Adds a Collection of Attachments to the message
-     *
-     * @param attachments
-     */
+     **/
     public MailMessage addAttachments(Collection<EmailAttachment> attachments);
 
     /**
      * Adds Attachment to the message
-     *
-     * @param fileName
-     * @param mimeType
-     * @param contentDispostion
-     * @param bytes
      */
     public MailMessage addAttachment(String fileName, String mimeType, ContentDisposition contentDispostion, byte[] bytes);
 
     /**
      * Adds Attachment to the message
-     *
-     * @param fileName
-     * @param mimeType
-     * @param contentDispostion
-     * @param inputStream
      */
     public MailMessage addAttachment(String fileName, String mimeType, ContentDisposition contentDispostion, InputStream inputStream);
 
     /**
      * Adds Attachment to the message
-     *
-     * @param contentDispostion
-     * @param file
      */
     public MailMessage addAttachment(ContentDisposition contentDispostion, File file);
 
@@ -264,8 +241,6 @@ public interface MailMessage {
 
     /**
      * Set the Message-ID for the message.
-     *
-     * @param messageId
      */
     public MailMessage messageId(String messageId);
 
@@ -275,20 +250,11 @@ public interface MailMessage {
 
     /**
      * Used for creating iCal Calendar Invites.
-     *
-     * @param textBody   Summary of the invite to be displayed in the body of the email messages.
-     * @param ICalMethod iCalMethod
-     * @param bytes      iCal data which will be attached to the message
      */
     public MailMessage iCal(String textBody, ICalMethod method, byte[] bytes);
 
     /**
      * Used for creating iCal Calendar Invites.
-     *
-     * @param htmlBody   Summary of the invite to be displayed in the html body of the email messages.
-     * @param textBody   Summary of the invite to be displayed in the alternate text body of the email messages.
-     * @param ICalMethod iCalMethod
-     * @param bytes      iCal data which will be attached to the message
      */
     public MailMessage iCal(String htmlBody, String textBody, ICalMethod method, byte[] bytes);
 
@@ -329,15 +295,11 @@ public interface MailMessage {
 
     /**
      * Set the charset of the message. Otherwise defaults to Charset.defaultCharset()
-     *
-     * @param contentType
      */
     public MailMessage charset(String charset);
 
     /**
      * Set the Content Type of the message
-     *
-     * @param contentType
      */
     public MailMessage contentType(ContentType contentType);
 
@@ -374,9 +336,6 @@ public interface MailMessage {
 
     /**
      * Set the template to be used for the message subject
-     *
-     * @param subject {@link TemplateProvider} to use
-     * @throws TemplatingException
      */
     public MailMessage subject(TemplateProvider subject);
 
@@ -384,7 +343,6 @@ public interface MailMessage {
      * Sets the text body of the message to the plain text output of the given template
      *
      * @param textBody {@link TemplateProvider} to use
-     * @throws TemplatingException
      */
     public MailMessage bodyText(TemplateProvider textBody);
 
@@ -392,7 +350,6 @@ public interface MailMessage {
      * Sets the HTML body of the message to the HTML output of the given template
      *
      * @param htmlBody {@link TemplateProvider} to use
-     * @throws TemplatingException
      */
     public MailMessage bodyHtml(TemplateProvider htmlBody);
 
@@ -401,7 +358,6 @@ public interface MailMessage {
      *
      * @param htmlBody {@link TemplateProvider} to use for HTML portion of message
      * @param textBody {@link TemplateProvider} to use for Text alternative portion of message
-     * @throws TemplatingException
      */
     public MailMessage bodyHtmlTextAlt(TemplateProvider htmlBody, TemplateProvider textBody);
 
@@ -416,7 +372,7 @@ public interface MailMessage {
     /**
      * Places a Map of variable in the templating engines context
      *
-     * @param values Map<String, Object> containing the variables to be placed in the context
+     * @param values {@code Map<String, Object>} containing the variables to be placed in the context
      */
     public MailMessage put(Map<String, Object> values);
 

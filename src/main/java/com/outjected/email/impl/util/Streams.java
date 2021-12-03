@@ -5,11 +5,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-/**
- * 
- * @author Cody Lerum
- * 
- */
 public class Streams {
 
     private static final int BUFFER_SIZE = 0x1000;
@@ -22,11 +17,6 @@ public class Streams {
 
     /**
      * Inspired by Guava's ByteStreams copy
-     * 
-     * @param is
-     * @param os
-     * @return
-     * @throws IOException
      */
     public static long copy(InputStream is, OutputStream os) throws IOException {
         byte[] buf = new byte[BUFFER_SIZE];

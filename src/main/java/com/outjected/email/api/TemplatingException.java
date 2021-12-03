@@ -14,8 +14,6 @@ package com.outjected.email.api;
 
 /**
  * Thrown when a error occurs during template processing
- * 
- * @author Cody Lerum
  */
 public class TemplatingException extends MailException {
 

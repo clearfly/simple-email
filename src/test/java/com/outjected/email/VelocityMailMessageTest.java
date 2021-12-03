@@ -40,9 +40,6 @@ import org.junit.Test;
 import org.subethamail.smtp.auth.EasyAuthenticationHandlerFactory;
 import org.subethamail.wiser.Wiser;
 
-/**
- * @author Cody Lerum
- */
 public class VelocityMailMessageTest {
 
     String fromName = "Seam Framework";

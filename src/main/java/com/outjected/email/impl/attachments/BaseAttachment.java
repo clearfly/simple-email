@@ -25,9 +25,6 @@ import com.outjected.email.api.ContentDisposition;
 import com.outjected.email.api.EmailAttachment;
 import com.outjected.email.api.Header;
 
-/**
- * @author Cody Lerum
- */
 public class BaseAttachment implements EmailAttachment, Serializable {
 
     private String contentId;

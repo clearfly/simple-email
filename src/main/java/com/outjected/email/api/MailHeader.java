@@ -14,8 +14,6 @@ package com.outjected.email.api;
 
 /**
  * Defines the available message receipt headers
- * 
- * @author Cody Lerum
  */
 public enum MailHeader {
     DELIVERY_RECIEPT("Return-Receipt-To"),

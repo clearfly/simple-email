@@ -14,8 +14,6 @@ package com.outjected.email.api;
 
 /**
  * Bean which holds Mail Session configuration options.
- * 
- * @author Cody Lerum
  */
 public interface SessionConfig {
 

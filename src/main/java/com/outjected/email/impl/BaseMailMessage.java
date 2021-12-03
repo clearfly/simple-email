@@ -9,6 +9,7 @@
 
 package com.outjected.email.impl;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -35,9 +36,6 @@ import com.outjected.email.impl.attachments.BaseAttachment;
 import com.outjected.email.impl.util.MailUtility;
 import com.sun.mail.smtp.SMTPMessage;
 
-/**
- * @author Cody Lerum
- */
 public class BaseMailMessage {
     private RootMimeMessage rootMimeMessage;
     private String charset;
@@ -57,10 +55,9 @@ public class BaseMailMessage {
     private void initialize() {
         rootMimeMessage = new RootMimeMessage(session);
         rootMultipart = new MimeMultipart(rootContentType.getValue());
-        setSentDate(new Date());
+        setSentDate(Instant.now());
 
         try {
-
             rootMimeMessage.setContent(rootMultipart);
         }
         catch (MessagingException e) {
@@ -155,9 +152,9 @@ public class BaseMailMessage {
         }
     }
 
-    public void setSentDate(Date date) {
+    public void setSentDate(Instant instant) {
         try {
-            rootMimeMessage.setSentDate(date);
+            rootMimeMessage.setSentDate(Date.from(instant));
         }
         catch (MessagingException e) {
             throw new RuntimeException("Unable to set Sent Date on MimeMessage", e);

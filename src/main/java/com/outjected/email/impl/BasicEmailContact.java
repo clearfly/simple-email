@@ -14,9 +14,6 @@ package com.outjected.email.impl;
 
 import com.outjected.email.api.EmailContact;
 
-/**
- * @author Cody Lerum
- */
 public class BasicEmailContact implements EmailContact {
 
     private String address;

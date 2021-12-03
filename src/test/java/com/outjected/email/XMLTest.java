@@ -19,7 +19,8 @@ import org.junit.Test;
 
 public class XMLTest {
 
-    @Test public void simple() throws AddressException, IOException, JAXBException {
+    @Test
+    public void simple() throws AddressException, IOException, JAXBException {
         EmailMessage msg = new EmailMessage();
         msg.setMessageId(UUID.randomUUID() + "@test.org");
         msg.setImportance(MessagePriority.HIGH);

@@ -24,9 +24,6 @@ import javax.mail.util.ByteArrayDataSource;
 import com.outjected.email.api.ContentDisposition;
 import com.outjected.email.api.Header;
 
-/**
- * @author Cody Lerum
- */
 public class AttachmentPart extends MimeBodyPart {
 
     public AttachmentPart(DataSource dataSource, String uid, String fileName, Collection<Header> headers, ContentDisposition contentDisposition) {

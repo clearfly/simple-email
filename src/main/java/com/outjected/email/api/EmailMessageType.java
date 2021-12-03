@@ -12,9 +12,6 @@
 
 package com.outjected.email.api;
 
-/**
- * @author Cody Lerum
- */
 public enum EmailMessageType {
     STANDARD,
     INVITE_ICAL;

@@ -49,9 +49,6 @@ import com.outjected.email.impl.BaseMailMessage;
 import com.outjected.email.impl.MailSessionAuthenticator;
 import com.sun.mail.smtp.SMTPMessage;
 
-/**
- * @author Cody Lerum
- */
 public class MailUtility {
 
     public static final String DOMAIN_PROPERTY_KEY = "com.outjected.email.domainName";
@@ -305,10 +302,6 @@ public class MailUtility {
 
     /**
      * Determines the content type of the part, or empty if it cannot determine
-     *
-     * @param part
-     * @return charset
-     * @throws MessagingException
      */
     public static Optional<Charset> determineCharset(Part part) throws MessagingException {
         Optional<String> contentTypeValue = Arrays.stream(part.getHeader("Content-Type")).findFirst();
