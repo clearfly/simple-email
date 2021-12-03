@@ -60,7 +60,7 @@ public class BaseAttachment implements EmailAttachment, Serializable {
         return contentId;
     }
 
-    public void setContenetId(String contentId) {
+    public void setContentId(String contentId) {
         this.contentId = contentId;
     }
 
