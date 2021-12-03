@@ -14,9 +14,6 @@ package com.outjected.email.api;
 
 import java.util.Collection;
 
-/**
- * @author Cody Lerum
- */
 public interface EmailAttachment {
 
     public String getContentId();

@@ -18,9 +18,6 @@ import javax.mail.BodyPart;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMultipart;
 
-/**
- * @author Cody Lerum
- */
 public class MailTestUtil {
     public static String getAddressHeader(String address) {
         return address;

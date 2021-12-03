@@ -22,9 +22,6 @@ import com.outjected.email.api.ContentDisposition;
 import com.outjected.email.api.Header;
 import com.outjected.email.impl.util.Streams;
 
-/**
- * @author Cody Lerum
- */
 public class URLAttachment extends BaseAttachment {
 
     public URLAttachment(String url, String fileName, ContentDisposition contentDisposition) {

@@ -15,9 +15,6 @@ package com.outjected.email.util;
 import org.subethamail.smtp.auth.LoginFailedException;
 import org.subethamail.smtp.auth.UsernamePasswordValidator;
 
-/**
- * @author Cody Lerum
- */
 public class SMTPAuthenticator implements UsernamePasswordValidator {
     private String username;
     private String password;

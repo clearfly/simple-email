@@ -14,9 +14,6 @@ package com.outjected.email;
 
 import com.outjected.email.api.EmailContact;
 
-/**
- * @author Cody Lerum
- */
 public class Person implements EmailContact {
     private String name;
     private String email;

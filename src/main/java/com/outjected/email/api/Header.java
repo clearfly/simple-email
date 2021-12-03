@@ -19,9 +19,6 @@ import java.util.Objects;
 import javax.mail.internet.MimeUtility;
 import javax.xml.bind.annotation.XmlElement;
 
-/**
- * @author Cody Lerum
- */
 public class Header implements Serializable {
 
     private String name;

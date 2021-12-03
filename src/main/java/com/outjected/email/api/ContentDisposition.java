@@ -26,7 +26,6 @@ import javax.mail.internet.MimeBodyPart;
  * ATTACHMENT is used for standard file attachments to a message.
  * </p>
  * 
- * @author Cody Lerum
  */
 public enum ContentDisposition {
     ATTACHMENT(MimeBodyPart.ATTACHMENT),

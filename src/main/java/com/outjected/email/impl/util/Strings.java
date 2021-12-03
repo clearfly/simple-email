@@ -12,26 +12,11 @@
 
 package com.outjected.email.impl.util;
 
-/**
- * @author Cody Lerum
- */
 public class Strings {
     /**
      * Checks if a String is null or empty when trimmed
-     * 
-     * @param string
-     * @return TRUE if NULL or string.trim.length == 0
      */
     public static boolean isNullOrBlank(String string) {
         return string == null || string.trim().length() == 0;
-    }
-
-    public static boolean in(final String needle, final String... haystack) {
-        final int len = haystack.length;
-        for (String s : haystack) {
-            if (s.equals(needle))
-                return true;
-        }
-        return false;
     }
 }

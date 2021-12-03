@@ -12,9 +12,6 @@
 
 package com.outjected.email.api;
 
-/**
- * @author Cody Lerum
- */
 public enum MessagePriority {
     LOW("5", "non-urgent", "low"),
     NORMAL("3", "normal", "normal"),

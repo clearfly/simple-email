@@ -21,9 +21,6 @@ import com.outjected.email.api.AttachmentException;
 import com.outjected.email.api.ContentDisposition;
 import com.outjected.email.api.Header;
 
-/**
- * @author Cody Lerum
- */
 public class FileAttachment extends BaseAttachment {
 
     public FileAttachment(ContentDisposition contentDisposition, Path path) {

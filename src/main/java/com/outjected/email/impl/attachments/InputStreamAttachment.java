@@ -20,9 +20,6 @@ import com.outjected.email.api.ContentDisposition;
 import com.outjected.email.api.Header;
 import com.outjected.email.impl.util.Streams;
 
-/**
- * @author Cody Lerum
- */
 public class InputStreamAttachment extends BaseAttachment {
 
     public InputStreamAttachment(String fileName, String mimeType, ContentDisposition contentDisposition, InputStream inputStream) {

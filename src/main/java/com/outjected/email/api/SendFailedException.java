@@ -14,8 +14,6 @@ package com.outjected.email.api;
 
 /**
  * Thrown when an email fails to be sent.
- * 
- * @author Cody Lerum
  */
 public class SendFailedException extends MailException {
 

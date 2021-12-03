@@ -37,9 +37,6 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.subethamail.wiser.Wiser;
 
-/**
- * @author Cody Lerum
- */
 public class MailMessageTest {
 
     private final String fromName = "Seam Framework";

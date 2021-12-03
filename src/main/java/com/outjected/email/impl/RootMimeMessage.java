@@ -23,8 +23,6 @@ import com.sun.mail.smtp.SMTPMessage;
 
 /**
  * Extends {@link MimeMessage} to allow for the setting of the Message-ID
- * 
- * @author cody.lerum
  */
 public class RootMimeMessage extends SMTPMessage {
     private String messageId;

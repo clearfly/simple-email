@@ -18,8 +18,6 @@ import com.outjected.email.api.SessionConfig;
 
 /**
  * Bean which holds Mail Session configuration options.
- * 
- * @author Cody Lerum
  */
 public class SimpleMailConfig implements Serializable, SessionConfig {
 

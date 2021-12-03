@@ -12,11 +12,6 @@
 
 package com.outjected.email.api;
 
-/**
- * Thrown when an email address fails to validate as RFC822
- * 
- * @author Cody Lerum
- */
 public class AttachmentException extends MailException {
     private static final long serialVersionUID = 1L;
 

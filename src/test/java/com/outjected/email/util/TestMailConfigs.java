@@ -15,11 +15,6 @@ package com.outjected.email.util;
 import com.outjected.email.api.SessionConfig;
 import com.outjected.email.impl.SimpleMailConfig;
 
-/**
- * 
- * @author Cody Lerum
- * 
- */
 public class TestMailConfigs {
 
     public static SessionConfig standardConfig() {

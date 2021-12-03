@@ -40,9 +40,6 @@ import com.outjected.email.impl.util.EmailAttachmentUtil;
 import com.outjected.email.impl.util.HtmlToPlainText;
 import com.outjected.email.impl.util.MailUtility;
 
-/**
- * @author Cody Lerum
- */
 public class MailMessageImpl implements MailMessage {
 
     private EmailMessage emailMessage;
@@ -401,8 +398,6 @@ public class MailMessageImpl implements MailMessage {
 
     /**
      * Enable click tracking
-     *
-     * @return
      */
     @Override
     public MailMessage enableClickTracking() {

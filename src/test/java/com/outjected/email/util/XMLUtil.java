@@ -20,13 +20,13 @@ public class XMLUtil {
     public static String marshal(Object o) {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         marshal(o, bos, new HashMap<>());
-        return bos.toString();
+        return new String(bos.toByteArray(), Charsets.UTF_8);
     }
 
     public static String marshal(Object o, Map<String, Object> properties) {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         marshal(o, bos, properties);
-        return bos.toString();
+        return new String(bos.toByteArray(), Charsets.UTF_8);
     }
 
     public static void marshal(Object o, OutputStream os) {

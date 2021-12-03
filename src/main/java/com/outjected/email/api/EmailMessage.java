@@ -27,8 +27,6 @@ import com.outjected.email.impl.attachments.BaseAttachment;
 
 /**
  * Stores information about an EmailMessage while it is being built and after sending
- *
- * @author Cody Lerum
  */
 @XmlRootElement
 @XmlType(propOrder = { "messageId", "importance", "charset", "fromAddresses", "replyToAddresses", "toAddresses", "ccAddresses", "bccAddresses", "envelopeFrom", "deliveryReceiptAddresses",
@@ -73,8 +71,6 @@ public class EmailMessage implements Serializable {
 
     /**
      * Override the default charset of the JVM
-     *
-     * @param charset
      */
     public void setCharset(String charset) {
         this.charset = charset;
@@ -205,8 +201,6 @@ public class EmailMessage implements Serializable {
 
     /**
      * Gets the "Envelope From" address which is used for error messages
-     *
-     * @return
      */
     @XmlElement
     public InternetAddress getEnvelopeFrom() {
@@ -215,8 +209,6 @@ public class EmailMessage implements Serializable {
 
     /**
      * Sets the "Envelope From" address which is used for error messages
-     *
-     * @param address
      */
     public void setEnvelopeFrom(InternetAddress address) {
         this.envelopeFrom = address;

@@ -18,11 +18,6 @@ import com.outjected.email.api.EmailMessage;
 import com.outjected.email.api.MailTransporter;
 import com.outjected.email.impl.util.MailUtility;
 
-/**
- * 
- * @author Cody Lerum
- * 
- */
 public class MailTransporterImpl implements MailTransporter {
 
     private Session session;

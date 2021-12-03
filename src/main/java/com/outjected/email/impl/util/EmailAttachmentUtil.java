@@ -18,9 +18,6 @@ import java.util.Map;
 
 import com.outjected.email.impl.attachments.BaseAttachment;
 
-/**
- * @author Cody Lerum
- */
 public class EmailAttachmentUtil {
     public static Map<String, BaseAttachment> getEmailAttachmentMap(Collection<BaseAttachment> attachments) {
         Map<String, BaseAttachment> emailAttachmentMap = new HashMap<>();

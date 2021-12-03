@@ -27,9 +27,6 @@ import org.apache.velocity.exception.MethodInvocationException;
 import org.apache.velocity.exception.ParseErrorException;
 import org.apache.velocity.exception.ResourceNotFoundException;
 
-/**
- * @author Cody Lerum
- */
 public class VelocityTemplate implements TemplateProvider {
     private VelocityEngine velocityEngine;
     private String template;
