@@ -347,9 +347,9 @@ public class MailMessageTest {
 
         MimeMessage mess = wiser.getMessages().get(0).getMimeMessage();
 
-        Assert.assertEquals(MailTestUtil.getAddressHeader(longFromName, longFromAddress), mess.getHeader("From", null));
-        Assert.assertEquals(MailTestUtil.getAddressHeader(longToName, longToAddress), mess.getHeader("To", null));
-        Assert.assertEquals(MailTestUtil.getAddressHeader(longCcName, longCcAddress), mess.getHeader("CC", null));
+        Assert.assertEquals(MailTestUtil.getAddressHeader(longFromName, longFromAddress), MimeUtility.unfold(mess.getHeader("From", null)));
+        Assert.assertEquals(MailTestUtil.getAddressHeader(longToName, longToAddress), MimeUtility.unfold(mess.getHeader("To", null)));
+        Assert.assertEquals(MailTestUtil.getAddressHeader(longCcName, longCcAddress), MimeUtility.unfold(mess.getHeader("CC", null)));
         Assert.assertEquals("Subject has been modified", subject, MimeUtility.unfold(mess.getHeader("Subject", null)));
         Assert.assertEquals(MessagePriority.HIGH.getPriority(), mess.getHeader("Priority", null));
         Assert.assertEquals(MessagePriority.HIGH.getX_priority(), mess.getHeader("X-Priority", null));
