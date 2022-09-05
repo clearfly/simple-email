@@ -5,11 +5,10 @@ updates:
     schedule:
       interval: "monthly"
     open-pull-requests-limit: 10
-    allow:
-      - dependency-name: org.apache.velocity:*
-      - dependency-name: org.subethamail:*
-      - dependency-name: com.google.guava:*
-      - dependency-name: com.google.errorprone:*
+    ignore:
+      - dependency-name: jakarta.xml.bind:*
+      - dependency-name: jakarta.xml.ws:*
+      - dependency-name: jakarta.jws:*
 
   - package-ecosystem: github-actions
     directory: "/"
