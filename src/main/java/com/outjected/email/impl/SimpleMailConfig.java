@@ -30,7 +30,6 @@ public class SimpleMailConfig implements Serializable, SessionConfig {
     private Boolean requireTls = false;
     private Boolean enableSsl = false;
     private Boolean auth = false;
-    private String jndiSessionName;
 
     @Override
     public String getServerHost() {
@@ -113,20 +112,7 @@ public class SimpleMailConfig implements Serializable, SessionConfig {
         this.auth = auth;
     }
 
-    @Override
-    public String getJndiSessionName() {
-        return jndiSessionName;
-    }
-
-    public void setJndiSessionName(String jndiSessionName) {
-        this.jndiSessionName = jndiSessionName;
-    }
-
     public boolean isValid() {
-
-        if (jndiSessionName != null && !jndiSessionName.trim().isEmpty()) {
-            return true;
-        }
 
         if (serverHost == null || serverHost.trim().isEmpty()) {
             return false;

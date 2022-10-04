@@ -17,13 +17,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import javax.mail.internet.InternetAddress;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
-
 import com.outjected.email.impl.attachments.BaseAttachment;
+import jakarta.mail.internet.InternetAddress;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElementWrapper;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
 
 /**
  * Stores information about an EmailMessage while it is being built and after sending

@@ -14,11 +14,11 @@ package com.outjected.email;
 
 import java.io.IOException;
 
-import javax.mail.BodyPart;
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
-import javax.mail.internet.MimeUtility;
+import jakarta.mail.BodyPart;
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
+import jakarta.mail.internet.MimeMultipart;
+import jakarta.mail.internet.MimeUtility;
 
 import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
@@ -50,7 +50,7 @@ public class VelocityMailMessageTest {
     String toAddress = "seamy.seamerson@seam-mail.test";
 
     @Test
-    public void testVelocityTextMailMessage() throws MessagingException, IOException {
+    public void testVelocityTextMailMessage() throws IOException, jakarta.mail.MessagingException {
         SessionConfig mailConfig = TestMailConfigs.standardConfig();
         Person person = new Person(toName, toAddress);
         EmailMessage e;
@@ -75,7 +75,7 @@ public class VelocityMailMessageTest {
 
         Assert.assertEquals("Didn't receive the expected amount of messages. Expected 1 got " + wiser.getMessages().size(), 1, wiser.getMessages().size());
 
-        MimeMessage mess = wiser.getMessages().get(0).getMimeMessage();
+        MimeMessage mess = MailUtilityTest.fromWiser(wiser.getMessages().get(0));
 
         Assert.assertEquals(MailTestUtil.getAddressHeader(fromName, fromAddress), mess.getHeader("From", null));
         Assert.assertEquals(MailTestUtil.getAddressHeader(replyToAddress), mess.getHeader("Reply-To", null));
@@ -101,7 +101,6 @@ public class VelocityMailMessageTest {
     @Test
     public void testTextMailMessageSpecialCharacters() throws MessagingException, IOException {
         SessionConfig mailConfig = TestMailConfigs.standardConfig();
-        Person person = new Person(toName, toAddress);
         EmailMessage e;
 
         String uuid = java.util.UUID.randomUUID().toString();
@@ -118,9 +117,6 @@ public class VelocityMailMessageTest {
         try {
             wiser.start();
 
-            person.setName(toName);
-            person.setEmail(toAddress);
-
             e = new MailMessageImpl(mailConfig).from(MailTestUtil.getAddressHeader(fromName, fromAddress)).replyTo(replyToAddress).to(MailTestUtil.getAddressHeader(toName, toAddress)).subject(
                     new VelocityTemplate(subjectTemplate)).bodyText(new VelocityTemplate(specialTextBody)).importance(MessagePriority.HIGH).messageId(messageId).put("version", version).send();
         }
@@ -130,7 +126,7 @@ public class VelocityMailMessageTest {
 
         Assert.assertEquals("Didn't receive the expected amount of messages. Expected 1 got " + wiser.getMessages().size(), 1, wiser.getMessages().size());
 
-        MimeMessage mess = wiser.getMessages().get(0).getMimeMessage();
+        MimeMessage mess = MailUtilityTest.fromWiser(wiser.getMessages().get(0));
 
         Assert.assertEquals("Subject has been modified", subject, MimeUtility.decodeText(MimeUtility.unfold(mess.getHeader("Subject", null))));
 
@@ -173,7 +169,7 @@ public class VelocityMailMessageTest {
 
         Assert.assertEquals("Didn't receive the expected amount of messages. Expected 1 got " + wiser.getMessages().size(), 1, wiser.getMessages().size());
 
-        MimeMessage mess = wiser.getMessages().get(0).getMimeMessage();
+        MimeMessage mess = MailUtilityTest.fromWiser(wiser.getMessages().get(0));
 
         Assert.assertEquals(MailTestUtil.getAddressHeader(fromName, fromAddress), mess.getHeader("From", null));
         Assert.assertEquals(MailTestUtil.getAddressHeader(replyToName, replyToAddress), mess.getHeader("Reply-To", null));
@@ -230,7 +226,7 @@ public class VelocityMailMessageTest {
 
         Assert.assertEquals("Didn't receive the expected amount of messages. Expected 1 got " + wiser.getMessages().size(), 1, wiser.getMessages().size());
 
-        MimeMessage mess = wiser.getMessages().get(0).getMimeMessage();
+        MimeMessage mess = MailUtilityTest.fromWiser(wiser.getMessages().get(0));
 
         Assert.assertEquals(MailTestUtil.getAddressHeader(fromName, fromAddress), mess.getHeader("From", null));
         Assert.assertEquals(MailTestUtil.getAddressHeader(toName, toAddress), mess.getHeader("To", null));
@@ -294,7 +290,7 @@ public class VelocityMailMessageTest {
 
         Assert.assertEquals("Didn't receive the expected amount of messages. Expected 1 got " + wiser.getMessages().size(), 1, wiser.getMessages().size());
 
-        MimeMessage mess = wiser.getMessages().get(0).getMimeMessage();
+        MimeMessage mess = MailUtilityTest.fromWiser(wiser.getMessages().get(0));
 
         Assert.assertEquals("Subject has been modified", subject, MimeUtility.unfold(mess.getHeader("Subject", null)));
         EmailMessage convertedMessage = MessageConverter.convert(mess);

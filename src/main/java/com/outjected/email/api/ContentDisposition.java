@@ -12,7 +12,7 @@
 
 package com.outjected.email.api;
 
-import javax.mail.internet.MimeBodyPart;
+import jakarta.mail.internet.MimeBodyPart;
 
 /**
  * Defines the available Dispostions for attachments in an email Message.
@@ -33,7 +33,7 @@ public enum ContentDisposition {
 
     private final String headerValue;
 
-    private ContentDisposition(String headerValue) {
+     ContentDisposition(String headerValue) {
         this.headerValue = headerValue;
     }
 

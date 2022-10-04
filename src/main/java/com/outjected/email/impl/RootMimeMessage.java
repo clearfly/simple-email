@@ -14,10 +14,10 @@ package com.outjected.email.impl;
 
 import java.io.InputStream;
 
-import javax.mail.Header;
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.internet.MimeMessage;
+import jakarta.mail.Header;
+import jakarta.mail.MessagingException;
+import jakarta.mail.Session;
+import jakarta.mail.internet.MimeMessage;
 
 import com.sun.mail.smtp.SMTPMessage;
 

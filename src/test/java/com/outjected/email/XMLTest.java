@@ -3,10 +3,6 @@ package com.outjected.email;
 import java.io.IOException;
 import java.util.UUID;
 
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
-import javax.xml.bind.JAXBException;
-
 import com.google.common.io.Resources;
 import com.outjected.email.api.ContentDisposition;
 import com.outjected.email.api.EmailMessage;
@@ -14,6 +10,9 @@ import com.outjected.email.api.Header;
 import com.outjected.email.api.MessagePriority;
 import com.outjected.email.impl.attachments.BaseAttachment;
 import com.outjected.email.util.XMLUtil;
+import jakarta.mail.internet.AddressException;
+import jakarta.mail.internet.InternetAddress;
+import jakarta.xml.bind.JAXBException;
 import org.junit.Assert;
 import org.junit.Test;
 

@@ -15,11 +15,11 @@ package com.outjected.email.impl.attachments;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import javax.activation.DataHandler;
-import javax.activation.DataSource;
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.util.ByteArrayDataSource;
+import jakarta.activation.DataHandler;
+import jakarta.activation.DataSource;
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeBodyPart;
+import jakarta.mail.util.ByteArrayDataSource;
 
 import com.outjected.email.api.ContentDisposition;
 import com.outjected.email.api.Header;

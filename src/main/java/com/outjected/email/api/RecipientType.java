@@ -19,7 +19,7 @@ public enum RecipientType {
 
     private final String typeName;
 
-    private RecipientType(String typeName) {
+     RecipientType(String typeName) {
         this.typeName = typeName;
     }
 
@@ -27,16 +27,11 @@ public enum RecipientType {
         return typeName;
     }
 
-    public javax.mail.Message.RecipientType asJavaMailType() {
-        switch (this) {
-            case TO:
-                return javax.mail.Message.RecipientType.TO;
-            case CC:
-                return javax.mail.Message.RecipientType.CC;
-            case BCC:
-                return javax.mail.Message.RecipientType.BCC;
-            default:
-                throw new RuntimeException("Unsupported Type: " + this);
-        }
+    public jakarta.mail.Message.RecipientType asJavaMailType() {
+        return switch (this) {
+            case TO -> jakarta.mail.Message.RecipientType.TO;
+            case CC -> jakarta.mail.Message.RecipientType.CC;
+            case BCC -> jakarta.mail.Message.RecipientType.BCC;
+        };
     }
 }

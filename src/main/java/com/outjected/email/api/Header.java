@@ -16,8 +16,8 @@ import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.util.Objects;
 
-import javax.mail.internet.MimeUtility;
-import javax.xml.bind.annotation.XmlElement;
+import jakarta.mail.internet.MimeUtility;
+import jakarta.xml.bind.annotation.XmlElement;
 
 public class Header implements Serializable {
 

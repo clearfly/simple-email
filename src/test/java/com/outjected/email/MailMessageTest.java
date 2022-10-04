@@ -14,11 +14,11 @@ package com.outjected.email;
 
 import java.io.IOException;
 
-import javax.mail.BodyPart;
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
-import javax.mail.internet.MimeUtility;
+import jakarta.mail.BodyPart;
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
+import jakarta.mail.internet.MimeMultipart;
+import jakarta.mail.internet.MimeUtility;
 
 import com.google.common.io.Resources;
 import com.outjected.email.api.ContentDisposition;
@@ -73,7 +73,7 @@ public class MailMessageTest {
 
         Assert.assertEquals("Didn't receive the expected amount of messages. Expected 1 got " + wiser.getMessages().size(), 1, wiser.getMessages().size());
 
-        MimeMessage mess = wiser.getMessages().get(0).getMimeMessage();
+        MimeMessage mess = MailUtilityTest.fromWiser(wiser.getMessages().get(0));
 
         Assert.assertEquals(MailTestUtil.getAddressHeader(fromName, fromAddress), mess.getHeader("From", null));
         Assert.assertEquals(MailTestUtil.getAddressHeader(replyToAddress), mess.getHeader("Reply-To", null));
@@ -122,7 +122,7 @@ public class MailMessageTest {
 
         Assert.assertEquals("Didn't receive the expected amount of messages. Expected 1 got " + wiser.getMessages().size(), 1, wiser.getMessages().size());
 
-        MimeMessage mess = wiser.getMessages().get(0).getMimeMessage();
+        MimeMessage mess = MailUtilityTest.fromWiser(wiser.getMessages().get(0));
 
         Assert.assertEquals("Subject has been modified", subject, MimeUtility.decodeText(MimeUtility.unfold(mess.getHeader("Subject", null))));
 
@@ -162,7 +162,7 @@ public class MailMessageTest {
 
         Assert.assertEquals("Didn't receive the expected amount of messages. Expected 1 got " + wiser.getMessages().size(), 1, wiser.getMessages().size());
 
-        MimeMessage mess = wiser.getMessages().get(0).getMimeMessage();
+        MimeMessage mess = MailUtilityTest.fromWiser(wiser.getMessages().get(0));
 
         Assert.assertEquals(MailTestUtil.getAddressHeader(fromName, fromAddress), mess.getHeader("From", null));
         Assert.assertEquals(MailTestUtil.getAddressHeader(replyToName, replyToAddress), mess.getHeader("Reply-To", null));
@@ -215,7 +215,7 @@ public class MailMessageTest {
 
         Assert.assertEquals("Didn't receive the expected amount of messages. Expected 1 got " + wiser.getMessages().size(), 1, wiser.getMessages().size());
 
-        MimeMessage mess = wiser.getMessages().get(0).getMimeMessage();
+        MimeMessage mess = MailUtilityTest.fromWiser(wiser.getMessages().get(0));
 
         Assert.assertEquals(MailTestUtil.getAddressHeader(fromName, fromAddress), mess.getHeader("From", null));
         Assert.assertEquals(MailTestUtil.getAddressHeader(toName, toAddress), mess.getHeader("To", null));
@@ -276,7 +276,7 @@ public class MailMessageTest {
 
         Assert.assertEquals("Didn't receive the expected amount of messages. Expected 1 got " + wiser.getMessages().size(), 1, wiser.getMessages().size());
 
-        MimeMessage mess = wiser.getMessages().get(0).getMimeMessage();
+        MimeMessage mess = MailUtilityTest.fromWiser(wiser.getMessages().get(0));
 
         Assert.assertEquals(MailTestUtil.getAddressHeader(fromName, fromAddress), mess.getHeader("From", null));
         Assert.assertEquals(MailTestUtil.getAddressHeader(toName, toAddress), mess.getHeader("To", null));
@@ -345,7 +345,7 @@ public class MailMessageTest {
 
         Assert.assertEquals("Didn't receive the expected amount of messages. Expected 2 got " + wiser.getMessages().size(), 2, wiser.getMessages().size());
 
-        MimeMessage mess = wiser.getMessages().get(0).getMimeMessage();
+        MimeMessage mess = MailUtilityTest.fromWiser(wiser.getMessages().get(0));
 
         Assert.assertEquals(MailTestUtil.getAddressHeader(longFromName, longFromAddress), MimeUtility.unfold(mess.getHeader("From", null)));
         Assert.assertEquals(MailTestUtil.getAddressHeader(longToName, longToAddress), MimeUtility.unfold(mess.getHeader("To", null)));
@@ -437,7 +437,7 @@ public class MailMessageTest {
 
         Assert.assertEquals("Didn't receive the expected amount of messages. Expected 1 got " + wiser.getMessages().size(), 1, wiser.getMessages().size());
 
-        MimeMessage mess = wiser.getMessages().get(0).getMimeMessage();
+        MimeMessage mess = MailUtilityTest.fromWiser(wiser.getMessages().get(0));
 
         Assert.assertEquals(MailTestUtil.getAddressHeader(fromName, fromAddress), mess.getHeader("From", null));
         Assert.assertEquals(MailTestUtil.getAddressHeader(replyToAddress), mess.getHeader("Reply-To", null));
@@ -484,7 +484,7 @@ public class MailMessageTest {
 
         Assert.assertEquals("Didn't receive the expected amount of messages. Expected 1 got " + wiser.getMessages().size(), 1, wiser.getMessages().size());
 
-        MimeMessage mess = wiser.getMessages().get(0).getMimeMessage();
+        MimeMessage mess = MailUtilityTest.fromWiser(wiser.getMessages().get(0));
 
         Assert.assertEquals(MailTestUtil.getAddressHeader(fromName, fromAddress), mess.getHeader("From", null));
         Assert.assertEquals(MailTestUtil.getAddressHeader(replyToAddress), mess.getHeader("Reply-To", null));
@@ -529,7 +529,7 @@ public class MailMessageTest {
 
         Assert.assertEquals("Didn't receive the expected amount of messages. Expected 2 got " + wiser.getMessages().size(), 2, wiser.getMessages().size());
 
-        MimeMessage mess = wiser.getMessages().get(0).getMimeMessage();
+        MimeMessage mess = MailUtilityTest.fromWiser(wiser.getMessages().get(0));
 
         Assert.assertEquals(MailTestUtil.getAddressHeader(fromName, fromAddress), mess.getHeader("From", null));
         Assert.assertEquals(MailTestUtil.getAddressHeader(replyToAddress), mess.getHeader("Reply-To", null));
@@ -542,7 +542,7 @@ public class MailMessageTest {
         Assert.assertTrue(mess.getHeader("Content-Type", null).startsWith("multipart/mixed"));
         Assert.assertEquals(messageId, MailUtility.headerStripper(mess.getHeader("Message-ID", null)));
 
-        mess = wiser.getMessages().get(1).getMimeMessage();
+        mess = MailUtilityTest.fromWiser(wiser.getMessages().get(1));
         Assert.assertEquals(MailTestUtil.getAddressHeader(fromName, fromAddress), mess.getHeader("From", null));
         Assert.assertEquals(MailTestUtil.getAddressHeader(replyToAddress), mess.getHeader("Reply-To", null));
         Assert.assertEquals(MailTestUtil.getAddressHeader(toName, toAddress), mess.getHeader("To", null));

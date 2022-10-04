@@ -18,11 +18,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMultipart;
+import jakarta.mail.MessagingException;
+import jakarta.mail.Session;
+import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeBodyPart;
+import jakarta.mail.internet.MimeMultipart;
 
 import com.outjected.email.api.ContentDisposition;
 import com.outjected.email.api.ContentType;
@@ -36,6 +36,7 @@ import com.outjected.email.impl.attachments.BaseAttachment;
 import com.outjected.email.impl.util.MailUtility;
 import com.sun.mail.smtp.SMTPMessage;
 
+@SuppressWarnings("CanIgnoreReturnValueSuggester")
 public class BaseMailMessage {
     private RootMimeMessage rootMimeMessage;
     private String charset;

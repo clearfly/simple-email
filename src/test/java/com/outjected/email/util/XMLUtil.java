@@ -8,25 +8,26 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
+
 
 import com.google.common.base.Charsets;
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBException;
+import jakarta.xml.bind.Marshaller;
+import jakarta.xml.bind.Unmarshaller;
 
 public class XMLUtil {
 
     public static String marshal(Object o) {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         marshal(o, bos, new HashMap<>());
-        return new String(bos.toByteArray(), Charsets.UTF_8);
+        return bos.toString(Charsets.UTF_8);
     }
 
     public static String marshal(Object o, Map<String, Object> properties) {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         marshal(o, bos, properties);
-        return new String(bos.toByteArray(), Charsets.UTF_8);
+        return bos.toString(Charsets.UTF_8);
     }
 
     public static void marshal(Object o, OutputStream os) {

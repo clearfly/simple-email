@@ -24,18 +24,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import javax.mail.Address;
-import javax.mail.MessagingException;
-import javax.mail.Part;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeUtility;
-import javax.mail.internet.ParseException;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-
 import com.outjected.email.api.EmailContact;
 import com.outjected.email.api.EmailMessage;
 import com.outjected.email.api.EmailMessageType;
@@ -48,6 +36,15 @@ import com.outjected.email.api.SessionConfig;
 import com.outjected.email.impl.BaseMailMessage;
 import com.outjected.email.impl.MailSessionAuthenticator;
 import com.sun.mail.smtp.SMTPMessage;
+import jakarta.mail.Address;
+import jakarta.mail.MessagingException;
+import jakarta.mail.Part;
+import jakarta.mail.Session;
+import jakarta.mail.Transport;
+import jakarta.mail.internet.AddressException;
+import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeUtility;
+import jakarta.mail.internet.ParseException;
 
 public class MailUtility {
 
@@ -138,22 +135,13 @@ public class MailUtility {
     public static List<Header> getHeaders(Enumeration<?> allHeaders) {
         List<Header> result = new ArrayList<>();
         while (allHeaders.hasMoreElements()) {
-            javax.mail.Header h = (javax.mail.Header) allHeaders.nextElement();
+            jakarta.mail.Header h = (jakarta.mail.Header) allHeaders.nextElement();
             result.add(new Header(h.getName(), h.getValue()));
         }
         return result;
     }
 
     public static Session createSession(SessionConfig mailConfig) {
-
-        if (!Strings.isNullOrBlank(mailConfig.getJndiSessionName())) {
-            try {
-                return InitialContext.doLookup(mailConfig.getJndiSessionName());
-            }
-            catch (NamingException e) {
-                throw new MailException("Unable to lookup JNDI JavaMail Session", e);
-            }
-        }
 
         Session session;
 

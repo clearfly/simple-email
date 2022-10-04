@@ -15,12 +15,11 @@ package com.outjected.email.impl.attachments;
 import java.io.IOException;
 import java.net.URL;
 
-import javax.activation.URLDataSource;
-
 import com.outjected.email.api.AttachmentException;
 import com.outjected.email.api.ContentDisposition;
 import com.outjected.email.api.Header;
 import com.outjected.email.impl.util.Streams;
+import jakarta.activation.URLDataSource;
 
 public class URLAttachment extends BaseAttachment {
 

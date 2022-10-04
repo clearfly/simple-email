@@ -15,8 +15,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.mail.Session;
-import javax.mail.internet.InternetAddress;
+import jakarta.mail.Session;
+import jakarta.mail.internet.InternetAddress;
 
 import com.outjected.email.api.ContentDisposition;
 import com.outjected.email.api.ContentType;
@@ -40,6 +40,7 @@ import com.outjected.email.impl.util.EmailAttachmentUtil;
 import com.outjected.email.impl.util.HtmlToPlainText;
 import com.outjected.email.impl.util.MailUtility;
 
+@SuppressWarnings("CanIgnoreReturnValueSuggester")
 public class MailMessageImpl implements MailMessage {
 
     private EmailMessage emailMessage;

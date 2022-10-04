@@ -18,12 +18,11 @@ import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-
 import com.outjected.email.api.ContentDisposition;
 import com.outjected.email.api.EmailAttachment;
 import com.outjected.email.api.Header;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElementWrapper;
 
 public class BaseAttachment implements EmailAttachment, Serializable {
 

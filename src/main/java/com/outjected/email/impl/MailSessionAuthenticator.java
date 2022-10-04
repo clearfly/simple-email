@@ -12,8 +12,8 @@
 
 package com.outjected.email.impl;
 
-import javax.mail.Authenticator;
-import javax.mail.PasswordAuthentication;
+import jakarta.mail.Authenticator;
+import jakarta.mail.PasswordAuthentication;
 
 public class MailSessionAuthenticator extends Authenticator {
     private String username;

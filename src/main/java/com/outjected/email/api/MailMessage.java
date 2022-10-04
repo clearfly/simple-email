@@ -17,7 +17,7 @@ import java.io.InputStream;
 import java.util.Collection;
 import java.util.Map;
 
-import javax.mail.internet.InternetAddress;
+import jakarta.mail.internet.InternetAddress;
 
 /**
  * Base interface for creating email messages.
@@ -30,21 +30,21 @@ public interface MailMessage {
      * @param address Address of the recipient eq "john.doe@example.com" or "John Doe<john.doe@example.com>"
      * @throws InvalidAddressException if address(es) are in an invalid format
      */
-    public MailMessage from(String address);
+    MailMessage from(String address);
 
     /**
      * Adds a From Address
      *
      * @param emailAddress {@link InternetAddress} of the address to be added
      */
-    public MailMessage from(InternetAddress emailAddress);
+    MailMessage from(InternetAddress emailAddress);
 
     /**
      * Adds a From Address
      *
      * @param emailContact {@link EmailContact} of the address to be added
      */
-    public MailMessage from(EmailContact emailContact);
+    MailMessage from(EmailContact emailContact);
 
     /**
      * Convenience varargs method to add REPLY-TO address. Only one is allowed
@@ -52,21 +52,21 @@ public interface MailMessage {
      * @param address Address of the recipient eq "john.doe@example.com" or "John Doe<john.doe@example.com>"
      * @throws InvalidAddressException if address(es) are in an invalid format
      */
-    public MailMessage replyTo(String address);
+    MailMessage replyTo(String address);
 
     /**
      * Adds a REPLY-TO Address
      *
      * @param emailAddress {@link InternetAddress} of the address to be added
      */
-    public MailMessage replyTo(InternetAddress emailAddress);
+    MailMessage replyTo(InternetAddress emailAddress);
 
     /**
      * Adds a REPLY-TO Address
      *
      * @param emailContact {@link EmailContact} of the address to be added
      */
-    public MailMessage replyTo(EmailContact emailContact);
+    MailMessage replyTo(EmailContact emailContact);
 
     /**
      * Add header to the message.
@@ -74,7 +74,7 @@ public interface MailMessage {
      * @param name  Header name
      * @param value Header value
      */
-    public MailMessage addHeader(String name, String value);
+    MailMessage addHeader(String name, String value);
 
     /**
      * Add header to the message.
@@ -82,7 +82,7 @@ public interface MailMessage {
      * @param name  Header name
      * @param value Header value
      */
-    public MailMessage addCustomVariable(String name, String value);
+    MailMessage addCustomVariable(String name, String value);
 
     /**
      * Convenience varargs method to add TO address(es)
@@ -90,28 +90,28 @@ public interface MailMessage {
      * @param address Address of the recipient eq "john.doe@example.com" or "John Doe<john.doe@example.com>"
      * @throws InvalidAddressException if address(es) are in an invalid format
      */
-    public MailMessage to(String... address);
+    MailMessage to(String... address);
 
     /**
      * Add TO recipient
      *
      * @param emailAddress {@link InternetAddress} of the address to be added
      */
-    public MailMessage to(InternetAddress emailAddress);
+    MailMessage to(InternetAddress emailAddress);
 
     /**
      * Add TO recipient
      *
      * @param emailContact {@link EmailContact} of the address to be added
      */
-    public MailMessage to(EmailContact emailContact);
+    MailMessage to(EmailContact emailContact);
 
     /**
      * Convenience method to add a TO recipients
      *
      * @param emailContacts Collection of {@link EmailContact} to be added
      */
-    public MailMessage to(Collection<? extends EmailContact> emailContacts);
+    MailMessage to(Collection<? extends EmailContact> emailContacts);
 
     /**
      * Convenience varargs method to add CC address(es)
@@ -119,28 +119,28 @@ public interface MailMessage {
      * @param address Address of the recipient eq "john.doe@example.com" or "John Doe<john.doe@example.com>"
      * @throws InvalidAddressException if address(es) are in an invalid format
      */
-    public MailMessage cc(String... address);
+    MailMessage cc(String... address);
 
     /**
      * Add CC (Carbon Copy) recipient
      *
      * @param emailAddress {@link InternetAddress} of the address to be added
      */
-    public MailMessage cc(InternetAddress emailAddress);
+    MailMessage cc(InternetAddress emailAddress);
 
     /**
      * Add CC recipient
      *
      * @param emailContact {@link EmailContact} of the address to be added
      */
-    public MailMessage cc(EmailContact emailContact);
+    MailMessage cc(EmailContact emailContact);
 
     /**
      * Add collection of CC (Carbon Copy) recipients
      *
      * @param emailContacts Collection of {@link EmailContact} to be added
      */
-    public MailMessage cc(Collection<? extends EmailContact> emailContacts);
+    MailMessage cc(Collection<? extends EmailContact> emailContacts);
 
     /**
      * Convenience varargs method to add BCC address(es)
@@ -148,38 +148,38 @@ public interface MailMessage {
      * @param address Address of the recipient eq "john.doe@example.com" or "John Doe<john.doe@example.com>"
      * @throws InvalidAddressException if address(es) are in an invalid format
      */
-    public MailMessage bcc(String... address);
+    MailMessage bcc(String... address);
 
     /**
      * Add BCC (Blind Carbon Copy) recipient
      *
      * @param emailAddress {@link InternetAddress} of the address to be added
      */
-    public MailMessage bcc(InternetAddress emailAddress);
+    MailMessage bcc(InternetAddress emailAddress);
 
     /**
      * Add BCC recipient
      *
      * @param emailContact {@link EmailContact} of the address to be added
      */
-    public MailMessage bcc(EmailContact emailContact);
+    MailMessage bcc(EmailContact emailContact);
 
     /**
      * Add collection of BCC (Blind Carbon Copy) recipients
      *
      * @param emailContacts Collection of {@link EmailContact} to be added
      */
-    public MailMessage bcc(Collection<? extends EmailContact> emailContacts);
+    MailMessage bcc(Collection<? extends EmailContact> emailContacts);
 
     /**
      * Set the "Envelope From" address which is used for error messages
      */
-    public MailMessage envelopeFrom(EmailContact emailContact);
+    MailMessage envelopeFrom(EmailContact emailContact);
 
     /**
      * Set the "Envelope From" address which is used for error messages
      */
-    public MailMessage envelopeFrom(String address);
+    MailMessage envelopeFrom(String address);
 
     // End Recipients
 
@@ -190,27 +190,27 @@ public interface MailMessage {
      *
      * @param attachment {@link EmailAttachment} to be added
      */
-    public MailMessage addAttachment(EmailAttachment attachment);
+    MailMessage addAttachment(EmailAttachment attachment);
 
     /**
      * Adds a Collection of Attachments to the message
      **/
-    public MailMessage addAttachments(Collection<EmailAttachment> attachments);
+    MailMessage addAttachments(Collection<EmailAttachment> attachments);
 
     /**
      * Adds Attachment to the message
      */
-    public MailMessage addAttachment(String fileName, String mimeType, ContentDisposition contentDispostion, byte[] bytes);
+    MailMessage addAttachment(String fileName, String mimeType, ContentDisposition contentDispostion, byte[] bytes);
 
     /**
      * Adds Attachment to the message
      */
-    public MailMessage addAttachment(String fileName, String mimeType, ContentDisposition contentDispostion, InputStream inputStream);
+    MailMessage addAttachment(String fileName, String mimeType, ContentDisposition contentDispostion, InputStream inputStream);
 
     /**
      * Adds Attachment to the message
      */
-    public MailMessage addAttachment(ContentDisposition contentDispostion, File file);
+    MailMessage addAttachment(ContentDisposition contentDispostion, File file);
 
     // End Attachements
 
@@ -221,7 +221,7 @@ public interface MailMessage {
      *
      * @param messagePriority The priority level of the message.
      */
-    public MailMessage importance(MessagePriority messagePriority);
+    MailMessage importance(MessagePriority messagePriority);
 
     /**
      * Request a delivery receipt "Return-Receipt-To" to the given address
@@ -229,7 +229,7 @@ public interface MailMessage {
      * @param address Email address the receipt should be sent to
      * @throws InvalidAddressException if address is in invalid format
      */
-    public MailMessage deliveryReceipt(String address);
+    MailMessage deliveryReceipt(String address);
 
     /**
      * Request a read receipt "Disposition-Notification-To" to a given address
@@ -237,12 +237,12 @@ public interface MailMessage {
      * @param address Email address the receipt should be sent to
      * @throws InvalidAddressException if address is in invalid format
      */
-    public MailMessage readReceipt(String address);
+    MailMessage readReceipt(String address);
 
     /**
      * Set the Message-ID for the message.
      */
-    public MailMessage messageId(String messageId);
+    MailMessage messageId(String messageId);
 
     // End Flags
 
@@ -251,12 +251,12 @@ public interface MailMessage {
     /**
      * Used for creating iCal Calendar Invites.
      */
-    public MailMessage iCal(String textBody, ICalMethod method, byte[] bytes);
+    MailMessage iCal(String textBody, ICalMethod method, byte[] bytes);
 
     /**
      * Used for creating iCal Calendar Invites.
      */
-    public MailMessage iCal(String htmlBody, String textBody, ICalMethod method, byte[] bytes);
+    MailMessage iCal(String htmlBody, String textBody, ICalMethod method, byte[] bytes);
 
     // End Calendar
 
@@ -267,23 +267,23 @@ public interface MailMessage {
      *
      * @param value Subject of the message
      */
-    public MailMessage subject(String value);
+    MailMessage subject(String value);
 
     /**
      * Sets the body of the message a plan text body represented by the supplied string
      *
      * @param text Plain text body
      */
-    public MailMessage bodyText(String text);
+    MailMessage bodyText(String text);
 
     /**
      * Sets the body of the message a HTML body represented by the supplied string
      *
      * @param html HTML body
      */
-    public MailMessage bodyHtml(String html);
+    MailMessage bodyHtml(String html);
 
-    public MailMessage createTextAlternative(boolean value);
+    MailMessage createTextAlternative(boolean value);
 
     /**
      * Sets the body of the message to a HTML body with a plain text alternative
@@ -291,17 +291,17 @@ public interface MailMessage {
      * @param html HTML body
      * @param text Plain text body
      */
-    public MailMessage bodyHtmlTextAlt(String html, String text);
+    MailMessage bodyHtmlTextAlt(String html, String text);
 
     /**
      * Set the charset of the message. Otherwise defaults to Charset.defaultCharset()
      */
-    public MailMessage charset(String charset);
+    MailMessage charset(String charset);
 
     /**
      * Set the Content Type of the message
      */
-    public MailMessage contentType(ContentType contentType);
+    MailMessage contentType(ContentType contentType);
 
     // End Core
 
@@ -310,19 +310,19 @@ public interface MailMessage {
      *
      * @return {@link EmailMessage} representing this {@link MailMessage}
      */
-    public EmailMessage getEmailMessage();
+    EmailMessage getEmailMessage();
 
     /**
      * Set the {@link EmailMessage} representing this {@link MailMessage}
      */
-    public void setEmailMessage(EmailMessage emailMessage);
+    void setEmailMessage(EmailMessage emailMessage);
 
     /**
      * Merge the templates with the context
      *
      * @return {@link EmailMessage} representing this {@link MailMessage} after merging
      */
-    public EmailMessage mergeTemplates();
+    EmailMessage mergeTemplates();
 
     /**
      * Send the Message
@@ -330,28 +330,28 @@ public interface MailMessage {
      * @return {@link EmailMessage} which represents the {@link MailMessage} as sent
      * @throws SendFailedException If the messages fails to be sent.
      */
-    public EmailMessage send();
+    EmailMessage send();
 
     // Templating Specific
 
     /**
      * Set the template to be used for the message subject
      */
-    public MailMessage subject(TemplateProvider subject);
+    MailMessage subject(TemplateProvider subject);
 
     /**
      * Sets the text body of the message to the plain text output of the given template
      *
      * @param textBody {@link TemplateProvider} to use
      */
-    public MailMessage bodyText(TemplateProvider textBody);
+    MailMessage bodyText(TemplateProvider textBody);
 
     /**
      * Sets the HTML body of the message to the HTML output of the given template
      *
      * @param htmlBody {@link TemplateProvider} to use
      */
-    public MailMessage bodyHtml(TemplateProvider htmlBody);
+    MailMessage bodyHtml(TemplateProvider htmlBody);
 
     /**
      * Sets the body of the message to a HTML body with a plain text alternative output of the given templates
@@ -359,7 +359,7 @@ public interface MailMessage {
      * @param htmlBody {@link TemplateProvider} to use for HTML portion of message
      * @param textBody {@link TemplateProvider} to use for Text alternative portion of message
      */
-    public MailMessage bodyHtmlTextAlt(TemplateProvider htmlBody, TemplateProvider textBody);
+    MailMessage bodyHtmlTextAlt(TemplateProvider htmlBody, TemplateProvider textBody);
 
     /**
      * Places a variable in the templating engines context
@@ -367,16 +367,16 @@ public interface MailMessage {
      * @param name  Reference name of the object
      * @param value the Object being placed in the context
      */
-    public MailMessage put(String name, Object value);
+    MailMessage put(String name, Object value);
 
     /**
      * Places a Map of variable in the templating engines context
      *
      * @param values {@code Map<String, Object>} containing the variables to be placed in the context
      */
-    public MailMessage put(Map<String, Object> values);
+    MailMessage put(Map<String, Object> values);
 
-    public MailMessage enableClickTracking();
+    MailMessage enableClickTracking();
 
-    public MailMessage disableClickTracking();
+    MailMessage disableClickTracking();
 }

@@ -19,12 +19,12 @@ import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 import java.util.Optional;
 
-import javax.mail.BodyPart;
-import javax.mail.Message;
-import javax.mail.Message.RecipientType;
-import javax.mail.MessagingException;
-import javax.mail.Part;
-import javax.mail.internet.MimeMultipart;
+import jakarta.mail.BodyPart;
+import jakarta.mail.Message;
+import jakarta.mail.Message.RecipientType;
+import jakarta.mail.MessagingException;
+import jakarta.mail.Part;
+import jakarta.mail.internet.MimeMultipart;
 
 import com.outjected.email.api.ContentDisposition;
 import com.outjected.email.api.EmailMessage;
@@ -136,9 +136,8 @@ public class MessageConverter {
         if (content instanceof String) {
             return (String) content;
         }
-        else if (content instanceof QPDecoderStream) {
+        else if (content instanceof QPDecoderStream qpDecoderStream) {
             final Charset charset = MailUtility.determineCharset(part).orElse(StandardCharsets.UTF_8);
-            QPDecoderStream qpDecoderStream = (QPDecoderStream) content;
             return new String(Streams.toByteArray(qpDecoderStream), charset);
         }
         else {

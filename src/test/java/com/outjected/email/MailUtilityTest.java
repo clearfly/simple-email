@@ -1,14 +1,15 @@
 package com.outjected.email;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Properties;
 
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMessage;
+import jakarta.mail.MessagingException;
+import jakarta.mail.Session;
+import jakarta.mail.internet.MimeBodyPart;
+import jakarta.mail.internet.MimeMessage;
 
 import com.google.common.io.Resources;
 import com.outjected.email.api.ContentDisposition;
@@ -17,8 +18,13 @@ import com.outjected.email.impl.util.MailUtility;
 import com.outjected.email.impl.util.MessageConverter;
 import org.junit.Assert;
 import org.junit.Test;
+import org.subethamail.wiser.WiserMessage;
 
 public class MailUtilityTest {
+
+    public static MimeMessage fromWiser(WiserMessage wiserMessage) throws MessagingException {
+        return new MimeMessage(Session.getDefaultInstance(new Properties()), new ByteArrayInputStream(wiserMessage.getData()));
+    }
 
     @Test
     public void determineCharset() throws MessagingException {

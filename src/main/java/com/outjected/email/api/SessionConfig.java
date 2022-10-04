@@ -34,6 +34,4 @@ public interface SessionConfig {
     Boolean getEnableSsl();
 
     Boolean getAuth();
-
-    String getJndiSessionName();
 }

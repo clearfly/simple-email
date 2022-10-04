@@ -12,7 +12,7 @@
 
 package com.outjected.email.impl;
 
-import javax.mail.Session;
+import jakarta.mail.Session;
 
 import com.outjected.email.api.EmailMessage;
 import com.outjected.email.api.MailTransporter;
