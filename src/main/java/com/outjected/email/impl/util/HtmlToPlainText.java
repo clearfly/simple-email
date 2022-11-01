@@ -67,7 +67,7 @@ public class HtmlToPlainText {
                 append("\n");
             }
             else if (name.equals("a")) {
-                append(String.format(" (%s)", node.absUrl("href")));
+                append(String.format(" ( %s )", node.absUrl("href")));
             }
         }
 
