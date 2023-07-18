@@ -33,8 +33,6 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeUtility;
 import javax.mail.internet.ParseException;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 
 import com.outjected.email.api.EmailContact;
 import com.outjected.email.api.EmailMessage;
@@ -145,15 +143,6 @@ public class MailUtility {
     }
 
     public static Session createSession(SessionConfig mailConfig) {
-
-        if (!Strings.isNullOrBlank(mailConfig.getJndiSessionName())) {
-            try {
-                return InitialContext.doLookup(mailConfig.getJndiSessionName());
-            }
-            catch (NamingException e) {
-                throw new MailException("Unable to lookup JNDI JavaMail Session", e);
-            }
-        }
 
         Session session;
 
