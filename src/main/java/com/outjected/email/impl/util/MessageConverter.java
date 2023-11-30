@@ -136,9 +136,8 @@ public class MessageConverter {
         if (content instanceof String) {
             return (String) content;
         }
-        else if (content instanceof QPDecoderStream) {
+        else if (content instanceof QPDecoderStream qpDecoderStream) {
             final Charset charset = MailUtility.determineCharset(part).orElse(StandardCharsets.UTF_8);
-            QPDecoderStream qpDecoderStream = (QPDecoderStream) content;
             return new String(Streams.toByteArray(qpDecoderStream), charset);
         }
         else {

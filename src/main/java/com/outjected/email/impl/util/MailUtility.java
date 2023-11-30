@@ -16,10 +16,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Enumeration;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Properties;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -113,8 +115,8 @@ public class MailUtility {
         }
     }
 
-    public static List<InternetAddress> getInternetAddressses(Address[] addresses) throws InvalidAddressException {
-        List<InternetAddress> result = new ArrayList<>();
+    public static Set<InternetAddress> getInternetAddressses(Address[] addresses) throws InvalidAddressException {
+        Set<InternetAddress> result = new HashSet<>();
         if (addresses != null) {
             for (Address a : addresses) {
                 if (a.getType().equals("rfc822")) {
@@ -164,7 +166,7 @@ public class MailUtility {
             props.put(MailUtility.DOMAIN_PROPERTY_KEY, mailConfig.getDomainName());
         }
 
-        if (mailConfig.getUsername() != null && mailConfig.getUsername().length() != 0 && mailConfig.getPassword() != null && mailConfig.getPassword().length() != 0) {
+        if (mailConfig.getUsername() != null && !mailConfig.getUsername().isEmpty() && mailConfig.getPassword() != null && !mailConfig.getPassword().isEmpty()) {
             MailSessionAuthenticator authenticator = new MailSessionAuthenticator(mailConfig.getUsername(), mailConfig.getPassword());
 
             session = Session.getInstance(props, authenticator);

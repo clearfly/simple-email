@@ -13,8 +13,10 @@ import java.io.Serializable;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 
 import javax.mail.internet.InternetAddress;
@@ -37,11 +39,11 @@ public class EmailMessage implements Serializable {
     private ContentType rootContentType = ContentType.MIXED;
     private EmailMessageType type = EmailMessageType.STANDARD;
     private String messageId;
-    private List<InternetAddress> fromAddresses = new ArrayList<>();
-    private List<InternetAddress> replyToAddresses = new ArrayList<>();
-    private List<InternetAddress> toAddresses = new ArrayList<>();
-    private List<InternetAddress> ccAddresses = new ArrayList<>();
-    private List<InternetAddress> bccAddresses = new ArrayList<>();
+    private Set<InternetAddress> fromAddresses = new HashSet<>();
+    private Set<InternetAddress> replyToAddresses = new HashSet<>();
+    private Set<InternetAddress> toAddresses = new HashSet<>();
+    private Set<InternetAddress> ccAddresses = new HashSet<>();
+    private Set<InternetAddress> bccAddresses = new HashSet<>();
     private InternetAddress envelopeFrom;
     private List<Header> headers = new ArrayList<>();
     private Map<String, String> customVariables = new TreeMap<>();
@@ -139,11 +141,11 @@ public class EmailMessage implements Serializable {
      * @return Collection of InternetAddresses addresses
      */
     @XmlElement
-    public List<InternetAddress> getFromAddresses() {
+    public Set<InternetAddress> getFromAddresses() {
         return fromAddresses;
     }
 
-    public void setFromAddresses(List<InternetAddress> fromAddresses) {
+    public void setFromAddresses(Set<InternetAddress> fromAddresses) {
         this.fromAddresses = fromAddresses;
     }
 
@@ -153,11 +155,11 @@ public class EmailMessage implements Serializable {
      * @return Collection of InternetAddresses addresses
      */
     @XmlElement
-    public List<InternetAddress> getReplyToAddresses() {
+    public Set<InternetAddress> getReplyToAddresses() {
         return replyToAddresses;
     }
 
-    public void setReplyToAddresses(List<InternetAddress> replyToAddresses) {
+    public void setReplyToAddresses(Set<InternetAddress> replyToAddresses) {
         this.replyToAddresses = replyToAddresses;
     }
 
@@ -167,7 +169,7 @@ public class EmailMessage implements Serializable {
      * @return Collection of InternetAddresses addresses
      */
     @XmlElement
-    public List<InternetAddress> getToAddresses() {
+    public Set<InternetAddress> getToAddresses() {
         return toAddresses;
     }
 
@@ -177,11 +179,11 @@ public class EmailMessage implements Serializable {
      * @return Collection of InternetAddresses addresses
      */
     @XmlElement
-    public List<InternetAddress> getCcAddresses() {
+    public Set<InternetAddress> getCcAddresses() {
         return ccAddresses;
     }
 
-    public void setCcAddresses(List<InternetAddress> ccAddresses) {
+    public void setCcAddresses(Set<InternetAddress> ccAddresses) {
         this.ccAddresses = ccAddresses;
     }
 
@@ -191,11 +193,11 @@ public class EmailMessage implements Serializable {
      * @return Collection of InternetAddresses addresses
      */
     @XmlElement
-    public List<InternetAddress> getBccAddresses() {
+    public Set<InternetAddress> getBccAddresses() {
         return bccAddresses;
     }
 
-    public void setBccAddresses(List<InternetAddress> bccAddresses) {
+    public void setBccAddresses(Set<InternetAddress> bccAddresses) {
         this.bccAddresses = bccAddresses;
     }
 
