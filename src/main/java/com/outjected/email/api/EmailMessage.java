@@ -173,6 +173,10 @@ public class EmailMessage implements Serializable {
         return toAddresses;
     }
 
+    public void setToAddresses(Set<InternetAddress> toAddresses) {
+        this.toAddresses = toAddresses;
+    }
+
     /**
      * Get the Collection of CC addresses on the EmailMeassage
      *
