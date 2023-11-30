@@ -54,10 +54,10 @@ public class MessageConverter {
         emailMessage = new EmailMessage();
 
         try {
-            emailMessage.setFromAddresses(MailUtility.getInternetAddressses(m.getFrom()));
+            emailMessage.getFromAddresses().addAll(MailUtility.getInternetAddressses(m.getFrom()));
             emailMessage.getToAddresses().addAll(MailUtility.getInternetAddressses(m.getRecipients(RecipientType.TO)));
-            emailMessage.setCcAddresses(MailUtility.getInternetAddressses(m.getRecipients(RecipientType.CC)));
-            emailMessage.setBccAddresses(MailUtility.getInternetAddressses(m.getRecipients(RecipientType.BCC)));
+            emailMessage.getCcAddresses().addAll(MailUtility.getInternetAddressses(m.getRecipients(RecipientType.CC)));
+            emailMessage.getBccAddresses().addAll(MailUtility.getInternetAddressses(m.getRecipients(RecipientType.BCC)));
             emailMessage.setSubject(m.getSubject());
             emailMessage.setMessageId(m.getHeader("Message-ID")[0]);
             emailMessage.getHeaders().addAll(MailUtility.getHeaders(m.getAllHeaders()));

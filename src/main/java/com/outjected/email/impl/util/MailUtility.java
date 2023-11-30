@@ -16,12 +16,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Enumeration;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Properties;
-import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -115,8 +113,8 @@ public class MailUtility {
         }
     }
 
-    public static Set<InternetAddress> getInternetAddressses(Address[] addresses) throws InvalidAddressException {
-        Set<InternetAddress> result = new HashSet<>();
+    public static Collection<InternetAddress> getInternetAddressses(Address[] addresses) throws InvalidAddressException {
+        final ArrayList<InternetAddress> result = new ArrayList<>();
         if (addresses != null) {
             for (Address a : addresses) {
                 if (a.getType().equals("rfc822")) {
