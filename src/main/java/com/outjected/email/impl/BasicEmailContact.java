@@ -58,7 +58,7 @@ public class BasicEmailContact implements EmailContact {
     }
 
     @Override public String toString() {
-        if (name == null || name.length() == 0) {
+        if (name == null || name.isEmpty()) {
             return address;
         }
         else {

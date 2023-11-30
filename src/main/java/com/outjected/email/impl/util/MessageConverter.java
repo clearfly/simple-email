@@ -54,10 +54,10 @@ public class MessageConverter {
         emailMessage = new EmailMessage();
 
         try {
-            emailMessage.setFromAddresses(MailUtility.getInternetAddressses(m.getFrom()));
+            emailMessage.getFromAddresses().addAll(MailUtility.getInternetAddressses(m.getFrom()));
             emailMessage.getToAddresses().addAll(MailUtility.getInternetAddressses(m.getRecipients(RecipientType.TO)));
-            emailMessage.setCcAddresses(MailUtility.getInternetAddressses(m.getRecipients(RecipientType.CC)));
-            emailMessage.setBccAddresses(MailUtility.getInternetAddressses(m.getRecipients(RecipientType.BCC)));
+            emailMessage.getCcAddresses().addAll(MailUtility.getInternetAddressses(m.getRecipients(RecipientType.CC)));
+            emailMessage.getBccAddresses().addAll(MailUtility.getInternetAddressses(m.getRecipients(RecipientType.BCC)));
             emailMessage.setSubject(m.getSubject());
             emailMessage.setMessageId(m.getHeader("Message-ID")[0]);
             emailMessage.getHeaders().addAll(MailUtility.getHeaders(m.getAllHeaders()));
@@ -136,9 +136,8 @@ public class MessageConverter {
         if (content instanceof String) {
             return (String) content;
         }
-        else if (content instanceof QPDecoderStream) {
+        else if (content instanceof QPDecoderStream qpDecoderStream) {
             final Charset charset = MailUtility.determineCharset(part).orElse(StandardCharsets.UTF_8);
-            QPDecoderStream qpDecoderStream = (QPDecoderStream) content;
             return new String(Streams.toByteArray(qpDecoderStream), charset);
         }
         else {
