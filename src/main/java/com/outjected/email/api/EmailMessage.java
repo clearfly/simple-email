@@ -145,10 +145,6 @@ public class EmailMessage implements Serializable {
         return fromAddresses;
     }
 
-    public void setFromAddresses(Set<InternetAddress> fromAddresses) {
-        this.fromAddresses = fromAddresses;
-    }
-
     /**
      * Get the Collection of REPLY-TO addresses on the EmailMeassage
      *
@@ -157,10 +153,6 @@ public class EmailMessage implements Serializable {
     @XmlElement
     public Set<InternetAddress> getReplyToAddresses() {
         return replyToAddresses;
-    }
-
-    public void setReplyToAddresses(Set<InternetAddress> replyToAddresses) {
-        this.replyToAddresses = replyToAddresses;
     }
 
     /**
@@ -173,10 +165,6 @@ public class EmailMessage implements Serializable {
         return toAddresses;
     }
 
-    public void setToAddresses(Set<InternetAddress> toAddresses) {
-        this.toAddresses = toAddresses;
-    }
-
     /**
      * Get the Collection of CC addresses on the EmailMeassage
      *
@@ -187,10 +175,6 @@ public class EmailMessage implements Serializable {
         return ccAddresses;
     }
 
-    public void setCcAddresses(Set<InternetAddress> ccAddresses) {
-        this.ccAddresses = ccAddresses;
-    }
-
     /**
      * Get the Collection of BCC addresses on the EmailMeassage
      *
@@ -199,10 +183,6 @@ public class EmailMessage implements Serializable {
     @XmlElement
     public Set<InternetAddress> getBccAddresses() {
         return bccAddresses;
-    }
-
-    public void setBccAddresses(Set<InternetAddress> bccAddresses) {
-        this.bccAddresses = bccAddresses;
     }
 
     /**

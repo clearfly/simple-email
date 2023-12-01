@@ -14,6 +14,9 @@ package com.outjected.email;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+
+import javax.mail.internet.InternetAddress;
 
 import com.outjected.email.api.EmailContact;
 import com.outjected.email.api.InvalidAddressException;
@@ -21,6 +24,7 @@ import com.outjected.email.api.MailMessage;
 import com.outjected.email.impl.BasicEmailContact;
 import com.outjected.email.impl.MailMessageImpl;
 import com.outjected.email.util.TestMailConfigs;
+import org.junit.Assert;
 import org.junit.Test;
 
 public class InternetAddressTest {
@@ -143,5 +147,32 @@ public class InternetAddressTest {
         MailMessage m = new MailMessageImpl(TestMailConfigs.standardConfig());
 
         m.readReceipt("woo foo @bar.com");
+    }
+
+    @Test
+    public void duplicateSingle() {
+        MailMessage m = new MailMessageImpl(TestMailConfigs.standardConfig());
+        m.to("test@bar.com");
+        m.to("Test@Bar.com");
+        m.to("Testy<tEsT@bar.com>");
+        Assert.assertEquals(1, m.getEmailMessage().getToAddresses().size());
+        Assert.assertEquals("test@bar.com", m.getEmailMessage().getToAddresses().stream().findFirst().orElseThrow().getAddress());
+    }
+
+    @Test
+    public void duplicateMultiple() {
+        MailMessage m = new MailMessageImpl(TestMailConfigs.standardConfig());
+        m.to("test@bar.com");
+        m.to("Test@Bar.com");
+        m.to("Testy<tEsT@bar.com>");
+        m.to("Testy<foo@foo.com>");
+        m.to("Testy Two<foo@foo.com>");
+
+        List<InternetAddress> toAddresses = m.getEmailMessage().getToAddresses().stream().toList();
+
+        Assert.assertEquals(2, toAddresses.size());
+        Assert.assertEquals("test@bar.com", toAddresses.get(0).toString());
+        Assert.assertEquals("Testy <foo@foo.com>", toAddresses.get(1).toString());
+
     }
 }
