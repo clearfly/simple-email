@@ -44,10 +44,10 @@ public class XMLTest {
         Assert.assertEquals(msg.getType(), umsg.getType());
         Assert.assertEquals(msg.getCharset(), umsg.getCharset());
         Assert.assertEquals(msg.getImportance(), umsg.getImportance());
-        Assert.assertEquals(msg.getToAddresses().get(0), umsg.getToAddresses().get(0));
-        Assert.assertEquals(msg.getFromAddresses().get(0), umsg.getFromAddresses().get(0));
-        Assert.assertEquals(msg.getCcAddresses().get(0), umsg.getCcAddresses().get(0));
-        Assert.assertEquals(msg.getBccAddresses().get(0), umsg.getBccAddresses().get(0));
+        Assert.assertEquals(msg.getToAddresses().stream().findFirst().orElseThrow(), umsg.getToAddresses().stream().findFirst().orElseThrow());
+        Assert.assertEquals(msg.getFromAddresses().stream().findFirst().orElseThrow(), umsg.getFromAddresses().stream().findFirst().orElseThrow());
+        Assert.assertEquals(msg.getCcAddresses().stream().findFirst().orElseThrow(), umsg.getCcAddresses().stream().findFirst().orElseThrow());
+        Assert.assertEquals(msg.getBccAddresses().stream().findFirst().orElseThrow(), umsg.getBccAddresses().stream().findFirst().orElseThrow());
         Assert.assertEquals(msg.getSubject(), umsg.getSubject());
         Assert.assertEquals(msg.getTextBody(), umsg.getTextBody());
         Assert.assertEquals(msg.getHtmlBody(), umsg.getHtmlBody());

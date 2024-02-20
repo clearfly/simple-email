@@ -112,8 +112,8 @@ public class MailUtility {
         }
     }
 
-    public static List<InternetAddress> getInternetAddressses(Address[] addresses) throws InvalidAddressException {
-        List<InternetAddress> result = new ArrayList<>();
+    public static Collection<InternetAddress> getInternetAddressses(Address[] addresses) throws InvalidAddressException {
+        final ArrayList<InternetAddress> result = new ArrayList<>();
         if (addresses != null) {
             for (Address a : addresses) {
                 if (a.getType().equals("rfc822")) {
@@ -163,7 +163,7 @@ public class MailUtility {
             props.put(MailUtility.DOMAIN_PROPERTY_KEY, mailConfig.getDomainName());
         }
 
-        if (mailConfig.getUsername() != null && mailConfig.getUsername().length() != 0 && mailConfig.getPassword() != null && mailConfig.getPassword().length() != 0) {
+        if (mailConfig.getUsername() != null && !mailConfig.getUsername().isEmpty() && mailConfig.getPassword() != null && !mailConfig.getPassword().isEmpty()) {
             MailSessionAuthenticator authenticator = new MailSessionAuthenticator(mailConfig.getUsername(), mailConfig.getPassword());
 
             session = Session.getInstance(props, authenticator);
