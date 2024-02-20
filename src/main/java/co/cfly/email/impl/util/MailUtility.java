@@ -35,7 +35,7 @@ import co.cfly.email.api.SendFailedException;
 import co.cfly.email.api.SessionConfig;
 import co.cfly.email.impl.BaseMailMessage;
 import co.cfly.email.impl.MailSessionAuthenticator;
-import com.sun.mail.smtp.SMTPMessage;
+import co.cfly.email.impl.RootMimeMessage;
 import jakarta.mail.Address;
 import jakarta.mail.MessagingException;
 import jakarta.mail.Part;
@@ -191,7 +191,7 @@ public class MailUtility {
         }
     }
 
-    public static SMTPMessage createMimeMessage(EmailMessage e, Session session) {
+    public static RootMimeMessage createMimeMessage(EmailMessage e, Session session) {
         BaseMailMessage b = new BaseMailMessage(session, e.getCharset(), e.getRootContentType());
 
         if (!Strings.isNullOrBlank(e.getMessageId())) {
@@ -248,7 +248,7 @@ public class MailUtility {
     }
 
     public static void send(EmailMessage e, Session session) throws SendFailedException {
-        SMTPMessage msg = MailUtility.createMimeMessage(e, session);
+        RootMimeMessage msg = MailUtility.createMimeMessage(e, session);
         try {
             Transport.send(msg);
         }

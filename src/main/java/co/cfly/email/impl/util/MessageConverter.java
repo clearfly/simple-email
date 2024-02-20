@@ -14,7 +14,6 @@ package co.cfly.email.impl.util;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 import java.util.Optional;
@@ -23,7 +22,6 @@ import co.cfly.email.api.ContentDisposition;
 import co.cfly.email.api.EmailMessage;
 import co.cfly.email.api.MailException;
 import co.cfly.email.impl.attachments.InputStreamAttachment;
-import com.sun.mail.util.QPDecoderStream;
 import jakarta.mail.BodyPart;
 import jakarta.mail.Message;
 import jakarta.mail.Message.RecipientType;
@@ -131,16 +129,11 @@ public class MessageConverter {
     }
 
     private String convertBodyPart(Part part) throws MessagingException, IOException {
-        final Object content = part.getContent();
-        if (content instanceof String) {
-            return (String) content;
-        }
-        else if (content instanceof QPDecoderStream qpDecoderStream) {
-            final Charset charset = MailUtility.determineCharset(part).orElse(StandardCharsets.UTF_8);
-            return new String(Streams.toByteArray(qpDecoderStream), charset);
+        if (part.getContent() instanceof String value) {
+            return value;
         }
         else {
-            throw new RuntimeException("Unsupported Content Object: " + content.getClass().getName());
+            return new String(part.getInputStream().readAllBytes(), MailUtility.determineCharset(part).orElse(StandardCharsets.UTF_8));
         }
     }
 }

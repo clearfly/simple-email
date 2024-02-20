@@ -14,7 +14,6 @@ package co.cfly.email.impl;
 
 import java.io.InputStream;
 
-import com.sun.mail.smtp.SMTPMessage;
 import jakarta.mail.Header;
 import jakarta.mail.MessagingException;
 import jakarta.mail.Session;
@@ -23,8 +22,10 @@ import jakarta.mail.internet.MimeMessage;
 /**
  * Extends {@link MimeMessage} to allow for the setting of the Message-ID
  */
-public class RootMimeMessage extends SMTPMessage {
+public class RootMimeMessage extends MimeMessage {
+
     private String messageId;
+    private String envelopeFrom;
 
     public RootMimeMessage(Session session) {
         super(session);
@@ -46,5 +47,13 @@ public class RootMimeMessage extends SMTPMessage {
 
     public void setMessageId(String messageId) {
         this.messageId = messageId;
+    }
+
+    public String getEnvelopeFrom() {
+        return envelopeFrom;
+    }
+
+    public void setEnvelopeFrom(String envelopeFrom) {
+        this.envelopeFrom = envelopeFrom;
     }
 }

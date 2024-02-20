@@ -28,7 +28,6 @@ import co.cfly.email.api.RecipientType;
 import co.cfly.email.impl.attachments.AttachmentPart;
 import co.cfly.email.impl.attachments.BaseAttachment;
 import co.cfly.email.impl.util.MailUtility;
-import com.sun.mail.smtp.SMTPMessage;
 import jakarta.mail.MessagingException;
 import jakarta.mail.Session;
 import jakarta.mail.internet.InternetAddress;
@@ -343,11 +342,11 @@ public class BaseMailMessage {
         return attachments;
     }
 
-    public SMTPMessage getRootMimeMessage() {
+    public RootMimeMessage getRootMimeMessage() {
         return rootMimeMessage;
     }
 
-    public SMTPMessage getFinalizedMessage() {
+    public RootMimeMessage getFinalizedMessage() {
         addAttachmentsToMessage();
         return getRootMimeMessage();
     }
