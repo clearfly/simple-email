@@ -1,6 +1,6 @@
 **simple-email** is a continuation of the Seam 3 Mail Module.
 
-It has been refactored to `com.outjected.mail` packaging and CDI integration has been removed for simplicity.
+It has been refactored to `co.cfly` packaging and CDI integration has been removed for simplicity.
 
 **To run errorprone Tests:**
 
@@ -14,7 +14,7 @@ It has been refactored to `com.outjected.mail` packaging and CDI integration has
 
 ```
 <dependency>
-	<groupId>com.outjected</groupId>
+	<groupId>co.cfly</groupId>
 	<artifactId>simple-email</artifactId>
 	<version>CURRENT_VERSION</version>
 </dependency>

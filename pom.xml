@@ -3,7 +3,7 @@
 		xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.outjected</groupId>
+	<groupId>co.cfly</groupId>
 	<artifactId>simple-email</artifactId>
 	<version>3.0.0-SNAPSHOT</version>
 
@@ -34,7 +34,7 @@
 	</distributionManagement>
 
 	<description>Continuation of the Seam 3 Mail Module</description>
-	<url>https://github.com/codylerum/simple-email</url>
+	<url>https://github.com/clearfly/simple-email</url>
 
 	<licenses>
 		<license>
@@ -44,8 +44,8 @@
 	</licenses>
 
 	<scm>
-		<url>https://github.com/codylerum/simple-email</url>
-		<connection>https://github.com/codylerum/simple-email.git</connection>
+		<url>https://github.com/clearfly/simple-email</url>
+		<connection>https://github.com/clearfly/simple-email.git</connection>
 	</scm>
 
 	<developers>
