@@ -3,9 +3,9 @@
 		xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.outjected</groupId>
+	<groupId>co.cfly</groupId>
 	<artifactId>simple-email</artifactId>
-	<version>2.13</version>
+	<version>3.0.0-SNAPSHOT</version>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -15,7 +15,7 @@
 		<velocity.version>2.3</velocity.version>
 		<subetha.version>3.1.7</subetha.version>
 		<version.guava>33.0.0-jre</version.guava>
-		<version.jakarta.jaxb>2.3.3</version.jakarta.jaxb>
+		<version.jakarta.jaxb>4.0.0</version.jakarta.jaxb>
 		<version.maven.compiler>3.12.1</version.maven.compiler>
 		<version.maven.source>3.3.0</version.maven.source>
 	</properties>
@@ -34,7 +34,7 @@
 	</distributionManagement>
 
 	<description>Continuation of the Seam 3 Mail Module</description>
-	<url>https://github.com/codylerum/simple-email</url>
+	<url>https://github.com/clearfly/simple-email</url>
 
 	<licenses>
 		<license>
@@ -44,8 +44,8 @@
 	</licenses>
 
 	<scm>
-		<url>https://github.com/codylerum/simple-email</url>
-		<connection>https://github.com/codylerum/simple-email.git</connection>
+		<url>https://github.com/clearfly/simple-email</url>
+		<connection>https://github.com/clearfly/simple-email.git</connection>
 	</scm>
 
 	<developers>
@@ -58,17 +58,17 @@
 	<dependencies>
 
 		<dependency>
-			<groupId>com.sun.mail</groupId>
-			<artifactId>jakarta.mail</artifactId>
-			<version>1.6.7</version>
+			<groupId>jakarta.mail</groupId>
+			<artifactId>jakarta.mail-api</artifactId>
+			<version>2.1.2</version>
 			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
-			<groupId>javax.activation</groupId>
-			<artifactId>activation</artifactId>
-			<version>1.1.1</version>
-			<scope>provided</scope>
+			<groupId>org.eclipse.angus</groupId>
+			<artifactId>angus-mail</artifactId>
+			<version>2.0.2</version>
+			<scope>test</scope>
 		</dependency>
 
 		<dependency>
