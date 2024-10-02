@@ -12,7 +12,7 @@
 		<version.java>17</version.java>
 		<version.errorprone>2.33.0</version.errorprone>
 		<version.jsoup>1.18.1</version.jsoup>
-		<velocity.version>2.3</velocity.version>
+		<velocity.version>2.4</velocity.version>
 		<subetha.version>3.1.7</subetha.version>
 		<version.guava>33.3.1-jre</version.guava>
 		<version.jakarta.jaxb>4.0.0</version.jakarta.jaxb>
