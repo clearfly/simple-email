@@ -4,13 +4,13 @@ on: [ push ]
 
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
         with:
-          distribution: temurin
-          java-version: 17
+          distribution: corretto
+          java-version: 21
           cache: maven
       - name: Run Integration Tests
         run: mvn clean test -P errorprone
