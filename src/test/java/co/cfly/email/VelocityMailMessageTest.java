@@ -13,6 +13,7 @@
 package co.cfly.email;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 import co.cfly.email.api.ContentDisposition;
 import co.cfly.email.api.EmailMessage;
@@ -27,7 +28,6 @@ import co.cfly.email.impl.util.MailTestUtil;
 import co.cfly.email.impl.util.MessageConverter;
 import co.cfly.email.util.SMTPAuthenticator;
 import co.cfly.email.util.TestMailConfigs;
-import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
 import jakarta.mail.BodyPart;
 import jakarta.mail.MessagingException;
@@ -64,9 +64,10 @@ public class VelocityMailMessageTest {
         try {
             wiser.start();
 
-            e = new MailMessageImpl(mailConfig).from(MailTestUtil.getAddressHeader(fromName, fromAddress)).replyTo(replyToAddress).to(MailTestUtil.getAddressHeader(toName, toAddress)).subject(
-                    new VelocityTemplate(subjectTemplate)).bodyText(new VelocityTemplate(Resources.asCharSource(Resources.getResource("template.text.velocity"), Charsets.UTF_8).read())).put("version",
-                            version).put("person", person).importance(MessagePriority.HIGH).send();
+            e = new MailMessageImpl(mailConfig).from(MailTestUtil.getAddressHeader(fromName, fromAddress)).replyTo(replyToAddress).to(MailTestUtil.getAddressHeader(toName, toAddress))
+                    .subject(new VelocityTemplate(subjectTemplate))
+                    .bodyText(new VelocityTemplate(Resources.asCharSource(Resources.getResource("template.text.velocity"), StandardCharsets.UTF_8).read())).put("version", version)
+                    .put("person", person).importance(MessagePriority.HIGH).send();
         }
         finally {
             stop(wiser);
@@ -116,8 +117,9 @@ public class VelocityMailMessageTest {
         try {
             wiser.start();
 
-            e = new MailMessageImpl(mailConfig).from(MailTestUtil.getAddressHeader(fromName, fromAddress)).replyTo(replyToAddress).to(MailTestUtil.getAddressHeader(toName, toAddress)).subject(
-                    new VelocityTemplate(subjectTemplate)).bodyText(new VelocityTemplate(specialTextBody)).importance(MessagePriority.HIGH).messageId(messageId).put("version", version).send();
+            e = new MailMessageImpl(mailConfig).from(MailTestUtil.getAddressHeader(fromName, fromAddress)).replyTo(replyToAddress).to(MailTestUtil.getAddressHeader(toName, toAddress))
+                    .subject(new VelocityTemplate(subjectTemplate)).bodyText(new VelocityTemplate(specialTextBody)).importance(MessagePriority.HIGH).messageId(messageId).put("version", version)
+                    .send();
         }
         finally {
             stop(wiser);
@@ -158,9 +160,9 @@ public class VelocityMailMessageTest {
             person.setEmail(toAddress);
 
             emailMessage = new MailMessageImpl(mailConfig).from(MailTestUtil.getAddressHeader(fromName, fromAddress)).replyTo(MailTestUtil.getAddressHeader(replyToName, replyToAddress)).to(person)
-                    .subject(subject).bodyHtml(new VelocityTemplate(Resources.asCharSource(Resources.getResource("template.html.velocity"), Charsets.UTF_8).read())).put("version", version).put(
-                            "person", person).importance(MessagePriority.HIGH).addAttachment(new URLAttachment("https://design.jboss.org/seam/logo/final/seam_mail_85px.png", "seamLogo.png",
-                                    ContentDisposition.INLINE)).send();
+                    .subject(subject).bodyHtml(new VelocityTemplate(Resources.asCharSource(Resources.getResource("template.html.velocity"), StandardCharsets.UTF_8).read())).put("version", version)
+                    .put("person", person).importance(MessagePriority.HIGH)
+                    .addAttachment(new URLAttachment("https://design.jboss.org/seam/logo/final/seam_mail_85px.png", "seamLogo.png", ContentDisposition.INLINE)).send();
         }
         finally {
             stop(wiser);
@@ -212,12 +214,14 @@ public class VelocityMailMessageTest {
         try {
             wiser.start();
 
-            emailMessage = new MailMessageImpl(mailConfig).from(MailTestUtil.getAddressHeader(fromName, fromAddress)).to(MailTestUtil.getAddressHeader(person.getName(), person.getEmail())).subject(
-                    subject).put("version", version).put("person", person).bodyHtmlTextAlt(new VelocityTemplate(Resources.asCharSource(Resources.getResource("template.html.velocity"), Charsets.UTF_8)
-                            .read()), new VelocityTemplate(Resources.asCharSource(Resources.getResource("template.text.velocity"), Charsets.UTF_8).read())).importance(MessagePriority.LOW)
-                    .deliveryReceipt(fromAddress).readReceipt(fromAddress).addAttachment("template.html.velocity", "text/html", ContentDisposition.ATTACHMENT, Resources.asByteSource(Resources
-                            .getResource("template.html.velocity")).read()).addAttachment(new URLAttachment("https://design.jboss.org/seam/logo/final/seam_mail_85px.png", "seamLogo.png",
-                                    ContentDisposition.INLINE)).send();
+            emailMessage =
+                    new MailMessageImpl(mailConfig).from(MailTestUtil.getAddressHeader(fromName, fromAddress)).to(MailTestUtil.getAddressHeader(person.getName(), person.getEmail())).subject(subject)
+                            .put("version", version).put("person", person)
+                            .bodyHtmlTextAlt(new VelocityTemplate(Resources.asCharSource(Resources.getResource("template.html.velocity"), StandardCharsets.UTF_8).read()),
+                                    new VelocityTemplate(Resources.asCharSource(Resources.getResource("template.text.velocity"), StandardCharsets.UTF_8).read())).importance(MessagePriority.LOW)
+                            .deliveryReceipt(fromAddress).readReceipt(fromAddress)
+                            .addAttachment("template.html.velocity", "text/html", ContentDisposition.ATTACHMENT, Resources.asByteSource(Resources.getResource("template.html.velocity")).read())
+                            .addAttachment(new URLAttachment("https://design.jboss.org/seam/logo/final/seam_mail_85px.png", "seamLogo.png", ContentDisposition.INLINE)).send();
         }
         finally {
             stop(wiser);
@@ -277,11 +281,12 @@ public class VelocityMailMessageTest {
         try {
             wiser.start();
 
-            new MailMessageImpl(mailConfig).from(fromAddress).to(person.getEmail()).subject(subject).put("version", "Seam 3").bodyHtmlTextAlt(new VelocityTemplate(Resources.asCharSource(Resources
-                    .getResource("template.html.velocity"), Charsets.UTF_8).read()), new VelocityTemplate(Resources.asCharSource(Resources.getResource("template.text.velocity"), Charsets.UTF_8)
-                            .read())).importance(MessagePriority.LOW).deliveryReceipt(fromAddress).readReceipt(fromAddress).addAttachment("template.html.velocity", "text/html",
-                                    ContentDisposition.ATTACHMENT, Resources.asByteSource(Resources.getResource("template.html.velocity")).read()).addAttachment(new URLAttachment(
-                                            "https://design.jboss.org/seam/logo/final/seam_mail_85px.png", "seamLogo.png", ContentDisposition.INLINE)).send();
+            new MailMessageImpl(mailConfig).from(fromAddress).to(person.getEmail()).subject(subject).put("version", "Seam 3")
+                    .bodyHtmlTextAlt(new VelocityTemplate(Resources.asCharSource(Resources.getResource("template.html.velocity"), StandardCharsets.UTF_8).read()),
+                            new VelocityTemplate(Resources.asCharSource(Resources.getResource("template.text.velocity"), StandardCharsets.UTF_8).read())).importance(MessagePriority.LOW)
+                    .deliveryReceipt(fromAddress).readReceipt(fromAddress)
+                    .addAttachment("template.html.velocity", "text/html", ContentDisposition.ATTACHMENT, Resources.asByteSource(Resources.getResource("template.html.velocity")).read())
+                    .addAttachment(new URLAttachment("https://design.jboss.org/seam/logo/final/seam_mail_85px.png", "seamLogo.png", ContentDisposition.INLINE)).send();
         }
         finally {
             stop(wiser);
@@ -309,8 +314,9 @@ public class VelocityMailMessageTest {
         try {
             wiser.start();
 
-            new MailMessageImpl(mailConfig).from(fromAddress).replyTo(replyToAddress).to(toAddress).subject(new VelocityTemplate(subject)).bodyText(new VelocityTemplate(Resources.asCharSource(
-                    Resources.getResource("template.text.velocity"), Charsets.UTF_8).read())).put("version", version).importance(MessagePriority.HIGH).send();
+            new MailMessageImpl(mailConfig).from(fromAddress).replyTo(replyToAddress).to(toAddress).subject(new VelocityTemplate(subject))
+                    .bodyText(new VelocityTemplate(Resources.asCharSource(Resources.getResource("template.text.velocity"), StandardCharsets.UTF_8).read())).put("version", version)
+                    .importance(MessagePriority.HIGH).send();
         }
         finally {
             stop(wiser);
@@ -318,7 +324,7 @@ public class VelocityMailMessageTest {
     }
 
     /**
-     * Wiser takes a fraction of a second to shutdown, so let it finish.
+     * Wiser takes a fraction of a second to shut down, so let it finish.
      */
     protected void stop(Wiser wiser) {
         wiser.stop();
@@ -333,9 +339,9 @@ public class VelocityMailMessageTest {
     private static String expectedHtmlBody(EmailMessage emailMessage, String name, String email, String version) {
 
         return "<html xmlns=\"http://www.w3.org/1999/xhtml\">" + "\r\n" + "<body>" + "\r\n" + "<p><b>Dear <a href=\"mailto:" + email + "\">" + name + "</a>,</b></p>" + "\r\n"
-                + "<p>This is an example <i>HTML</i> email sent by " + version + " and Velocity.</p>" + "\r\n" + "<p><img src=\"cid:" + EmailAttachmentUtil
-                .getEmailAttachmentMap(emailMessage.getAttachments()).get("seamLogo.png").getContentId() + "\" /></p>" + "\r\n"
-                + "<p>It has an alternative text body for mail readers that don't support html.</p>" + "\r\n" + "</body>" + "\r\n" + "</html>";
+                + "<p>This is an example <i>HTML</i> email sent by " + version + " and Velocity.</p>" + "\r\n" + "<p><img src=\"cid:" + EmailAttachmentUtil.getEmailAttachmentMap(
+                emailMessage.getAttachments()).get("seamLogo.png").getContentId() + "\" /></p>" + "\r\n" + "<p>It has an alternative text body for mail readers that don't support html.</p>" + "\r\n"
+                + "</body>" + "\r\n" + "</html>";
     }
 
     private static String expectedTextBody(String name, String version) {

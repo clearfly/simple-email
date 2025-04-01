@@ -5,12 +5,12 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>co.cfly</groupId>
 	<artifactId>simple-email</artifactId>
-	<version>3.0.0</version>
+	<version>3.0.1-SNAPSHOT</version>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<version.java>17</version.java>
-		<version.errorprone>2.36.0</version.errorprone>
+		<version.errorprone>2.37.0</version.errorprone>
 		<version.jsoup>1.19.1</version.jsoup>
 		<velocity.version>2.4.1</velocity.version>
 		<subetha.version>3.1.7</subetha.version>

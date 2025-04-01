@@ -59,8 +59,8 @@ public class Header implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        if (o instanceof Header) {
-            return getName().equalsIgnoreCase(((Header) o).getName()) && getValue().equalsIgnoreCase(((Header) o).getValue());
+        if (o instanceof Header header) {
+            return getName().equalsIgnoreCase(header.getName()) && getValue().equalsIgnoreCase(header.getValue());
         }
         else {
             return false;

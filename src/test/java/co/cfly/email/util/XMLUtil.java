@@ -4,11 +4,11 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import com.google.common.base.Charsets;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Marshaller;
@@ -19,13 +19,13 @@ public class XMLUtil {
     public static String marshal(Object o) {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         marshal(o, bos, new HashMap<>());
-        return bos.toString(Charsets.UTF_8);
+        return bos.toString(StandardCharsets.UTF_8);
     }
 
     public static String marshal(Object o, Map<String, Object> properties) {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         marshal(o, bos, properties);
-        return bos.toString(Charsets.UTF_8);
+        return bos.toString(StandardCharsets.UTF_8);
     }
 
     public static void marshal(Object o, OutputStream os) {
@@ -56,6 +56,6 @@ public class XMLUtil {
     }
 
     public static <T> T unmarshal(Class<T> clazz, String xml) throws JAXBException {
-        return unmarshal(clazz, new ByteArrayInputStream(xml.getBytes(Charsets.UTF_8)));
+        return unmarshal(clazz, new ByteArrayInputStream(xml.getBytes(StandardCharsets.UTF_8)));
     }
 }
