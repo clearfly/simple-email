@@ -11,7 +11,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<version.java>17</version.java>
 		<version.errorprone>2.37.0</version.errorprone>
-		<version.jsoup>1.19.1</version.jsoup>
+		<version.jsoup>1.20.1</version.jsoup>
 		<velocity.version>2.4.1</velocity.version>
 		<subetha.version>3.1.7</subetha.version>
 		<version.guava>33.4.6-jre</version.guava>
