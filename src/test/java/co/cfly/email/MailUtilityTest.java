@@ -112,4 +112,14 @@ public class MailUtilityTest {
             Assert.assertEquals("Test fax", emailMessage.getSubject());
         }
     }
+
+    @Test
+    public void unparsableFilename() throws IOException, MessagingException {
+        try (InputStream inputStream = Resources.getResource("unparsable-filename.mime").openStream()) {
+            MimeMessage mimeMessage = new MimeMessage(Session.getDefaultInstance(new Properties()), inputStream);
+            EmailMessage emailMessage = MessageConverter.convert(mimeMessage);
+            Assert.assertEquals("SWC Scanned", emailMessage.getSubject());
+            Assert.assertEquals(0, emailMessage.getAttachments().size());
+        }
+    }
 }

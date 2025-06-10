@@ -1,0 +1,41 @@
+Received: from outbound-ip20a.ess.bar.com (outbound-ip20a.ess.foo.com [8.8.8.8])
+ by mxa.mailgun.org with ESMTP id 6093fbeb.7f8a010daa50-api-n13;
+ Thu, 06 May 2021 14:23:39 -0000 (UTC)
+From: "=?utf-8?Q?Clinic=20Scan=20to=20Email?=" <SWCScanned@foo.com>
+To: "=?utf-8?Q?1555555555@sendfax.io?=" <1555555555@sendfax.io>
+Subject: SWC Scanned
+Content-Type: multipart/mixed;charset=utf-8; boundary="----=_Part_Boundary_00000001_679bb941.3aec887e"
+Date: Thu, 6 May 2021 14:23:28 +0000
+X-Originating-IP: [4.4.4.4]
+X-ClientProxiedBy: BL1PR13CA0314.namprd13.prod.bar.com
+ (2603:10b6:208:2c1::19) To SN7PR18MB3950.namprd18.prod.bar.com
+ (2603:10b6:806:10e::18)
+Return-Path: SWCScanned@foo.com
+Message-ID:
+ <SN7PR18MB3950CA4B2269DD112125A53DB4589@SN7PR18MB3950.namprd18.prod.bar.com>
+MIME-Version: 1.0
+
+------=_Part_Boundary_00000001_679bb941.3aec887e
+Content-Type: text/plain;charset=utf-8; Content-Transfer-Encoding:base64
+Content-Transfer-Encoding: quoted-printable
+
+
+
+HIPAA CONFIDENTIALITY NOTICE
+
+The information in this message may be privileged, confidential and protect=
+ed from disclosure. If the reader of this message is neither the intended r=
+ecipient, nor an employee or agent responsible for delivering this message =
+to the intended recipient, then you are hereby notified that any disseminat=
+ion, distribution, unauthorized use, or copying of this communication is st=
+rictly prohibited. Please notify me by telephone and/or e-mail immediately =
+if you have received this copy in error.
+
+------=_Part_Boundary_00000001_679bb941.3aec887e
+Content-Type: image/jpeg; name=Irondequoit Ambulance
+Content-Disposition: inline; filename=Irondequoit Ambulance
+Content-Transfer-Encoding: base64
+
+dGVzdA==
+
+------=_Part_Boundary_00000001_679bb941.3aec887e--

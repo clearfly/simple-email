@@ -13,14 +13,13 @@
 package co.cfly.email.impl.util;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.logging.Logger;
 
 import co.cfly.email.api.ContentDisposition;
 import co.cfly.email.api.EmailMessage;
-import co.cfly.email.api.MailException;
 import co.cfly.email.impl.attachments.InputStreamAttachment;
 import jakarta.mail.BodyPart;
 import jakarta.mail.Message;
@@ -28,8 +27,11 @@ import jakarta.mail.Message.RecipientType;
 import jakarta.mail.MessagingException;
 import jakarta.mail.Part;
 import jakarta.mail.internet.MimeMultipart;
+import jakarta.mail.internet.ParseException;
 
 public class MessageConverter {
+
+    static final Logger log = Logger.getLogger(MessageConverter.class.getName());
 
     private final ContentDisposition defaultDisposition;
     private EmailMessage emailMessage;
@@ -38,16 +40,16 @@ public class MessageConverter {
         this.defaultDisposition = defaultDisposition;
     }
 
-    public static EmailMessage convert(Message m) throws MailException, UnsupportedEncodingException {
+    public static EmailMessage convert(Message m) throws MessagingException {
         return convert(m, ContentDisposition.INLINE);
     }
 
-    public static EmailMessage convert(Message m, ContentDisposition defaultDisposition) throws MailException, UnsupportedEncodingException {
+    public static EmailMessage convert(Message m, ContentDisposition defaultDisposition) throws MessagingException {
         MessageConverter mc = new MessageConverter(defaultDisposition);
         return mc.convertMessage(m);
     }
 
-    private EmailMessage convertMessage(Message m) throws MailException, UnsupportedEncodingException {
+    private EmailMessage convertMessage(Message m) throws MessagingException {
         emailMessage = new EmailMessage();
 
         try {
@@ -72,46 +74,63 @@ public class MessageConverter {
                 addAttachment(m);
             }
         }
-        catch (UnsupportedEncodingException e) {
-            throw e;
+        catch (IOException e) {
+            throw new RuntimeException(e);
         }
-        catch (IOException | MessagingException e) {
-            throw new MailException(e);
-        }
-
         return emailMessage;
     }
 
-    private void addAttachment(Message m) throws MessagingException, IOException {
-        ContentDisposition attachmentDisposition = determineContentDisposition(m.getDisposition());
-        emailMessage.addAttachment(new InputStreamAttachment(MailUtility.decodeString(m.getFileName()), m.getContentType(), attachmentDisposition, m.getInputStream()));
+    private void addAttachment(Message m) throws MessagingException {
+        try {
+            ContentDisposition attachmentDisposition = determineContentDisposition(m.getDisposition());
+            emailMessage.addAttachment(new InputStreamAttachment(MailUtility.decodeString(m.getFileName()), m.getContentType(), attachmentDisposition, m.getInputStream()));
+        }
+        catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    private void addMultiPart(MimeMultipart mp) throws MessagingException, IOException {
-        for (int i = 0; i < mp.getCount(); i++) {
-            BodyPart bp = mp.getBodyPart(i);
+    private void addMultiPart(MimeMultipart mp) throws MessagingException {
+        try {
+            for (int i = 0; i < mp.getCount(); i++) {
+                BodyPart bp = mp.getBodyPart(i);
+                if (bp.getContentType().toLowerCase().contains("multipart/")) {
+                    addMultiPart((MimeMultipart) bp.getContent());
+                }
+                else {
+                    addPart(mp.getBodyPart(i));
+                }
+            }
+        }
+        catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void addPart(BodyPart bp) throws MessagingException {
+        try {
             if (bp.getContentType().toLowerCase().contains("multipart/")) {
                 addMultiPart((MimeMultipart) bp.getContent());
             }
+            else if (bp.getContentType().toLowerCase().contains("text/plain")) {
+                emailMessage.setTextBody(convertBodyPart(bp));
+            }
+            else if (bp.getContentType().toLowerCase().contains("text/html")) {
+                emailMessage.setHtmlBody(convertBodyPart(bp));
+            }
             else {
-                addPart(mp.getBodyPart(i));
+                try {
+                    final ContentDisposition attachmentDisposition = determineContentDisposition(bp.getDisposition());
+                    final String fileName = MailUtility.decodeString(bp.getFileName());
+                    emailMessage.addAttachment(new InputStreamAttachment(fileName, bp.getContentType(), attachmentDisposition, bp.getInputStream()));
+                }
+                catch (ParseException e) {
+                    log.info("Failed to parse attachment: %s".formatted(e.getMessage()));
+                }
             }
         }
-    }
-
-    private void addPart(BodyPart bp) throws MessagingException, IOException {
-        if (bp.getContentType().toLowerCase().contains("multipart/")) {
-            addMultiPart((MimeMultipart) bp.getContent());
-        }
-        else if (bp.getContentType().toLowerCase().contains("text/plain")) {
-            emailMessage.setTextBody(convertBodyPart(bp));
-        }
-        else if (bp.getContentType().toLowerCase().contains("text/html")) {
-            emailMessage.setHtmlBody(convertBodyPart(bp));
-        }
-        else {
-            ContentDisposition attachmentDisposition = determineContentDisposition(bp.getDisposition());
-            emailMessage.addAttachment(new InputStreamAttachment(MailUtility.decodeString(bp.getFileName()), bp.getContentType(), attachmentDisposition, bp.getInputStream()));
+        catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -128,12 +147,17 @@ public class MessageConverter {
         return attachmentDisposition;
     }
 
-    private String convertBodyPart(Part part) throws MessagingException, IOException {
-        if (part.getContent() instanceof String value) {
-            return value;
+    private String convertBodyPart(Part part) throws MessagingException {
+        try {
+            if (part.getContent() instanceof String value) {
+                return value;
+            }
+            else {
+                return new String(part.getInputStream().readAllBytes(), MailUtility.determineCharset(part).orElse(StandardCharsets.UTF_8));
+            }
         }
-        else {
-            return new String(part.getInputStream().readAllBytes(), MailUtility.determineCharset(part).orElse(StandardCharsets.UTF_8));
+        catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 }
