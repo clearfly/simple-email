@@ -13,6 +13,7 @@
 package co.cfly.email.impl.util;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 import java.util.Optional;
@@ -40,16 +41,16 @@ public class MessageConverter {
         this.defaultDisposition = defaultDisposition;
     }
 
-    public static EmailMessage convert(Message m) throws MessagingException {
+    public static EmailMessage convert(Message m) throws MessagingException, UnsupportedEncodingException {
         return convert(m, ContentDisposition.INLINE);
     }
 
-    public static EmailMessage convert(Message m, ContentDisposition defaultDisposition) throws MessagingException {
+    public static EmailMessage convert(Message m, ContentDisposition defaultDisposition) throws MessagingException, UnsupportedEncodingException {
         MessageConverter mc = new MessageConverter(defaultDisposition);
         return mc.convertMessage(m);
     }
 
-    private EmailMessage convertMessage(Message m) throws MessagingException {
+    private EmailMessage convertMessage(Message m) throws MessagingException, UnsupportedEncodingException {
         emailMessage = new EmailMessage();
 
         try {
@@ -73,6 +74,9 @@ public class MessageConverter {
             else if (Optional.ofNullable(m.getDisposition()).orElse("inline").startsWith(Part.ATTACHMENT)) {
                 addAttachment(m);
             }
+        }
+        catch (UnsupportedEncodingException e) {
+            throw e;
         }
         catch (IOException e) {
             throw new RuntimeException(e);
