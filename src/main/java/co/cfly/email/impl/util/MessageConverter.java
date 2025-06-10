@@ -129,7 +129,7 @@ public class MessageConverter {
                     emailMessage.addAttachment(new InputStreamAttachment(fileName, bp.getContentType(), attachmentDisposition, bp.getInputStream()));
                 }
                 catch (ParseException e) {
-                    log.info("Failed to parse attachment: %s".formatted(e.getMessage()));
+                    log.info("Failed to parse attachment in %s: %s".formatted(Optional.ofNullable(emailMessage.getMessageId()).orElse("Unknown Message-Id"), e.getMessage()));
                 }
             }
         }
