@@ -49,7 +49,7 @@ import jakarta.mail.internet.ParseException;
 public class MailUtility {
 
     public static final String DOMAIN_PROPERTY_KEY = "co.cfly.email.domainName";
-    public static final Pattern CHARSET_EXTRACT = Pattern.compile("charset=(.+?)($|;)", Pattern.CASE_INSENSITIVE);
+    public static final Pattern CHARSET_EXTRACT = Pattern.compile("charset\\s*=\\s*\"?([^\";]*)\"?", Pattern.CASE_INSENSITIVE);
 
     public static InternetAddress internetAddress(String address) throws InvalidAddressException {
         try {
@@ -292,19 +292,18 @@ public class MailUtility {
      * Determines the content type of the part, or empty if it cannot determine
      */
     public static Optional<Charset> determineCharset(Part part) throws MessagingException {
-        Optional<String> contentTypeValue = Arrays.stream(part.getHeader("Content-Type")).findFirst();
-        if (contentTypeValue.isPresent()) {
-            final String value = contentTypeValue.get();
+        return Arrays.stream(part.getHeader("Content-Type")).findFirst().map(value -> {
             Matcher matcher = CHARSET_EXTRACT.matcher(value);
             if (matcher.find()) {
-                return Optional.of(Charset.forName(matcher.group(1).trim()));
+                String charsetName = matcher.group(1).trim().toUpperCase();
+                return switch (charsetName) {
+                    case "CP-850" -> Charset.forName("CP850");
+                    default -> Charset.forName(charsetName);
+                };
             }
             else {
-                return Optional.empty();
+                return null;
             }
-        }
-        else {
-            return Optional.empty();
-        }
+        });
     }
 }
