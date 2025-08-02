@@ -18,7 +18,6 @@ import java.util.Collection;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -291,7 +290,7 @@ public class MailUtility {
     /**
      * Determines the content type of the part, or empty if it cannot determine
      */
-    public static Optional<Charset> determineCharset(Part part) throws MessagingException {
+    public static Charset determineCharset(Part part, Charset defaultValue) throws MessagingException {
         return Arrays.stream(part.getHeader("Content-Type")).findFirst().map(value -> {
             Matcher matcher = CHARSET_EXTRACT.matcher(value);
             if (matcher.find()) {
@@ -304,6 +303,6 @@ public class MailUtility {
             else {
                 return null;
             }
-        });
+        }).orElse(defaultValue);
     }
 }

@@ -29,21 +29,21 @@ public class MailUtilityTest {
     public void determineCharset() throws MessagingException {
         MimeBodyPart part = new MimeBodyPart();
         part.addHeader("Content-Type", "text/plain;charset=utf-8; Content-Transfer-Encoding:base64");
-        Assert.assertEquals(StandardCharsets.UTF_8, MailUtility.determineCharset(part).orElseThrow(RuntimeException::new));
+        Assert.assertEquals(StandardCharsets.UTF_8, MailUtility.determineCharset(part, StandardCharsets.UTF_8));
     }
 
     @Test
     public void determineCharsetQuoted() throws MessagingException {
         MimeBodyPart part = new MimeBodyPart();
         part.addHeader("Content-Type", "text/plain;charset=\"utf-8\"; Content-Transfer-Encoding:base64");
-        Assert.assertEquals(StandardCharsets.UTF_8, MailUtility.determineCharset(part).orElseThrow(RuntimeException::new));
+        Assert.assertEquals(StandardCharsets.UTF_8, MailUtility.determineCharset(part, StandardCharsets.UTF_8));
     }
 
     @Test
     public void determineCharsetNoSemiColon() throws MessagingException {
         MimeBodyPart part = new MimeBodyPart();
         part.addHeader("Content-Type", "text/plain;charset=utf-8");
-        Assert.assertEquals(StandardCharsets.UTF_8, MailUtility.determineCharset(part).orElseThrow(RuntimeException::new));
+        Assert.assertEquals(StandardCharsets.UTF_8, MailUtility.determineCharset(part, StandardCharsets.UTF_8));
     }
 
     @Test
