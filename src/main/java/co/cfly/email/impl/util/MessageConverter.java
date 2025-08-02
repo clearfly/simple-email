@@ -151,7 +151,7 @@ public class MessageConverter {
         return attachmentDisposition;
     }
 
-    private String convertBodyPart(Part part) throws MessagingException {
+    private String convertBodyPart(Part part) throws MessagingException, UnsupportedEncodingException {
         try {
             if (part.getContent() instanceof String value) {
                 return value;
@@ -159,6 +159,9 @@ public class MessageConverter {
             else {
                 return new String(part.getInputStream().readAllBytes(), MailUtility.determineCharset(part).orElse(StandardCharsets.UTF_8));
             }
+        }
+        catch (UnsupportedEncodingException e) {
+            throw e;
         }
         catch (IOException e) {
             throw new RuntimeException(e);
