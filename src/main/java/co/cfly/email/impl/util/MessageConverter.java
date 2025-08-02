@@ -84,17 +84,20 @@ public class MessageConverter {
         return emailMessage;
     }
 
-    private void addAttachment(Message m) throws MessagingException {
+    private void addAttachment(Message m) throws MessagingException, UnsupportedEncodingException {
         try {
             ContentDisposition attachmentDisposition = determineContentDisposition(m.getDisposition());
             emailMessage.addAttachment(new InputStreamAttachment(MailUtility.decodeString(m.getFileName()), m.getContentType(), attachmentDisposition, m.getInputStream()));
+        }
+        catch (UnsupportedEncodingException e) {
+            throw e;
         }
         catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private void addMultiPart(MimeMultipart mp) throws MessagingException {
+    private void addMultiPart(MimeMultipart mp) throws MessagingException, UnsupportedEncodingException {
         try {
             for (int i = 0; i < mp.getCount(); i++) {
                 BodyPart bp = mp.getBodyPart(i);
@@ -106,12 +109,15 @@ public class MessageConverter {
                 }
             }
         }
+        catch (UnsupportedEncodingException e) {
+            throw e;
+        }
         catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private void addPart(BodyPart bp) throws MessagingException {
+    private void addPart(BodyPart bp) throws MessagingException, UnsupportedEncodingException {
         try {
             if (bp.getContentType().toLowerCase().contains("multipart/")) {
                 addMultiPart((MimeMultipart) bp.getContent());
@@ -132,6 +138,9 @@ public class MessageConverter {
                     log.info("Failed to parse attachment in %s: %s".formatted(Optional.ofNullable(emailMessage.getMessageId()).orElse("Unknown Message-Id"), e.getMessage()));
                 }
             }
+        }
+        catch (UnsupportedEncodingException e) {
+            throw e;
         }
         catch (IOException e) {
             throw new RuntimeException(e);
