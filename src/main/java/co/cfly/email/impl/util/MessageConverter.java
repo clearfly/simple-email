@@ -162,12 +162,7 @@ public class MessageConverter {
 
     private String convertBodyPart(Part part) throws MessagingException, UnsupportedEncodingException {
         try {
-            if (part.getContent() instanceof String value) {
-                return value;
-            }
-            else {
-                return new String(part.getInputStream().readAllBytes(), MailUtility.determineCharset(part).orElse(StandardCharsets.UTF_8));
-            }
+            return new String(part.getInputStream().readAllBytes(), MailUtility.determineCharset(part, StandardCharsets.UTF_8));
         }
         catch (UnsupportedEncodingException e) {
             throw e;
