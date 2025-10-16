@@ -291,8 +291,9 @@ public class MailUtility {
     /**
      * Determines the content type of the part, or empty if it cannot determine
      */
+    @SuppressWarnings("SwitchStatementWithTooFewBranches")
     public static Charset determineCharset(Part part, Charset defaultValue) throws MessagingException {
-        return Arrays.stream(Optional.ofNullable(part.getHeader("Content-Type")).orElseGet(() -> new String[0])).findFirst().map(value -> {
+        return Optional.ofNullable(part.getHeader("Content-Type")).flatMap(headers -> Arrays.stream(headers).findFirst()).map(value -> {
             Matcher matcher = CHARSET_EXTRACT.matcher(value);
             if (matcher.find()) {
                 String charsetName = matcher.group(1).trim().toUpperCase();
