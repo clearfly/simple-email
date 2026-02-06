@@ -284,7 +284,8 @@ public class VelocityMailMessageTest {
                     .bodyHtmlTextAlt(new VelocityTemplate(Resources.asCharSource(Resources.getResource("template.html.velocity"), StandardCharsets.UTF_8).read()),
                             new VelocityTemplate(Resources.asCharSource(Resources.getResource("template.text.velocity"), StandardCharsets.UTF_8).read())).importance(MessagePriority.LOW)
                     .deliveryReceipt(fromAddress).readReceipt(fromAddress)
-                    .addAttachment("template.html.velocity", "text/html", ContentDisposition.ATTACHMENT, Resources.asByteSource(Resources.getResource("template.html.velocity")).read()).send();
+                    .addAttachment("template.html.velocity", "text/html", ContentDisposition.ATTACHMENT, Resources.asByteSource(Resources.getResource("template.html.velocity")).read())
+                    .addAttachment(new URLAttachment(MailMessageTest.PNG_URL, "seamLogo.png", ContentDisposition.INLINE)).send();
         }
         finally {
             stop(wiser);
