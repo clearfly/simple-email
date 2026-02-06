@@ -75,7 +75,7 @@ public class VelocityMailMessageTest {
 
         Assert.assertEquals("Didn't receive the expected amount of messages. Expected 1 got " + wiser.getMessages().size(), 1, wiser.getMessages().size());
 
-        MimeMessage mess = MailUtilityTest.fromWiser(wiser.getMessages().get(0));
+        MimeMessage mess = MailUtilityTest.fromWiser(wiser.getMessages().getFirst());
 
         Assert.assertEquals(MailTestUtil.getAddressHeader(fromName, fromAddress), mess.getHeader("From", null));
         Assert.assertEquals(MailTestUtil.getAddressHeader(replyToAddress), mess.getHeader("Reply-To", null));
@@ -127,7 +127,7 @@ public class VelocityMailMessageTest {
 
         Assert.assertEquals("Didn't receive the expected amount of messages. Expected 1 got " + wiser.getMessages().size(), 1, wiser.getMessages().size());
 
-        MimeMessage mess = MailUtilityTest.fromWiser(wiser.getMessages().get(0));
+        MimeMessage mess = MailUtilityTest.fromWiser(wiser.getMessages().getFirst());
 
         Assert.assertEquals("Subject has been modified", subject, MimeUtility.decodeText(MimeUtility.unfold(mess.getHeader("Subject", null))));
 
@@ -161,8 +161,7 @@ public class VelocityMailMessageTest {
 
             emailMessage = new MailMessageImpl(mailConfig).from(MailTestUtil.getAddressHeader(fromName, fromAddress)).replyTo(MailTestUtil.getAddressHeader(replyToName, replyToAddress)).to(person)
                     .subject(subject).bodyHtml(new VelocityTemplate(Resources.asCharSource(Resources.getResource("template.html.velocity"), StandardCharsets.UTF_8).read())).put("version", version)
-                    .put("person", person).importance(MessagePriority.HIGH)
-                    .addAttachment(new URLAttachment("https://design.jboss.org/seam/logo/final/seam_mail_85px.png", "seamLogo.png", ContentDisposition.INLINE)).send();
+                    .put("person", person).importance(MessagePriority.HIGH).addAttachment(new URLAttachment(MailMessageTest.PNG_URL, "seamLogo.png", ContentDisposition.INLINE)).send();
         }
         finally {
             stop(wiser);
@@ -170,7 +169,7 @@ public class VelocityMailMessageTest {
 
         Assert.assertEquals("Didn't receive the expected amount of messages. Expected 1 got " + wiser.getMessages().size(), 1, wiser.getMessages().size());
 
-        MimeMessage mess = MailUtilityTest.fromWiser(wiser.getMessages().get(0));
+        MimeMessage mess = MailUtilityTest.fromWiser(wiser.getMessages().getFirst());
 
         Assert.assertEquals(MailTestUtil.getAddressHeader(fromName, fromAddress), mess.getHeader("From", null));
         Assert.assertEquals(MailTestUtil.getAddressHeader(replyToName, replyToAddress), mess.getHeader("Reply-To", null));
@@ -221,7 +220,7 @@ public class VelocityMailMessageTest {
                                     new VelocityTemplate(Resources.asCharSource(Resources.getResource("template.text.velocity"), StandardCharsets.UTF_8).read())).importance(MessagePriority.LOW)
                             .deliveryReceipt(fromAddress).readReceipt(fromAddress)
                             .addAttachment("template.html.velocity", "text/html", ContentDisposition.ATTACHMENT, Resources.asByteSource(Resources.getResource("template.html.velocity")).read())
-                            .addAttachment(new URLAttachment("https://design.jboss.org/seam/logo/final/seam_mail_85px.png", "seamLogo.png", ContentDisposition.INLINE)).send();
+                            .addAttachment(new URLAttachment(MailMessageTest.PNG_URL, "seamLogo.png", ContentDisposition.INLINE)).send();
         }
         finally {
             stop(wiser);
@@ -229,7 +228,7 @@ public class VelocityMailMessageTest {
 
         Assert.assertEquals("Didn't receive the expected amount of messages. Expected 1 got " + wiser.getMessages().size(), 1, wiser.getMessages().size());
 
-        MimeMessage mess = MailUtilityTest.fromWiser(wiser.getMessages().get(0));
+        MimeMessage mess = MailUtilityTest.fromWiser(wiser.getMessages().getFirst());
 
         Assert.assertEquals(MailTestUtil.getAddressHeader(fromName, fromAddress), mess.getHeader("From", null));
         Assert.assertEquals(MailTestUtil.getAddressHeader(toName, toAddress), mess.getHeader("To", null));
@@ -285,8 +284,7 @@ public class VelocityMailMessageTest {
                     .bodyHtmlTextAlt(new VelocityTemplate(Resources.asCharSource(Resources.getResource("template.html.velocity"), StandardCharsets.UTF_8).read()),
                             new VelocityTemplate(Resources.asCharSource(Resources.getResource("template.text.velocity"), StandardCharsets.UTF_8).read())).importance(MessagePriority.LOW)
                     .deliveryReceipt(fromAddress).readReceipt(fromAddress)
-                    .addAttachment("template.html.velocity", "text/html", ContentDisposition.ATTACHMENT, Resources.asByteSource(Resources.getResource("template.html.velocity")).read())
-                    .addAttachment(new URLAttachment("https://design.jboss.org/seam/logo/final/seam_mail_85px.png", "seamLogo.png", ContentDisposition.INLINE)).send();
+                    .addAttachment("template.html.velocity", "text/html", ContentDisposition.ATTACHMENT, Resources.asByteSource(Resources.getResource("template.html.velocity")).read()).send();
         }
         finally {
             stop(wiser);
@@ -294,7 +292,7 @@ public class VelocityMailMessageTest {
 
         Assert.assertEquals("Didn't receive the expected amount of messages. Expected 1 got " + wiser.getMessages().size(), 1, wiser.getMessages().size());
 
-        MimeMessage mess = MailUtilityTest.fromWiser(wiser.getMessages().get(0));
+        MimeMessage mess = MailUtilityTest.fromWiser(wiser.getMessages().getFirst());
 
         Assert.assertEquals("Subject has been modified", subject, MimeUtility.unfold(mess.getHeader("Subject", null)));
         EmailMessage convertedMessage = MessageConverter.convert(mess);
