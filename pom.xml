@@ -9,8 +9,8 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<version.java>21</version.java>
-		<version.errorprone>2.45.0</version.errorprone>
+		<version.java>25</version.java>
+		<version.errorprone>2.46.0</version.errorprone>
 		<version.jsoup>1.22.1</version.jsoup>
 		<velocity.version>2.4.1</velocity.version>
 		<subetha.version>3.1.7</subetha.version>

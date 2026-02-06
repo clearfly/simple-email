@@ -49,6 +49,8 @@ public class MailMessageTest {
 
     private static final String ENVELOPE_FROM_ADDRESS = "ef@jboss.org";
 
+    static final String PNG_URL = "https://d3kxu0ch7gs9bq.cloudfront.net/images/Clearfly_Logo_Primary_FC.png";
+
     @Test
     public void testTextMailMessage() throws MessagingException, IOException {
         SessionConfig mailConfig = TestMailConfigs.standardConfig();
@@ -72,7 +74,7 @@ public class MailMessageTest {
 
         Assert.assertEquals("Didn't receive the expected amount of messages. Expected 1 got " + wiser.getMessages().size(), 1, wiser.getMessages().size());
 
-        MimeMessage mess = MailUtilityTest.fromWiser(wiser.getMessages().get(0));
+        MimeMessage mess = MailUtilityTest.fromWiser(wiser.getMessages().getFirst());
 
         Assert.assertEquals(MailTestUtil.getAddressHeader(fromName, fromAddress), mess.getHeader("From", null));
         Assert.assertEquals(MailTestUtil.getAddressHeader(replyToAddress), mess.getHeader("Reply-To", null));
@@ -121,7 +123,7 @@ public class MailMessageTest {
 
         Assert.assertEquals("Didn't receive the expected amount of messages. Expected 1 got " + wiser.getMessages().size(), 1, wiser.getMessages().size());
 
-        MimeMessage mess = MailUtilityTest.fromWiser(wiser.getMessages().get(0));
+        MimeMessage mess = MailUtilityTest.fromWiser(wiser.getMessages().getFirst());
 
         Assert.assertEquals("Subject has been modified", subject, MimeUtility.decodeText(MimeUtility.unfold(mess.getHeader("Subject", null))));
 
@@ -151,9 +153,8 @@ public class MailMessageTest {
         String replyToName = "No Reply";
         try {
             wiser.start();
-            e = new MailMessageImpl(mailConfig).from(MailTestUtil.getAddressHeader(fromName, fromAddress)).replyTo(MailTestUtil.getAddressHeader(replyToName, replyToAddress)).to(person).subject(
-                    subject).bodyHtml(htmlBody).importance(MessagePriority.HIGH).addAttachment(new URLAttachment("https://design.jboss.org/seam/logo/final/seam_mail_85px.png", "seamLogo.png",
-                            ContentDisposition.INLINE)).send();
+            e = new MailMessageImpl(mailConfig).from(MailTestUtil.getAddressHeader(fromName, fromAddress)).replyTo(MailTestUtil.getAddressHeader(replyToName, replyToAddress)).to(person)
+                    .subject(subject).bodyHtml(htmlBody).importance(MessagePriority.HIGH).addAttachment(new URLAttachment(PNG_URL, "seamLogo.png", ContentDisposition.INLINE)).send();
         }
         finally {
             stop(wiser);
@@ -161,7 +162,7 @@ public class MailMessageTest {
 
         Assert.assertEquals("Didn't receive the expected amount of messages. Expected 1 got " + wiser.getMessages().size(), 1, wiser.getMessages().size());
 
-        MimeMessage mess = MailUtilityTest.fromWiser(wiser.getMessages().get(0));
+        MimeMessage mess = MailUtilityTest.fromWiser(wiser.getMessages().getFirst());
 
         Assert.assertEquals(MailTestUtil.getAddressHeader(fromName, fromAddress), mess.getHeader("From", null));
         Assert.assertEquals(MailTestUtil.getAddressHeader(replyToName, replyToAddress), mess.getHeader("Reply-To", null));
@@ -204,9 +205,9 @@ public class MailMessageTest {
             wiser.start();
 
             new MailMessageImpl(mailConfig).from(MailTestUtil.getAddressHeader(fromName, fromAddress)).to(person).subject(subject).bodyHtmlTextAlt(htmlBody, textBody).importance(MessagePriority.LOW)
-                    .deliveryReceipt(fromAddress).readReceipt(fromAddress).addAttachment("template.text.velocity", "text/plain", ContentDisposition.ATTACHMENT, Resources.asByteSource(Resources
-                            .getResource("template.text.velocity")).read()).addAttachment(new URLAttachment("https://design.jboss.org/seam/logo/final/seam_mail_85px.png", "seamLogo.png",
-                                    ContentDisposition.INLINE)).send();
+                    .deliveryReceipt(fromAddress).readReceipt(fromAddress)
+                    .addAttachment("template.text.velocity", "text/plain", ContentDisposition.ATTACHMENT, Resources.asByteSource(Resources.getResource("template.text.velocity")).read())
+                    .addAttachment(new URLAttachment(PNG_URL, "seamLogo.png", ContentDisposition.INLINE)).send();
         }
         finally {
             stop(wiser);
@@ -214,7 +215,7 @@ public class MailMessageTest {
 
         Assert.assertEquals("Didn't receive the expected amount of messages. Expected 1 got " + wiser.getMessages().size(), 1, wiser.getMessages().size());
 
-        MimeMessage mess = MailUtilityTest.fromWiser(wiser.getMessages().get(0));
+        MimeMessage mess = MailUtilityTest.fromWiser(wiser.getMessages().getFirst());
 
         Assert.assertEquals(MailTestUtil.getAddressHeader(fromName, fromAddress), mess.getHeader("From", null));
         Assert.assertEquals(MailTestUtil.getAddressHeader(toName, toAddress), mess.getHeader("To", null));
@@ -264,10 +265,10 @@ public class MailMessageTest {
         try {
             wiser.start();
 
-            new MailMessageImpl(mailConfig).from(MailTestUtil.getAddressHeader(fromName, fromAddress)).to(person).subject(subject).bodyHtml(htmlBody).createTextAlternative(true).importance(
-                    MessagePriority.LOW).deliveryReceipt(fromAddress).readReceipt(fromAddress).addAttachment("template.text.velocity", "text/plain", ContentDisposition.ATTACHMENT, Resources
-                            .asByteSource(Resources.getResource("template.text.velocity")).read()).addAttachment(new URLAttachment("https://design.jboss.org/seam/logo/final/seam_mail_85px.png",
-                                    "seamLogo.png", ContentDisposition.INLINE)).send();
+            new MailMessageImpl(mailConfig).from(MailTestUtil.getAddressHeader(fromName, fromAddress)).to(person).subject(subject).bodyHtml(htmlBody).createTextAlternative(true)
+                    .importance(MessagePriority.LOW).deliveryReceipt(fromAddress).readReceipt(fromAddress)
+                    .addAttachment("template.text.velocity", "text/plain", ContentDisposition.ATTACHMENT, Resources.asByteSource(Resources.getResource("template.text.velocity")).read())
+                    .addAttachment(new URLAttachment(PNG_URL, "seamLogo.png", ContentDisposition.INLINE)).send();
         }
         finally {
             stop(wiser);
@@ -275,7 +276,7 @@ public class MailMessageTest {
 
         Assert.assertEquals("Didn't receive the expected amount of messages. Expected 1 got " + wiser.getMessages().size(), 1, wiser.getMessages().size());
 
-        MimeMessage mess = MailUtilityTest.fromWiser(wiser.getMessages().get(0));
+        MimeMessage mess = MailUtilityTest.fromWiser(wiser.getMessages().getFirst());
 
         Assert.assertEquals(MailTestUtil.getAddressHeader(fromName, fromAddress), mess.getHeader("From", null));
         Assert.assertEquals(MailTestUtil.getAddressHeader(toName, toAddress), mess.getHeader("To", null));
@@ -335,8 +336,8 @@ public class MailMessageTest {
         try {
             wiser.start();
 
-            e = new MailMessageImpl(mailConfig).from(MailTestUtil.getAddressHeader(longFromName, longFromAddress)).to(MailTestUtil.getAddressHeader(longToName, longToAddress)).cc(MailTestUtil
-                    .getAddressHeader(longCcName, longCcAddress)).subject(subject).bodyText(textBody).importance(MessagePriority.HIGH).send();
+            e = new MailMessageImpl(mailConfig).from(MailTestUtil.getAddressHeader(longFromName, longFromAddress)).to(MailTestUtil.getAddressHeader(longToName, longToAddress))
+                    .cc(MailTestUtil.getAddressHeader(longCcName, longCcAddress)).subject(subject).bodyText(textBody).importance(MessagePriority.HIGH).send();
         }
         finally {
             stop(wiser);
@@ -344,7 +345,7 @@ public class MailMessageTest {
 
         Assert.assertEquals("Didn't receive the expected amount of messages. Expected 2 got " + wiser.getMessages().size(), 2, wiser.getMessages().size());
 
-        MimeMessage mess = MailUtilityTest.fromWiser(wiser.getMessages().get(0));
+        MimeMessage mess = MailUtilityTest.fromWiser(wiser.getMessages().getFirst());
 
         Assert.assertEquals(MailTestUtil.getAddressHeader(longFromName, longFromAddress), MimeUtility.unfold(mess.getHeader("From", null)));
         Assert.assertEquals(MailTestUtil.getAddressHeader(longToName, longToAddress), MimeUtility.unfold(mess.getHeader("To", null)));
@@ -381,8 +382,8 @@ public class MailMessageTest {
         try {
             wiser.start();
 
-            new MailMessageImpl(mailConfig).from(MailTestUtil.getAddressHeader(fromName, fromAddress)).replyTo(replyToAddress).to(toAddress).subject(subject).bodyText(textBody).importance(
-                    MessagePriority.HIGH).messageId(messageId).send();
+            new MailMessageImpl(mailConfig).from(MailTestUtil.getAddressHeader(fromName, fromAddress)).replyTo(replyToAddress).to(toAddress).subject(subject).bodyText(textBody)
+                    .importance(MessagePriority.HIGH).messageId(messageId).send();
         }
         finally {
             stop(wiser);
@@ -427,8 +428,8 @@ public class MailMessageTest {
         try {
             wiser.start();
 
-            e = new MailMessageImpl(mailConfig).from(MailTestUtil.getAddressHeader(fromName, fromAddress)).replyTo(replyToAddress).to(person).subject(subject).bodyText(textBody).importance(
-                    MessagePriority.HIGH).messageId(messageId).send();
+            e = new MailMessageImpl(mailConfig).from(MailTestUtil.getAddressHeader(fromName, fromAddress)).replyTo(replyToAddress).to(person).subject(subject).bodyText(textBody)
+                    .importance(MessagePriority.HIGH).messageId(messageId).send();
         }
         finally {
             stop(wiser);
@@ -436,7 +437,7 @@ public class MailMessageTest {
 
         Assert.assertEquals("Didn't receive the expected amount of messages. Expected 1 got " + wiser.getMessages().size(), 1, wiser.getMessages().size());
 
-        MimeMessage mess = MailUtilityTest.fromWiser(wiser.getMessages().get(0));
+        MimeMessage mess = MailUtilityTest.fromWiser(wiser.getMessages().getFirst());
 
         Assert.assertEquals(MailTestUtil.getAddressHeader(fromName, fromAddress), mess.getHeader("From", null));
         Assert.assertEquals(MailTestUtil.getAddressHeader(replyToAddress), mess.getHeader("Reply-To", null));
@@ -474,8 +475,8 @@ public class MailMessageTest {
         wiser.setHostname(mailConfig.getServerHost());
         try {
             wiser.start();
-            e = new MailMessageImpl(mailConfig).from(MailTestUtil.getAddressHeader(fromName, fromAddress)).replyTo(replyToAddress).to(person).subject(subject).bodyText(textBody).importance(
-                    MessagePriority.HIGH).messageId(messageId).send();
+            e = new MailMessageImpl(mailConfig).from(MailTestUtil.getAddressHeader(fromName, fromAddress)).replyTo(replyToAddress).to(person).subject(subject).bodyText(textBody)
+                    .importance(MessagePriority.HIGH).messageId(messageId).send();
         }
         finally {
             stop(wiser);
@@ -483,7 +484,7 @@ public class MailMessageTest {
 
         Assert.assertEquals("Didn't receive the expected amount of messages. Expected 1 got " + wiser.getMessages().size(), 1, wiser.getMessages().size());
 
-        MimeMessage mess = MailUtilityTest.fromWiser(wiser.getMessages().get(0));
+        MimeMessage mess = MailUtilityTest.fromWiser(wiser.getMessages().getFirst());
 
         Assert.assertEquals(MailTestUtil.getAddressHeader(fromName, fromAddress), mess.getHeader("From", null));
         Assert.assertEquals(MailTestUtil.getAddressHeader(replyToAddress), mess.getHeader("Reply-To", null));
@@ -519,8 +520,9 @@ public class MailMessageTest {
         String ccAddress = "red.hatty@jboss.org";
         try {
             wiser.start();
-            new MailMessageImpl(mailConfig).from(MailTestUtil.getAddressHeader(fromName, fromAddress)).replyTo(replyToAddress).to(MailTestUtil.getAddressHeader(toName, toAddress)).cc(MailTestUtil
-                    .getAddressHeader(ccName, ccAddress)).subject(subject).bodyText(textBody).importance(MessagePriority.HIGH).messageId(messageId).envelopeFrom(ENVELOPE_FROM_ADDRESS).send();
+            new MailMessageImpl(mailConfig).from(MailTestUtil.getAddressHeader(fromName, fromAddress)).replyTo(replyToAddress).to(MailTestUtil.getAddressHeader(toName, toAddress))
+                    .cc(MailTestUtil.getAddressHeader(ccName, ccAddress)).subject(subject).bodyText(textBody).importance(MessagePriority.HIGH).messageId(messageId).envelopeFrom(ENVELOPE_FROM_ADDRESS)
+                    .send();
         }
         finally {
             stop(wiser);
@@ -528,7 +530,7 @@ public class MailMessageTest {
 
         Assert.assertEquals("Didn't receive the expected amount of messages. Expected 2 got " + wiser.getMessages().size(), 2, wiser.getMessages().size());
 
-        MimeMessage mess = MailUtilityTest.fromWiser(wiser.getMessages().get(0));
+        MimeMessage mess = MailUtilityTest.fromWiser(wiser.getMessages().getFirst());
 
         Assert.assertEquals(MailTestUtil.getAddressHeader(fromName, fromAddress), mess.getHeader("From", null));
         Assert.assertEquals(MailTestUtil.getAddressHeader(replyToAddress), mess.getHeader("Reply-To", null));
