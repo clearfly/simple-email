@@ -10,7 +10,7 @@ jobs:
       - uses: actions/setup-java@v5
         with:
           distribution: corretto
-          java-version: 21
+          java-version: 25
           cache: maven
       - name: Run Integration Tests
         run: mvn clean test -P errorprone
