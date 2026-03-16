@@ -10,7 +10,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<version.java>25</version.java>
-		<version.errorprone>2.46.0</version.errorprone>
+		<version.errorprone>2.47.0</version.errorprone>
 		<version.jsoup>1.22.1</version.jsoup>
 		<velocity.version>2.4.1</velocity.version>
 		<subetha.version>3.1.7</subetha.version>
@@ -162,6 +162,7 @@
 						<version>${version.maven.compiler}</version>
 						<configuration>
 							<release>${version.java}</release>
+							<showDeprecation>true</showDeprecation>
 							<showWarnings>true</showWarnings>
 							<failOnWarning>true</failOnWarning>
 							<maxmem>2048m</maxmem>
@@ -170,15 +171,16 @@
 								<arg>-parameters</arg>
 								<arg>-XDcompilePolicy=simple</arg>
 								<arg>--should-stop=ifError=FLOW</arg>
-								<arg>-Xplugin:ErrorProne -Xep:UnusedMethod:OFF -Xep:JavaTimeDefaultTimeZone:OFF -Xep:ObjectEqualsForPrimitives:OFF -Xep:StringCaseLocaleUsage:OFF</arg>
+								<arg>-Xplugin:ErrorProne -Xep:UnusedMethod:OFF -Xep:JavaTimeDefaultTimeZone:OFF -Xep:ObjectEqualsForPrimitives:OFF -Xep:StringCaseLocaleUsage:OFF -Xep:MissingSummary:OFF</arg>
 								<arg>-J--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED</arg>
 								<arg>-J--add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED</arg>
 								<arg>-J--add-exports=jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED</arg>
-								<arg>-J--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED</arg>
-								<arg>-J--add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED</arg>
-								<arg>-J--add-exports=jdk.compiler/com.sun.tools.javac.processing=ALL-UNNAMED</arg>
-								<arg>-J--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED</arg>
+								<arg>-J--add-exports=jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED</arg>
 								<arg>-J--add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED</arg>
+								<arg>-J--add-exports=jdk.compiler/com.sun.tools.javac.processing=ALL-UNNAMED</arg>
+								<arg>-J--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED</arg>
+								<arg>-J--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED</arg>
+								<arg>-J--add-opens=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED</arg>
 								<arg>-J--add-opens=jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED</arg>
 							</compilerArgs>
 							<annotationProcessorPaths>

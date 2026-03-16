@@ -13,7 +13,8 @@
 package co.cfly.email.impl.attachments;
 
 import java.io.IOException;
-import java.net.URL;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 import co.cfly.email.api.AttachmentException;
 import co.cfly.email.api.ContentDisposition;
@@ -27,7 +28,7 @@ public class URLAttachment extends BaseAttachment {
         super();
         URLDataSource uds;
         try {
-            uds = new URLDataSource(new URL(url));
+            uds = new URLDataSource(new URI(url).toURL());
             super.setFileName(fileName);
             super.setMimeType(uds.getContentType());
             super.setContentDisposition(contentDisposition);
@@ -35,6 +36,9 @@ public class URLAttachment extends BaseAttachment {
         }
         catch (IOException e) {
             throw new AttachmentException("Wasn't able to create email attachment from URL: " + url, e);
+        }
+        catch (URISyntaxException e) {
+            throw new RuntimeException(e);
         }
     }
 
