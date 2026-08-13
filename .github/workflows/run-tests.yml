@@ -1,0 +1,13 @@
+name: Java CI
+
+on:
+  workflow_call:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup-build
+      - name: Run Integration Tests
+        run: mvn clean test -P errorprone

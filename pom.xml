@@ -1,11 +1,10 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>co.cfly</groupId>
 	<artifactId>simple-email</artifactId>
-	<version>3.0.7</version>
+	<version>3.0.8-SNAPSHOT</version>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -20,16 +19,15 @@
 		<version.maven.source>3.4.0</version.maven.source>
 	</properties>
 
+	<!-- mvn deploy writes to a local staging directory, which is then uploaded to S3 in CI. -->
 	<distributionManagement>
 		<repository>
-			<id>central</id>
-			<name>clearfly-releases</name>
-			<url>https://mvn.clearfly.net/artifactory/libs-release</url>
+			<id>local-releases</id>
+			<url>file://${project.build.directory}/staging/releases</url>
 		</repository>
 		<snapshotRepository>
-			<id>snapshots</id>
-			<name>clearfly-snapshots</name>
-			<url>https://mvn.clearfly.net/artifactory/libs-snapshot</url>
+			<id>local-snapshots</id>
+			<url>file://${project.build.directory}/staging/snapshots</url>
 		</snapshotRepository>
 	</distributionManagement>
 

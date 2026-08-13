@@ -1,0 +1,44 @@
+name: Deploy Maven Snapshot
+
+on:
+  workflow_dispatch:
+    inputs:
+      version_qualifier:
+        description: 'Optional suffix to distinguish this snapshot (defaults to sanitized branch name)'
+        required: false
+        type: string
+
+permissions:
+  id-token: write # required for OIDC on the deploy jobs
+  contents: read
+
+jobs:
+  deploy-snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup-build
+
+      - name: Configure AWS credentials via OIDC
+        uses: aws-actions/configure-aws-credentials@v6
+        with:
+          role-to-assume: arn:aws:iam::140748512045:role/github-actions-maven-deploy
+          aws-region: us-west-2
+
+      - name: Set snapshot version
+        run: |
+          QUALIFIER="${{ inputs.version_qualifier }}"
+          if [ -z "$QUALIFIER" ]; then
+            QUALIFIER=$(echo "${{ github.ref_name }}" | sed 's/[^a-zA-Z0-9._-]/-/g')
+          fi
+          BASE_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout | sed 's/-SNAPSHOT//')
+          if [ "${{ github.ref_name }}" != "master" ]; then
+            mvn versions:set -DnewVersion=${BASE_VERSION}-${QUALIFIER}-SNAPSHOT -DgenerateBackupPoms=false
+          fi
+
+      - name: Deploy snapshot (stage locally)
+        run: mvn deploy -B
+        # Writes to target/staging/snapshots via the file:// distributionManagement in pom.xml
+
+      - name: Sync to S3
+        run: aws s3 sync target/staging/snapshots s3://clearfly-maven/snapshots

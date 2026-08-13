@@ -2,15 +2,64 @@ name: Java CI
 
 on: [ push ]
 
+permissions:
+  id-token: write # required for OIDC on the deploy jobs
+  contents: read
+
 jobs:
-  build:
+  test:
+    uses: ./.github/workflows/run-tests.yml
+
+  deploy-release:
+    needs: test
+    if: github.ref_type == 'tag'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-      - uses: actions/setup-java@v5.6.0
         with:
-          distribution: corretto
-          java-version: 25
-          cache: maven
-      - name: Run Integration Tests
-        run: mvn clean test -P errorprone
+          fetch-depth: 0   # needed so origin/master is available for the "behind master" check below
+
+      - uses: ./.github/actions/setup-build
+
+      - name: Configure AWS credentials via OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::140748512045:role/github-actions-maven-deploy
+          aws-region: us-west-2
+
+      - name: Set version from tag
+        run: |
+          VERSION=${GITHUB_REF_NAME}   # tag name is used directly as the version, e.g. 3.0.8
+          echo "VERSION=$VERSION" >> "$GITHUB_ENV"
+          mvn versions:set -DnewVersion=$VERSION -DgenerateBackupPoms=false
+
+      - name: Validate tag format
+        run: |
+          if ! [[ "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?(\+[0-9A-Za-z.-]+)?$ ]]; then
+            echo "::error::Tag '${{ github.ref_name }}' does not match expected semver format MAJOR.MINOR.PATCH (e.g. 3.0.8, 3.0.8-rc.1)."
+            exit 1
+          fi
+
+      - name: Fail if this version is already published
+        run: |
+          GROUP_PATH=$(mvn help:evaluate -Dexpression=project.groupId -q -DforceStdout | tr '.' '/')
+          ARTIFACT=$(mvn help:evaluate -Dexpression=project.artifactId -q -DforceStdout)
+          KEY="releases/${GROUP_PATH}/${ARTIFACT}/${VERSION}/"
+          if aws s3 ls "s3://clearfly-maven/${KEY}" > /dev/null 2>&1; then
+            echo "::error::Version $VERSION already exists in S3 at $KEY — refusing to overwrite a published release."
+            exit 1
+          fi
+
+      - name: Sanity-check tag isn't behind master's current version
+        run: |
+          BASE_VERSION=$(git show origin/master:pom.xml | grep -m1 '<version>' | sed -E 's/.*<version>(.*)-SNAPSHOT<\/version>.*/\1/')
+          if [ "$(printf '%s\n' "$BASE_VERSION" "$VERSION" | sort -V | head -n1)" != "$BASE_VERSION" ] && [ "$VERSION" != "$BASE_VERSION" ]; then
+            echo "::warning::Tag version $VERSION is lower than master's current base version $BASE_VERSION — confirm this is intentional."
+          fi
+
+      - name: Deploy release (stage locally)
+        run: mvn deploy -B
+        # Writes to target/staging/releases via the file:// distributionManagement in pom.xml
+
+      - name: Sync to S3
+        run: aws s3 sync target/staging/releases s3://clearfly-maven/releases
