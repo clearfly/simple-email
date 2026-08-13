@@ -1,0 +1,11 @@
+name: Setup Build
+description: Set up Java with our standard version/distribution
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-java@v5.6.0
+      with:
+        distribution: corretto
+        java-version: 25
+        cache: maven
