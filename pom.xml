@@ -10,7 +10,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<version.java>25</version.java>
 		<version.errorprone>2.50.0</version.errorprone>
-		<version.jsoup>1.23.1</version.jsoup>
+		<version.jsoup>1.23.2</version.jsoup>
 		<velocity.version>2.4.1</velocity.version>
 		<subetha.version>3.1.7</subetha.version>
 		<version.guava>33.7.1-jre</version.guava>
