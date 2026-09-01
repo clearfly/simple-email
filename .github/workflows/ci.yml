@@ -22,7 +22,7 @@ jobs:
       - uses: ./.github/actions/setup-build
 
       - name: Configure AWS credentials via OIDC
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@v5
         with:
           role-to-assume: arn:aws:iam::140748512045:role/github-actions-maven-deploy
           aws-region: us-west-2
